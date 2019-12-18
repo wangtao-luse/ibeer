@@ -20,12 +20,12 @@ public ResponseMessage(String resultCode, String resultMessage) {
 	this.resultMessage = resultMessage;
 }
 public void setReturnResult(Object object) {
-	Map map = new HashMap<String, Object>();
+	Map<String,Object> map = new HashMap<String, Object>();
 	map.put("result", object);
 	this.returnResult=map;
 }
 public void setReturnResult(String key,Object object) {
-	Map map = new HashMap<String, Object>();
+	Map<String,Object> map = new HashMap<String, Object>();
 	map.put(key, object);
 	this.returnResult=map;
 }

@@ -1,0 +1,62 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+	background: #f4f4f4;
+	font: 12px/1.5 Microsoft YaHei,tahoma,arial,Hiragino Sans GB,\\5b8b\4f53,sans-serif;
+	color: #666;
+}
+li{
+	list-style: none;
+}
+a{
+	color: #666;
+	text-decoration: none;
+}
+a:hover{
+	color: #c81623;
+}
+em,i{
+	font-style: normal;
+}
+button, input {
+    font-family: Microsoft YaHei,Heiti SC,tahoma,arial,Hiragino Sans GB,"\5B8B\4F53",sans-serif;
+}
+button {
+	cursor: pointer;
+}
+img{
+	border: 0;
+	vertical-align: middle;
+}
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.clearfix:after{
+	content: ".";
+	display: block;
+	visibility: hidden;
+	height: 0;
+	clear: both;
+}
+/*https://blog.csdn.net/jyb123/article/details/51179725*/
+
+@font-face {
+  font-family: 'iconfont';  /* project id 1516828 */
+  src: url('https://at.alicdn.com/t/font_1516828_o4wnw9iecm.eot');
+  src: url('https://at.alicdn.com/t/font_1516828_o4wnw9iecm.eot?#iefix') format('embedded-opentype'),
+  url('https://at.alicdn.com/t/font_1516828_o4wnw9iecm.woff2') format('woff2'),
+  url('https://at.alicdn.com/t/font_1516828_o4wnw9iecm.woff') format('woff'),
+  url('https://at.alicdn.com/t/font_1516828_o4wnw9iecm.ttf') format('truetype'),
+  url('https://at.alicdn.com/t/font_1516828_o4wnw9iecm.svg#iconfont') format('svg');
+}
+.iconfont{
+	font-family:"iconfont";
+	font-style:normal;
+	-webkit-text-stroke-width: 0.2px;
+	}

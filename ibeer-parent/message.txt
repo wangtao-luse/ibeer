@@ -1,0 +1,2 @@
+1.SpringBoot引用Eureka导致返回结果由json变为xml解决方案
+https://blog.csdn.net/zyb2017/article/details/80265070
