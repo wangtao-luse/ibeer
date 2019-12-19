@@ -32,17 +32,10 @@ public String hello() {
 public ResponseMessage getResponseMessage(@RequestBody(required = false) JSONObject jsonObject,HttpServletRequest request) {
 	   ResponseMessage responseMessage = ResponseMessage.getSucess();
 	   //fegin rest
-	   String url="http://ibeer-account-service/account/test";
-	   JSONObject json = restTemplate.getForObject(url, JSONObject.class);
-	   //String jsonString = JSONObject.toJSONString(responseMessage);
-	   Contract t = new Contract();
-		 t.setCreateRq(new Date());
-		 t.setHymc("10000");
-		 t.setHydm("10000");
-		 t.setHthm("Beer00001");
-		 t.setHzmc("Ibeer");
-		 t.setId(1L);
-		// responseMessage.setReturnResult(t);
+	   String url="http://ibeer-account-service/account/test";	   
+	    responseMessage = restTemplate.getForObject(url, JSONObject.class).toJavaObject(ResponseMessage.class);
+	   
+	  
 	   return responseMessage.add("wangtao");
 }
 }

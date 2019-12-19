@@ -25,25 +25,30 @@ public static void main(String[] args) {
 @Bean
 @LoadBalanced
 RestTemplate  restTemplate(){
-	 ClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(HttpClients.createDefault());
-     RestTemplate restTemplate = new RestTemplate(requestFactory);
-	List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
-    //Add the Jackson Message converter
-     MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-     // Note: here we are making this converter to process any kind of response,
-     // not only application/*json, which is the default behaviour
-     converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
-     messageConverters.add(converter);
-     restTemplate.setMessageConverters(messageConverters);
-     
-     
-     
-     MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
-     mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM));
-     restTemplate.getMessageConverters().add(mappingJackson2HttpMessageConverter);
-
-     
+		/*
+		 * ClientHttpRequestFactory requestFactory = new
+		 * HttpComponentsClientHttpRequestFactory(HttpClients.createDefault());
+		 * RestTemplate restTemplate = new RestTemplate(requestFactory);
+		 * List<HttpMessageConverter<?>> messageConverters = new
+		 * ArrayList<HttpMessageConverter<?>>(); //Add the Jackson Message converter
+		 * MappingJackson2HttpMessageConverter converter = new
+		 * MappingJackson2HttpMessageConverter(); // Note: here we are making this
+		 * converter to process any kind of response, // not only application/*json,
+		 * which is the default behaviour
+		 * converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+		 * messageConverters.add(converter);
+		 * restTemplate.setMessageConverters(messageConverters);
+		 * 
+		 * 
+		 * 
+		 * MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new
+		 * MappingJackson2HttpMessageConverter();
+		 * mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(
+		 * MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM));
+		 * restTemplate.getMessageConverters().add(mappingJackson2HttpMessageConverter);
+		 * 
+		 */
     
-    return restTemplate;
+    return new RestTemplate();
 }
 }
