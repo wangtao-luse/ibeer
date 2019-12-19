@@ -2,6 +2,7 @@ package com.ibeer;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -35,12 +36,25 @@ public class TestJson {
 	  * 	String jsonString = JSONObject.toJSONString(list);
 	  */
 	 
-	 
-	 ResponseMessage resp = ResponseMessage.getSucess();
+	 // javaBean-->jsonStr-->javaBean-->jsonStr
+	 ResponseMessage resp = ResponseMessage.getSucess();	 
 	 resp.setReturnResult("wangtao");
+	 resp.add("123");
 	 String jsonString = JSON.toJSONString(resp);
+	 //jsonstr---->javaBean
 	 System.out.println(jsonString);
-		
+	 JSONObject parseObject = JSONObject.parseObject(jsonString);
+	 System.out.println(parseObject);
+	 ResponseMessage javaObject = JSONObject.toJavaObject(parseObject, ResponseMessage.class);
+	//javaBean-->jsonStr
+	 String jsonString2 = JSON.toJSONString(javaObject);
+	 System.out.println(jsonString2);
+	 
+	 
+	 
+	 
+	 
+	 
 		/*
 		 * JSONObject jsonobject = new JSONObject(); jsonobject.put("id", "1");
 		 * jsonobject.put("name", "wangtao");

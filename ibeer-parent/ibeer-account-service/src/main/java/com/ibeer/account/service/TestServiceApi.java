@@ -1,18 +1,18 @@
 package com.ibeer.account.service;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSONObject;
 import com.ibeer.common.req.RequestMessage;
 import com.ibeer.common.resp.ResponseMessage;
 import com.ibeer.model.Contract;
 @RestController
 public class TestServiceApi {
-	@RequestMapping("/account/test")
+	@RequestMapping(value = "/account/test")
 	public ResponseMessage test(RequestMessage requestMessage){
 		ResponseMessage responseMessage = ResponseMessage.getSucess();
 		//JSONObject jsonObject = requestMessage.getBody().getContent();
@@ -25,7 +25,9 @@ public class TestServiceApi {
 		 t.setHthm("Beer00001");
 		 t.setHzmc("Ibeer");
 		 t.setId(1L);
-		responseMessage.setReturnResult(t);
+		 Map<String,Object> map= new HashMap<String, Object>();
+		 map.put("result", t);
+		responseMessage.setReturnResult(map);
 		return responseMessage;
 	}
 
