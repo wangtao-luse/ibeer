@@ -38,7 +38,7 @@ public class TestJson {
 	 
 	 // javaBean-->jsonStr-->javaBean-->jsonStr
 	 ResponseMessage resp = ResponseMessage.getSucess();	 
-	 resp.setReturnResult("wangtao");
+	// resp.setReturnResult("wangtao");
 	 resp.add("123");
 	 String jsonString = JSON.toJSONString(resp);
 	 //jsonstr---->javaBean

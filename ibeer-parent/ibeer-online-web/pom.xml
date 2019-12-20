@@ -30,6 +30,11 @@
     	<artifactId>ibeer-common</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
+    <dependency>
+    	<groupId>com.ibeer</groupId>
+    	<artifactId>ibeer-account-api</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>ibeer-online-web</finalName>

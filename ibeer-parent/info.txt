@@ -1,0 +1,6 @@
+1.主要框架
+ Springboot+SpringClould(eureka(注册中心)+zuul(网关)+feign(远程调用))+Spring
+2.数据库
+ Mysql
+3.
+ 

@@ -8,9 +8,9 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <groupId>com.ibeer</groupId>
-  <artifactId>ibeer-account-service</artifactId>
+  <artifactId>ibeer-account-api</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>ibeer-account-service</name>
+  <name>ibeer-account-api</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,26 +19,17 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-		<groupId>oracle</groupId>
-  		<artifactId>ojdbc8</artifactId>
-	</dependency>
-
-    <dependency>
     	<groupId>com.ibeer</groupId>
-    	<artifactId>ibeer-account-presist</artifactId>
+    	<artifactId>ibeer-model</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
     	<groupId>com.ibeer</groupId>
     	<artifactId>ibeer-common</artifactId>
-    	<version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-    	<groupId>com.ibeer</groupId>
-    	<artifactId>ibeer-account-api</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>

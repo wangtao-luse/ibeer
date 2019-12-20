@@ -7,11 +7,12 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ibeer.api.TestApi;
 import com.ibeer.common.req.RequestMessage;
 import com.ibeer.common.resp.ResponseMessage;
 import com.ibeer.model.Contract;
 @RestController
-public class TestServiceApi {
+public class TestServiceApi implements TestApi {
 	@RequestMapping(value = "/account/test")
 	public ResponseMessage test(RequestMessage requestMessage){
 		ResponseMessage responseMessage = ResponseMessage.getSucess();
@@ -29,6 +30,12 @@ public class TestServiceApi {
 		 map.put("result", t);
 		responseMessage.setReturnResult(map);
 		return responseMessage;
+	}
+	@RequestMapping(value = "/testFegin",produces = {"application/json;charset=UTF-8"})
+	@Override
+	public ResponseMessage testFegin() {
+		// TODO Auto-generated method stub
+		return ResponseMessage.getSucess().add("wangtao");
 	}
 
 }

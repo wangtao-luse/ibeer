@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ibeer.api.TestApi;
 import com.ibeer.common.resp.ResponseMessage;
 import com.ibeer.model.Contract;
 
@@ -21,6 +22,8 @@ import com.ibeer.model.Contract;
 public class TestController {
 	@Autowired
     RestTemplate restTemplate;
+	@Autowired
+	TestApi testApi;
 
 @RequestMapping("test/hello")
 @ResponseBody
@@ -37,5 +40,15 @@ public ResponseMessage getResponseMessage(@RequestBody(required = false) JSONObj
 	   
 	  
 	   return responseMessage.add("wangtao");
+}
+
+
+@RequestMapping(value = "test/getMsg",produces = {"application/json;charset=UTF-8"})
+@ResponseBody
+public ResponseMessage testFegin() {
+	ResponseMessage resp = ResponseMessage.getSucess();
+	resp.setReturnResult("333");
+	ResponseMessage testFegin = testApi.testFegin();
+	return testFegin;
 }
 }
