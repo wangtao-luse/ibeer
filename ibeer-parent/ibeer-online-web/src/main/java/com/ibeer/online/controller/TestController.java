@@ -49,6 +49,7 @@ public ResponseMessage testFegin() {
 	ResponseMessage resp = ResponseMessage.getSucess();
 	resp.setReturnResult("333");
 	ResponseMessage testFegin = testApi.testFegin();
+	
 	return testFegin;
 }
 }
