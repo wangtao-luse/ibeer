@@ -1,4 +1,27 @@
 $(function(){
+	//https://blog.csdn.net/LEE18254290736/article/details/81326490
+	//https://blog.csdn.net/ChibiMarukoChan/article/details/77934248
+	//https://www.cnblogs.com/raphael1982/p/7994157.html
+	var htmlObj=$("html");
+	var height=window.screen.height;
+	var width=window.screen.width;
+	console.log("屏幕分辨率的高:"+height);
+	console.log("屏幕分辨率的宽:"+width);
+	//1. 1536*864
+	//2. 1280*720
+	console.log(document.body.clientWidth );
+	console.log(document.body.clientHeight );
+	
+	if(height<864){
+		htmlObj.addClass("o2_mini");
+	}
+	
+	
+	
+	
+	
+	
+	
 	$("#b_cate .cate_menu_item").mouseenter(function(){
         var index=$(this).attr("data-index");
         $(this).addClass("cate_menu_item_on");
@@ -96,4 +119,5 @@ $(function(){
        $("#b_niceGoods .goods-list").mouseleave(function(){
        	  setTime=setInterval(goods,100);
        });
+       
 });

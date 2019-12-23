@@ -12,9 +12,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.ibeer.common.resp.ResponseMessage;
 
 @Controller
+@RequestMapping("/account")
 public class AccountController {
-	@Autowired
-    RestTemplate restTemplate;
+	
 	/**
 	 * 注册页面
 	 * @return
@@ -23,6 +23,10 @@ public class AccountController {
 	public String registerPage() {	   
 		return "";
 	}
+   @RequestMapping("/loginPage")
+   public String loginPage() {
+	   return "/account/login";
+   }
   
    
 }

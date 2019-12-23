@@ -10,6 +10,10 @@ import lombok.Data;
 
 @Data
 public final class ResponseMessage implements Serializable {
+	/**
+	 * 00:失败
+	 * 10:成功
+	 */
 	private String resultCode;
 	private String resultMessage;
 	private Map<String, Object> returnResult = new HashMap<String, Object>();

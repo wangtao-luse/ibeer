@@ -30,6 +30,7 @@
   	<mybatis-plus-generator.version>3.3.0</mybatis-plus-generator.version>
   	<beetl.version>1.2.19.RELEASE</beetl.version>
   	<pagehelper.version>5.1.11</pagehelper.version>
+  	<shiro-spring.version>1.4.2</shiro-spring.version>
   </properties> 
   <dependencies>
   <!-- springboot web -->
@@ -142,6 +143,13 @@
 			    <artifactId>pagehelper</artifactId>
 			    <version>${pagehelper.version}</version>
 			</dependency>
+			<!-- shiro -->
+			<dependency>
+			    <groupId>org.apache.shiro</groupId>
+			    <artifactId>shiro-spring</artifactId>
+			    <version>${shiro-spring.version}</version>
+			</dependency>
+			
 		</dependencies>
 		
 	</dependencyManagement>

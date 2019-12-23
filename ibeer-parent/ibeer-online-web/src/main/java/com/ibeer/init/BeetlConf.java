@@ -42,6 +42,7 @@ public class BeetlConf {
                 BeetlSpringViewResolver beetlSpringViewResolver = new BeetlSpringViewResolver();
                 beetlSpringViewResolver.setContentType("text/html;charset=UTF-8");
                 beetlSpringViewResolver.setOrder(0);
+                beetlSpringViewResolver.setSuffix(".html");
                 beetlSpringViewResolver.setConfig(beetlGroupUtilConfiguration);
                 return beetlSpringViewResolver;
         }
