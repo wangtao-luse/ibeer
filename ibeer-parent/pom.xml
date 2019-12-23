@@ -13,7 +13,7 @@
     <module>ibeer-common</module>
     <module>ibeer-account-presist</module>
     <module>ibeer-online-web</module>
-      <module>ibeer-account-api</module>
+    <module>ibeer-account-api</module>
   </modules>
   <!-- 将当前项目作为一个springboot-starter的子模块 -->
   <parent>
@@ -27,6 +27,9 @@
   	<fastjson.version>1.2.62</fastjson.version>
   	<mybatis-plus.version>3.2.0</mybatis-plus.version>
   	<oracle.version>8.0.0</oracle.version>
+  	<mybatis-plus-generator.version>3.3.0</mybatis-plus-generator.version>
+  	<beetl.version>1.2.19.RELEASE</beetl.version>
+  	<pagehelper.version>5.1.11</pagehelper.version>
   </properties> 
   <dependencies>
   <!-- springboot web -->
@@ -34,6 +37,11 @@
 	    <groupId>org.springframework.boot</groupId>
 	    <artifactId>spring-boot-starter-web</artifactId>
 	</dependency>
+	<!-- springboot-boot -start -->
+	<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
+    </dependency>
   <!-- springboot 单元测试 -->
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
@@ -115,8 +123,25 @@
 			    <artifactId>mybatis-plus-boot-starter</artifactId>
 			    <version>${mybatis-plus.version}</version>
 			</dependency>
-			
-						
+			<!-- mybatis plus 代码生成器 -->
+			<dependency>
+			    <groupId>com.baomidou</groupId>
+			    <artifactId>mybatis-plus-generator</artifactId>
+			    <version>${mybatis-plus-generator.version}</version>
+			</dependency>
+			<!-- beetl模板引擎 -->
+			<dependency>
+			    <groupId>com.ibeetl</groupId>
+			    <artifactId>beetl-framework-starter</artifactId>
+			    <version>${beetl.version}</version>
+			</dependency>
+
+			<!--分页插件 pageHelper -->
+			<dependency>
+			    <groupId>com.github.pagehelper</groupId>
+			    <artifactId>pagehelper</artifactId>
+			    <version>${pagehelper.version}</version>
+			</dependency>
 		</dependencies>
 		
 	</dependencyManagement>
@@ -161,6 +186,7 @@
                 <spring.datasource.driverClassName>oracle.jdbc.driver.OracleDriver</spring.datasource.driverClassName>
                 <spring.datasource.username>onlinetest</spring.datasource.username>
                 <spring.datasource.password>onlinetest438</spring.datasource.password>
+                
             </properties>
         </profile>
         <!--测试环境-->
