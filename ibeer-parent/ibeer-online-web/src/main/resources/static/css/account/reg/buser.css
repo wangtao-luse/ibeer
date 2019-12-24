@@ -1,0 +1,90 @@
+.consult-online {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: -131px;
+    width: 87px;
+    height: 55px;
+    border: 1px solid #e3e3e3;
+    text-align: center;
+    padding: 16px 0;
+}
+.consult-online .icon {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    margin-bottom: 5px;
+    background: url(https://img10.360buyimg.com/imagetools/jfs/t1/47322/21/11825/20821/5d8c856aE0abc99ea/3b24d403e26a9d8e.png) no-repeat;
+    background-position: 0 -100px;
+}
+.consult-online .title {
+    font-size: 12px;
+    color: #333;
+}
+.consult-online:hover .icon {
+    background-position: 0 -134px;
+}
+.consult-online:hover .title {
+    color: #e12317;
+}
+.reg-form {
+    position: relative;
+}
+.des {
+    background: #f8f8f8;
+    height: 38px;
+    line-height: 19px;
+    text-align: center;
+    padding: 21px 0;
+    color: #999;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+.t {
+    margin-bottom: 76px;
+    margin-top: 60px;
+}
+.t .status {
+    height: 50px;
+    margin-bottom: 27px;
+    text-align: center;
+    font-size: 30px;
+    color: #333;
+}
+.t .status .i {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-right: 23px;
+    background: url(https://img10.360buyimg.com/imagetools/jfs/t1/47322/21/11825/20821/5d8c856aE0abc99ea/3b24d403e26a9d8e.png) no-repeat;
+}
+.t .status .i.wait {
+    background-position: 0 -50px;
+}
+.t .status .i.success {
+    background-position: 0 0;
+}
+.t .status .status-text {
+    line-height: 50px;
+    vertical-align: top;
+}
+.t .mt {
+    font-size: 14px;
+    color: #999;
+    text-align: center;
+    line-height: 19px;
+}
+.t .mt .bold {
+    color: #333;
+    font-weight: 700;
+}
+.t .mm {
+    text-align: center;
+    font-size: 16px;
+    color: #999;
+    line-height: 26px;
+}
+.t .mm a {
+    color: #06c;
+    margin: 0 5px;
+}

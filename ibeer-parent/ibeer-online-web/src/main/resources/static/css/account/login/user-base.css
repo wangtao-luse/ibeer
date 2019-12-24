@@ -4494,7 +4494,7 @@ input:-webkit-autofill {
 	height: 16px;
 	overflow: hidden;
 	vertical-align: middle;
-	background: url(//misc.360buyimg.com/user/passport/1.0.0/widget/login-form-2018-0827/i/pwd-icons-new.png) -104px -157px;
+	background: url(../../../account/login/pwd-icons-new.png) -104px -157px;
 	margin-right: 10px
 }
 
@@ -4627,7 +4627,7 @@ div.safetips {
 	margin-left: 10px;
 	overflow: hidden;
 	vertical-align: middle;
-	background: url(../../../pwd-icons-new.png) -104px -100px no-repeat
+	background: url(//misc.360buyimg.com/user/passport/1.0.0/widget/login-form-2018-0827/i/pwd-icons-new.png) -104px -100px no-repeat
 }
 
 .coagent .more-slide dd {

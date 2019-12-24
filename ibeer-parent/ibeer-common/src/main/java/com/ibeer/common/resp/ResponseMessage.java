@@ -63,5 +63,8 @@ public final class ResponseMessage implements Serializable {
 	public static ResponseMessage getFailed() {
 		return new ResponseMessage(ConstantBase.FAILED_CODE, ConstantBase.FAILED_MESSAGE);
 	}
+	public static ResponseMessage getFailed(String faileMsg) {
+		return new ResponseMessage(ConstantBase.FAILED_CODE, faileMsg);
+	}
 
 }
