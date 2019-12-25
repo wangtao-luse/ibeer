@@ -27,6 +27,7 @@
   	<fastjson.version>1.2.62</fastjson.version>
   	<mybatis-plus.version>3.2.0</mybatis-plus.version>
   	<oracle.version>8.0.0</oracle.version>
+  	<mysql.version>8.0.18</mysql.version>
   	<mybatis-plus-generator.version>3.3.0</mybatis-plus-generator.version>
   	<beetl.version>1.2.19.RELEASE</beetl.version>
   	<pagehelper.version>5.1.11</pagehelper.version>
@@ -118,6 +119,13 @@
 				<version>${oracle.version}</version>
 				<scope>compile</scope>
 			</dependency>
+			<!-- mysql驱动包 -->
+			<dependency>
+			    <groupId>mysql</groupId>
+			    <artifactId>mysql-connector-java</artifactId>
+			    <version>${mysql.version}</version>
+			</dependency>
+			
 			 <!-- mybatis plus -->
 		    <dependency>
 			    <groupId>com.baomidou</groupId>
@@ -180,7 +188,7 @@
             <id>dev</id>
             <activation>
                 <!--默认激活：如果在不指定profile时默认是开发环境-->
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <profiles.active>dev</profiles.active>
@@ -201,7 +209,7 @@
         <profile>
             <id>test</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <spring.profiles.active>test</spring.profiles.active>
@@ -210,6 +218,10 @@
                 <server.eureka.port>9090</server.eureka.port>
                 <server.zuul.port>9091</server.zuul.port>
                 <eureka.host>127.0.0.1</eureka.host>
+                <spring.datasource.url>jdbc:mysql://localhost:3306/ibeer?serverTimezone=UTC</spring.datasource.url>
+                <spring.datasource.driverClassName>com.mysql.cj.jdbc.Driver</spring.datasource.driverClassName>
+                <spring.datasource.username>root</spring.datasource.username>
+                <spring.datasource.password>root</spring.datasource.password>
             </properties>
         </profile>
         <!--生产环境-->
@@ -225,6 +237,10 @@
                 <server.eureka.port>9090</server.eureka.port>
                 <server.zuul.port>9091</server.zuul.port>
                 <eureka.host>127.0.0.1</eureka.host>
+                <spring.datasource.url>jdbc:mysql://localhost:3306/ibeer?serverTimezone=UTC</spring.datasource.url>
+                <spring.datasource.driverClassName>com.mysql.cj.jdbc.Driver</spring.datasource.driverClassName>
+                <spring.datasource.username>root</spring.datasource.username>
+                <spring.datasource.password>root</spring.datasource.password>
             </properties>
         </profile>
     </profiles>

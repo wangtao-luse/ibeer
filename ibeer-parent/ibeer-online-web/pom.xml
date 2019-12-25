@@ -46,6 +46,11 @@
 	    <groupId>org.apache.shiro</groupId>
 	    <artifactId>shiro-spring</artifactId>
 	</dependency>
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <scope>test</scope>
+	</dependency>
   </dependencies>
   <build>
     <finalName>ibeer-online-web</finalName>
