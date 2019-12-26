@@ -2,30 +2,34 @@
 <html class="root61">
 	<head>
 		<style type="text/css">
-			.protocol a{color:#c81623;text-decoration: underline;}</style>
-
+			.protocol a{color:#c81623;text-decoration: underline;}
+		</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>个人注册</title>
+     <title>个人注册</title>
+     <link type="text/css" rel="stylesheet" href="../../css/base.css">
     <link type="text/css" rel="stylesheet" href="../../css/account/reg/ui-base.css">
     <link type="text/css" rel="stylesheet" href="../../css/account/reg/header.css">
     <link type="text/css" rel="stylesheet" href="../../css/account/reg/tinyscrollbar-170524.css" />
     <link source="widget" type="text/css" rel="stylesheet" href="../../css/account/reg/dialog.css">
-    <script src="../../js/jquery-3.4.1.js.js"></script>
-    <script src="../../js/account/login.js"></script>
-    <script type="text/javascript" async="" src="register-person_files/wl.js"></script>
+    <script type="text/javascript" src="../../js/jquery-3.4.1.js.js"></script>
+    <script type="text/javascript" src="../../js/public.js"></script>
+    <script type="text/javascript" src="../../js/account/reg.js"></script>
+
+    
+ <!--    <script type="text/javascript" async="" src="register-person_files/wl.js"></script>
     <script type="text/javascript" async="" src="register-person_files/s.js"></script><script type="text/javascript">window.pageConfig = { compatible: true };</script>
-    <script type="text/javascript" src="register-person_files/a"></script>
+    <script type="text/javascript" src="register-person_files/a"></script> -->
     <script>
-        seajs.off('load');
+       /*  seajs.off('load');
         seajs.off('fetch');
-        seajs.config({ alias: { e2: '//verify.jd.com/static/gridcaptcha/dist/js/lib/e2.js' } });
+        seajs.config({ alias: { e2: '//verify.jd.com/static/gridcaptcha/dist/js/lib/e2.js' } }); */
     </script>
    
-                <script type="text/javascript" src="register-person_files/shape.js"></script>
+              <!--   <script type="text/javascript" src="register-person_files/shape.js"></script>
     
             <script src="register-person_files/jdSlide.js"></script>
-    
+     -->
     
 <body>
         <!-- widget header begin -->
@@ -86,22 +90,21 @@
                 <input type="hidden" id="emailWhiteList" value="\@qq.com,\@163.com,\@126.com,\@Gmail.com,\@Sohu.com,\@Sina.com,\@foxmail.com,\@yahoo.com,\@139.com,\@jd.com,\@live.com,\@live.cn.\@188.com,\@189.com,\@189.cn,\@hotmail.com,\@21cn.com,\@yeah.net,\@tom.com,\@sogou.com">
                 <input type="hidden" id="loginUrl" value="https://passport.jd.com/new/login.aspx?ReturnUrl=https://www.jd.com/?cu=true&amp;utm_source=baidu-pinzhuan&amp;utm_medium=cpc&amp;utm_campaign=t_288551095_baidupinzhuan&amp;utm_term=0f3d30c8dba7459bb52f2eb5eba8ac7d_0_cc746bdae7b44666aab10344501c7ca6">
                 <input type="hidden" id="backUrl" value="https://www.jd.com/?cu=true&amp;utm_source=baidu-pinzhuan&amp;utm_medium=cpc&amp;utm_campaign=t_288551095_baidupinzhuan&amp;utm_term=0f3d30c8dba7459bb52f2eb5eba8ac7d_0_cc746bdae7b44666aab10344501c7ca6">
-                <input type="hidden" id="authCodeStrategy" name="authCodeStrategy" value="1">
-                
-                                    <input id="slideAppId" value="16dd32e1eb3" type="hidden">
-                    <input id="slideScene" value="reg" type="hidden">
-                    <input id="slideProduct" value="embed" type="hidden">
-                    <input id="slideWidth" value="100%" type="hidden">
-                    <input id="slidePlaceHolder" value="" type="hidden">
-                    <input id="slideSuccessMsg" value="" type="hidden">
-                
-                                    <input type="hidden" id="popupProtocol" value="1">
-                                <div id="step1-wrap">
+                <input type="hidden" id="authCodeStrategy" name="authCodeStrategy" value="1">                
+                <input id="slideAppId" value="16dd32e1eb3" type="hidden">
+                <input id="slideScene" value="reg" type="hidden">
+                <input id="slideProduct" value="embed" type="hidden">
+                <input id="slideWidth" value="100%" type="hidden">
+                <input id="slidePlaceHolder" value="" type="hidden">
+                <input id="slideSuccessMsg" value="" type="hidden">                
+                <input type="hidden" id="popupProtocol" value="1">
+                <div id="step1-wrap">
                     <div class="item-phone-wrap">
                         <div class="form-item form-item-phone">
                             <label class="select-country" id="select-country" country_id="0086">中国 0086<a href="javascript:void(0)" class="arrow"></a></label>
                             <div class="item-input-wrap">
-                                <txt style="position: absolute; z-index: 2; line-height: 46px; margin-left: 20px; margin-top: 1px; font-size: 14px; font-family: MS Shell Dlg \32 ; color: rgb(204, 204, 204); display: inline;">建议使用常用手机号</txt><input type="text" id="form-phone" maxlength="11" name="phone" class="field" placeholder=" " autocomplete="off" default="&lt;i class='i-def'&gt;&lt;/i&gt;验证完成后，你可以使用该手机登录或找回密码">
+                                <txt style="position: absolute; z-index: 2; line-height: 46px; margin-left: 20px; margin-top: 1px; font-size: 14px; font-family: MS Shell Dlg \32 ; color: rgb(204, 204, 204); display: inline;">建议使用常用手机号</txt>
+                                <input type="text" id="form-phone" maxlength="11" name="phone" class="field" placeholder=" " autocomplete="off" default="&lt;i class='i-def'&gt;&lt;/i&gt;验证完成后，你可以使用该手机登录或找回密码">
                                 <i class="i-status"></i>
                                 <i class="i-cancel"></i>
                             </div>
@@ -195,15 +198,79 @@
                     </div>
                     <!--<div class="back-btn" id="back-btn">返回上一步</div>-->
                 </div>
-            </form><div id="country_code_layer"><iframe scrolling="no" style="background-color:transparent; position: absolute; z-index: -1; width: 100%; height: 100%; top: 0; left:0;" frameborder="0"></iframe><div><a class="arrow"></a><div class="search-bar"><b class="search-icon"></b><input type="text" placeholder="搜索您的国家和地区" id="inputSearch"></div><div id="result"><div class="capital-list"><ul></ul></div><div class="current-capital"><span id="currentCapital">A</span><span class="line"></span></div><div class="country-list"><div id="scrollbar2" class="scrollbar_all"><div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div><div class="viewport"><div class="overview"><ul></ul></div></div></div></div></div><div id="no-result">未找到国家或地区</div></div></div>
+            </form>
+            <div id="country_code_layer">
+            <iframe scrolling="no" style="background-color:transparent; position: absolute; z-index: -1; width: 100%; height: 100%; top: 0; left:0;" frameborder="0"></iframe>
+            <div>
+            <a class="arrow"></a>
+            <div class="search-bar">
+            	<b class="search-icon"></b>
+            	<input type="text" placeholder="搜索您的国家和地区" id="inputSearch">
+            </div>
+            <div id="result" style="display: block;">
+            	<div class="capital-list">
+	              <ul>
+	               <li><a href="javascript:void(0)" class="cur">常用国家/地区</a></li>
+	               <li><a href="javascript:void(0)">A</a></li>
+	               <li><a href="javascript:void(0)">B</a></li>
+	               <li><a href="javascript:void(0)">C</a></li>
+	               <li><a href="javascript:void(0)">D</a></li>
+	               <li><a href="javascript:void(0)">E</a></li>
+	               <li><a href="javascript:void(0)">F</a></li>
+	               <li><a href="javascript:void(0)">G</a></li>
+	               <li><a href="javascript:void(0)">H</a></li>
+	               <li><a href="javascript:void(0)">J</a></li>
+	               <li><a href="javascript:void(0)">K</a></li>
+	               <li><a href="javascript:void(0)">L</a></li>
+	               <li><a href="javascript:void(0)">M</a></li>
+	               <li><a href="javascript:void(0)">N</a></li>
+	               <li><a href="javascript:void(0)">P</a></li>
+	               <li><a href="javascript:void(0)">R</a></li>
+	               <li><a href="javascript:void(0)">S</a></li>
+	               <li><a href="javascript:void(0)">T</a></li>
+	               <li><a href="javascript:void(0)">W</a></li>
+	               <li><a href="javascript:void(0)">X</a></li>
+	               <li><a href="javascript:void(0)">Y</a></li>
+	               <li><a href="javascript:void(0)">Z</a></li>
+	              </ul>
+	             </div>
+	            <div class="current-capital">
+	             	<span id="currentCapital">常用国家/地区</span><span class="line line-short"></span>
+	             </div>
+	            <div class="country-list">
+	             	<div id="scrollbar2" class="scrollbar_all">
+	             		<div class="scrollbar" style="height: 155px;">
+	             			<div class="track" style="height: 155px;">
+	             				<div class="thumb" style="top: 0px; height: 69.6377px;">
+	             					<div class="end"></div>
+	             				</div>
+	             			</div>
+	             		</div>
+	             		<div class="viewport">
+		             		<div class="overview" style="top: 0px;">
+			             			<ul>
+				             			<li class="" data-code="0886">
+					             			<i style="background-image:url(//passport.jd.com/new/user/lib/img/nationalflag/zhongguotaiwan_0886.png);filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=//passport.jd.com/new/user/lib/img/nationalflag/zhongguotaiwan_0886.png,sizingMethod=scale)"></i><span>中国台湾</span><span class="flr">0886</span></li><li class="" data-code="0852"><i style="background-image:url(//passport.jd.com/new/user/lib/img/nationalflag/zhongguoxianggang_0852.png);filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=//passport.jd.com/new/user/lib/img/nationalflag/zhongguoxianggang_0852.png,sizingMethod=scale)"></i><span>中国香港</span><span class="flr">0852</span></li><li class="" data-code="0061">
+					             			<i style="background-image:url(//passport.jd.com/new/user/lib/img/nationalflag/aodaliya_0061.png);filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=//passport.jd.com/new/user/lib/img/nationalflag/aodaliya_0061.png,sizingMethod=scale)"></i><span>澳大利亚</span><span class="flr">0061</span></li><li class="" data-code="0001"><i style="background-image:url(//passport.jd.com/new/user/lib/img/nationalflag/meiguo_0001.png);filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=//passport.jd.com/new/user/lib/img/nationalflag/meiguo_0001.png,sizingMethod=scale)"></i><span>美国</span><span class="flr">0001</span></li><li class="" data-code="0060"><i style="background-image:url(//passport.jd.com/new/user/lib/img/nationalflag/malaixiya_0060.png);filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=//passport.jd.com/new/user/lib/img/nationalflag/malaixiya_0060.png,sizingMethod=scale)"></i><span>马来西亚</span><span class="flr">0060</span></li><li class="" data-code="0065"><i style="background-image:url(//passport.jd.com/new/user/lib/img/nationalflag/xinjiapo_0065.png);filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=//passport.jd.com/new/user/lib/img/nationalflag/xinjiapo_0065.png,sizingMethod=scale)"></i><span>新加坡</span><span class="flr">0065</span></li><li class="" data-code="0081"><i style="background-image:url(//passport.jd.com/new/user/lib/img/nationalflag/riben_0081.png);filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=//passport.jd.com/new/user/lib/img/nationalflag/riben_0081.png,sizingMethod=scale)"></i><span>日本</span><span class="flr">0081</span></li><li class="" data-code="0064"><i style="background-image:url(//passport.jd.com/new/user/lib/img/nationalflag/xinxilan_0064.png);filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=//passport.jd.com/new/user/lib/img/nationalflag/xinxilan_0064.png,sizingMethod=scale)"></i><span>新西兰</span><span class="flr">0064</span></li><li class="" data-code="0001"><i style="background-image:url(//passport.jd.com/new/user/lib/img/nationalflag/jianada_0001.png);filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=//passport.jd.com/new/user/lib/img/nationalflag/jianada_0001.png,sizingMethod=scale)"></i><span>加拿大</span><span class="flr">0001</span></li><li class="" data-code="0082"><i style="background-image:url(//passport.jd.com/new/user/lib/img/nationalflag/hanguo_0082.png);filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=//passport.jd.com/new/user/lib/img/nationalflag/hanguo_0082.png,sizingMethod=scale)"></i>
+					             			<span>韩国</span><span class="flr">0082</span>
+				             			</li>
+			             			</ul>
+			             		</div>
+		             	</div>
+	             	</div>
+	             </div>
+	         </div>
+            <div id="no-result">未找到国家或地区</div></div></div>
         </div>
 
-                    <div class="reg-other clearfix">
-                <a href="/account/regPage?source=buser" class="reg-other-item reg-other-person" clstag="pageclick|keycount|reg_puser_201804031|4">
-                    <i class="reg-ohter-icon"></i>企业用户注册                </a>
-                                    <a href="https://reg.jd.com/p/regPage?source=IBG&amp;ReturnUrl=http%3A//hk.jd.com/" class="reg-other-item reg-other-inter" clstag="pageclick|keycount|reg_puser_201804031|5">
-                        <i class="reg-ohter-icon"></i>海外用户注册                    </a>
-                            </div>
+       <div class="reg-other clearfix">
+           <a href="/account/regPage?source=buser" class="reg-other-item reg-other-person" clstag="pageclick|keycount|reg_puser_201804031|4">
+                    <i class="reg-ohter-icon"></i>企业用户注册  
+           </a>
+          <a href="https://reg.jd.com/p/regPage?source=IBG&amp;ReturnUrl=http%3A//hk.jd.com/" class="reg-other-item reg-other-inter" clstag="pageclick|keycount|reg_puser_201804031|5">
+                        <i class="reg-ohter-icon"></i>海外用户注册
+         </a>
+      </div>
         
     </div>
     <div id="privacyProtocolNew" style="display:none;">
@@ -2085,9 +2152,9 @@ mso-bidi-font-family:宋体;color:#454545;mso-font-kerning:0pt">。<span lang="E
 <script type="text/javascript" src="register-person_files/seajs-text.js"></script>
 <script type="text/javascript" src="register-person_files/underscore-min.js"></script>
 <script type="text/javascript">
-    seajs.use('//misc.360buyimg.com/user/reg/3.0.0/js/personal/register-191023', function (reg) {
+  /*   seajs.use('//misc.360buyimg.com/user/reg/3.0.0/js/personal/register-191023', function (reg) {
         reg.init();
-    });
+    }); */
 </script>
 <script type="text/javascript" src="register-person_files/common.js" source="widget"></script>
 <script src="register-person_files/td_002.js"></script><script src="register-person_files/y.html"></script>
@@ -2113,7 +2180,7 @@ mso-bidi-font-family:宋体;color:#454545;mso-font-kerning:0pt">。<span lang="E
 
 
 
-<a class="feedback" href="http://surveys.jd.com/index.php?r=survey/index/sid/447941/lang/zh-Hans" style="margin-top: -67.5px; position: fixed; right: 0px; bottom: 50%;"></a><div class="ui-dialog" style="width: 947px; position: fixed; z-index: 10000; display: block; overflow: hidden; top: 62px; left: 282px;"><div class="ui-dialog-title" style="width: 927px;">      <span>京东用户注册协议和隐私政策</span>     </div>    <div class="ui-dialog-content" style="height: 545px; width: 927px; overflow: hidden;"><div class="protocol" onselectstart="return false" ondrag="return false" oncontextmenu="return false"><div class="protocol-con"><div class="WordSection1" style="layout-grid:15.6pt">
+<a class="feedback" href="#" style="margin-top: -67.5px; position: fixed; right: 0px; bottom: 50%;"></a><div class="ui-dialog" style="width: 947px; position: fixed; z-index: 10000; display: block; overflow: hidden; top: 62px; left: 282px;"><div class="ui-dialog-title" style="width: 927px;">      <span>京东用户注册协议和隐私政策</span>     </div>    <div class="ui-dialog-content" style="height: 545px; width: 927px; overflow: hidden;"><div class="protocol" onselectstart="return false" ondrag="return false" oncontextmenu="return false"><div class="protocol-con"><div class="WordSection1" style="layout-grid:15.6pt">
         <div style="">
             <p class="MsoNormal" style="text-align: left; vertical-align: baseline;" align="left"><b><span style="font-size: 11.5pt; font-family: 宋体;">欢迎注册成为京东用户！在您注册过程中，您需要完成我们的注册流程并通过点击同意的形式在线签署以下协议，请您务必仔细阅读、充分理解协议中的条款内容后再点击同意（尤其是以粗体或下划线标识的条款，因为这些条款可能会明确您应履行的义务或对您的权利有所限制）。</span></b><b><span style="font-size: 11.5pt; font-family: &quot;Times New Roman&quot;, serif;" lang="EN-US"><o:p></o:p></span></b></p>
 

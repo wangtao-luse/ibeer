@@ -86,7 +86,7 @@
 .i-suc,
 .registerDialog .close,
 .registerDialog .ico {
-	background: url(//misc.360buyimg.com/user/reg/3.0.0/css/i/icon.png) no-repeat
+	background: url(../../../img/reg/icon.png) no-repeat
 }
 
 .i-error {
@@ -340,7 +340,7 @@ input::-ms-reveal {
 .i-error1,
 .i-global,
 .i-suc {
-	background: url(//misc.360buyimg.com/user/reg/3.0.0/css/i/icon.png) no-repeat
+	background: url(../../../img/reg/icon.png) no-repeat
 }
 
 .progress-bar .pro-line,
@@ -496,7 +496,7 @@ input::-ms-reveal {
 .i-pwd-strong,
 .i-pwd-weak,
 .i-suc {
-	background: url(//misc.360buyimg.com/user/reg/3.0.0/css/i/icon.png) no-repeat
+	background: url(../../../img/reg/icon.png) no-repeat
 }
 
 .form-agreen .agree-tip i,
@@ -725,7 +725,7 @@ body {
 }
 
 .form-item-phone .arrow {
-	background: url(//misc.360buyimg.com/user/reg/3.0.0/css/i/icon.png) no-repeat;
+	background: url(../../../img/reg/icon.png) no-repeat;
 	width: 15px;
 	height: 15px;
 	display: inline-block;

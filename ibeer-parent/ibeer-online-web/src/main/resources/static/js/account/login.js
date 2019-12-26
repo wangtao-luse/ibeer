@@ -27,22 +27,7 @@ $(function(){
     	$("#qrcode-error-2016").css("left","0px");
     });
     
-    /**注册**/
-    $(".ui-dialog-close").click(function(){
-    	$(".ui-dialog").hide();
-    	$(".ui-mask").hide();
-    });
-
-    $("#step1-next").click(function(){
-    	$("#step1-wrap").css("display","none");
-    	$("#step2-wrap").css("display","block");
-    	$(".cur-step").addClass("done-step");
-    	$(".cur-step span").text("");
-    	$(".cur-step").removeClass("cur-step");    	
-    	$(".person-pro-step2").addClass("cur-step");
-    })
-    $("#form-register").click(function(){
-    })
+   
 })
 
 

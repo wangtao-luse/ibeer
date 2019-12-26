@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSONObject;
@@ -34,6 +35,13 @@ public class AccountController {
 	   }
 		
 	}
+  //注册信息提交
+   @RequestMapping("/regSub")
+   @ResponseBody
+   public ResponseMessage regSub(@RequestBody JSONObject jsonObject,HttpServletRequest request) {
+	   System.out.println(jsonObject);
+	  return ResponseMessage.getSucess(); 
+   }
    /**
     * 登录页面
     * @return
