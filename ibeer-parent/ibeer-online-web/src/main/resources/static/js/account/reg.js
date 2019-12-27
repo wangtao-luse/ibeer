@@ -61,6 +61,22 @@ $(function(){
     	
     	
     });
+    $(".form-item.form-item-getcode").click(function(){
+    	var phon=$("#form-phone").val();
+    	if(phon!=""){
+    		$(".slide-authCode-wraper").css("display","block");
+    	}else{
+    		$(".form-item.form-item-phone .input-tip span").attr("id","form-phone-error").attr("class","error").html("");
+    		//<span id="form-phone-error" class="error"><i class="i-error"></i>请输入手机号</span>
+    		return;
+    	}
+    	
+    });
+    $(document).on("click",".slide-authCode-wraper .close",function(){
+    	$(".slide-authCode-wraper").css("display","none");
+    });
+    	
+  
 
     /*$("#form-register").click(function(){
     	var url="/account/regSub";

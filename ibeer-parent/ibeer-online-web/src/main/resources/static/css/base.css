@@ -613,3 +613,8 @@ img{
 		transform: rotate(360deg);
 	}
 }
+
+
+.phcolor {
+	color: #cccccc;
+}
