@@ -66,7 +66,7 @@ $(function(){
     	if(phon!=""){
     		$(".slide-authCode-wraper").css("display","block");
     	}else{
-    		$(".form-item.form-item-phone .input-tip span").attr("id","form-phone-error").attr("class","error").html("");
+    		$(".form-item.form-item-phone .input-tip span").attr("id","form-phone-error").attr("class","error").html("<i class='i-error'></i>请输入手机号");
     		//<span id="form-phone-error" class="error"><i class="i-error"></i>请输入手机号</span>
     		return;
     	}
