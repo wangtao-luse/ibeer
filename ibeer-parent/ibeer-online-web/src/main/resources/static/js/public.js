@@ -1,4 +1,4 @@
-var postAjax = function(url,postData,successFunction,option){
+var postAjax = function(url,postData,successFunction,options){
 			var returnFlag=false;
 			var defaultOptions={
 				type:"post",
@@ -23,9 +23,10 @@ var postAjax = function(url,postData,successFunction,option){
 				success:function(resultData){
 					if(resultData&&isSuccess(resultData.resultCode)){
 						if(defaultOptions&&defaultOptions.successArguments){
-							sucessFunction(resultData,defaultOptions.successArguments);
+							successFunction(resultData,defaultOptions.successArguments);
 						}else{
-							sucessFunction(resultData);
+							successFunction(resultData);
+							
 						}
 						returnFlag = true;
 					}else{
@@ -44,9 +45,10 @@ var postAjax = function(url,postData,successFunction,option){
 				
 				
 			});
+			return returnFlag;
 		}
 
-var postAjaxNoLoading = function (url, postData, successFunction, options) {
+/*var postAjaxNoLoading = function (url, postData, successFunction, options) {
     var returnFlag= false;
     var defaultOptions = {
         errorFunction: errorFunction,
@@ -188,7 +190,7 @@ var postForm = function (url, postData, successFunction, options) {
         }
     });
     return returnFlag;
-};
+};*/
 
 
 
@@ -212,3 +214,19 @@ var postForm = function (url, postData, successFunction, options) {
 		function showMessage(resultData) {
 		alert(resultData.description);
 		}
+		
+		
+		function filterSpecial(value) {
+		    return value.replace(/[']/g, '')
+		}
+		$.serializeObject = function (form) {
+		    var o = {};
+		    $.each(form.serializeArray(), function (index) {
+		        if (o[this['name']]) {
+		            o[this['name']] = filterSpecial(o[this['name']] + "," + this['value'])
+		        } else {
+		            o[this['name']] = filterSpecial(this['value'])
+		        }
+		    });
+		    return o
+		};

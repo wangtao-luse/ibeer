@@ -1,5 +1,7 @@
 $(function(){
 	 /**注册**/
+	$(".ui-dialog").hide();
+	$(".ui-mask").hide();
     $(".ui-dialog-close").click(function(){
     	$(".ui-dialog").hide();
     	$(".ui-mask").hide();
@@ -59,15 +61,8 @@ $(function(){
     	
     	
     });
-   /* $("#scrollbar2 .scrollbar").scroll(function(){
-    	var top = $(this).scrollTop();
-    	console.log(top);
-    	$(this).find(".thumb").css("top",top+"px");
-    	$(this).find(".thumb").css("height","35.9118px");
-    	$(this).find(".overview").css("top",top+"px");
-    });*/
-    
-    $("#form-register").click(function(){
+
+    /*$("#form-register").click(function(){
     	var url="/account/regSub";
     	var postData =$("#register-form").serialize();
     	console.log(postData);
@@ -77,5 +72,5 @@ $(function(){
     	}, {errorFunction:function(data){
     		
     	},cache: false, async: false});
-    });
+    });*/
 });
