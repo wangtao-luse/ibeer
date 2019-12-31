@@ -40,7 +40,12 @@ $(function(){
     	$("#select-country").css("border-color","rgb(221,221,221)");
     });    
     $("#form-phone").blur(function(){
-    	$(this).prev().css("display","inline");
+    	if($(this).val()==""){
+    		$(this).prev().css("display","inline");
+    	}else{
+    		$(this).prev().css("display","none");
+    	}
+    	
     	$(this).parent().css("border","1px solid rgb(221, 221, 221)");
     	$(this).parent().next().find("span").html("");
     	
@@ -76,8 +81,21 @@ $(function(){
     	$(".slide-authCode-wraper").css("display","none");
     });
     	
-  
-
+    
+    var dX;
+    var dY;
+	  $(".JDJRV-slide-inner.JDJRV-slide-btn").mousedown(function(e){
+		  var event = e || window.event;
+		  //console.log(event.pageX,event.pageY);
+		   dX = $(this).offset().left;
+           dY = $(this).offset().top;
+         // console.log(dX,dY);
+	  });
+	  $(".JDJRV-slide-inner.JDJRV-slide-btn").mousemove(function(e){
+		  var event = e || window.event;
+		  var x= event.pageX;
+		  console.log(x);
+	  })
     /*$("#form-register").click(function(){
     	var url="/account/regSub";
     	var postData =$("#register-form").serialize();

@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class BaseException extends RuntimeException {
+private static final long serialVersionUID = 1L;
 private String errorMessage;
 public BaseException() {}
 public BaseException(String errorMessage) {

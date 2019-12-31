@@ -6,7 +6,8 @@ import lombok.Data;
 
 @Data
 public class RequestMessage implements Serializable {
-private RequestHead head;
+private static final long serialVersionUID = 1L;
+private RequestHeader requestHeader;
 private RequestBody body;
 
 }

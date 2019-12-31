@@ -19,13 +19,13 @@ import com.baomidou.mybatisplus.generator.engine.BeetlTemplateEngine;
             mpg.setTemplateEngine(new BeetlTemplateEngine());
             // 全局配置
             GlobalConfig gc = new GlobalConfig();
-            gc.setOutputDir("D://");
+            gc.setOutputDir("D://mysql");
             gc.setFileOverride(true);
             gc.setActiveRecord(true);
             gc.setEnableCache(true);// XML 二级缓存
             gc.setBaseResultMap(true);// XML ResultMap
             gc.setBaseColumnList(true);// XML columList
-            gc.setAuthor("author");
+            gc.setAuthor("wangtao");
 
             // 自定义文件命名，注意 %s 会自动填充表实体属性！
             gc.setMapperName("%sMapper");
@@ -37,7 +37,8 @@ import com.baomidou.mybatisplus.generator.engine.BeetlTemplateEngine;
 
             // 数据源配置
             DataSourceConfig dsc = new DataSourceConfig();
-            dsc.setDbType(DbType.ORACLE);
+           // dsc.setDbType(DbType.ORACLE);
+            dsc.setDbType(DbType.MYSQL);
         /*dsc.setTypeConvert(new MySqlTypeConvert(){
             // 自定义数据库表字段类型转换【可选】
             @Override
@@ -47,18 +48,24 @@ import com.baomidou.mybatisplus.generator.engine.BeetlTemplateEngine;
             }
         });*/
 
-            dsc.setDriverName("oracle.jdbc.driver.OracleDriver");
-            dsc.setUrl("jdbc:oracle:thin:@10.103.32.24:1521:onlinetest");
-            dsc.setUsername("onlinetest");
-            dsc.setPassword("onlinetest438");
+		/*
+		 * dsc.setDriverName("oracle.jdbc.driver.OracleDriver");
+		 * dsc.setUrl("jdbc:oracle:thin:@10.103.32.24:1521:onlinetest");
+		 * dsc.setUsername("onlinetest"); dsc.setPassword("onlinetest438");
+		 * mpg.setDataSource(dsc);
+		 */
+            dsc.setDriverName("com.mysql.cj.jdbc.Driver");
+            dsc.setUrl("jdbc:mysql://localhost:3306/ibeer?serverTimezone=UTC");
+            dsc.setUsername("root");
+            dsc.setPassword("root");
             mpg.setDataSource(dsc);
 
             // 策略配置
             StrategyConfig strategy = new StrategyConfig();
             // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
-            strategy.setTablePrefix(new String[] { "t_m_", "t_p_", "t_s_", "t_r_", "t_c_"});// 此处可以修改为您的表前缀
+            strategy.setTablePrefix(new String[] { "t_m_", "t_p_", "t_s_", "t_r_", "t_c_","t_a_"});// 此处可以修改为您的表前缀
             strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-            strategy.setInclude(new String[] {"T_C_NOTE"}); // 需要生成的表
+            strategy.setInclude(new String[] {"T_A_ACCOUNT"}); // 需要生成的表
             // strategy.setExclude(new String[]{"test"}); // 排除生成的表
             mpg.setStrategy(strategy);
 

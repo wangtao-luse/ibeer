@@ -32,13 +32,13 @@
  transition:background .4s ease
 }
 .JDValidate-wrap .JDJRV-slide-bar .JDJRV-slide-bar-left {
- background:url(https://ivs.jd.com/slide/i/slide-bar-left2.png) no-repeat;
+ background:url(../../../img/account/reg/slide-bar-left2.png) no-repeat;
  width:24px;
  height:40px;
  float:left
 }
 .JDValidate-wrap .JDJRV-slide-bar .JDJRV-slide-bar-center {
- background-image:url(https://ivs.jd.com/slide/i/slide-bar-bg.png);
+ background-image:url(../../../img/account/reg/slide-bar-bg.png);
  margin-left:24px;
  margin-right:25px;
  color:#fff;
@@ -54,7 +54,7 @@
  display:none;
  width:25px;
  height:40px;
- background:url(https://ivs.jd.com/slide/i/slide-bar-right2.png) no-repeat;
+ background:url(../../../img/account/reg/slide-bar-right2.png) no-repeat;
  position:absolute;
  right:0;
  top:0
@@ -71,10 +71,10 @@
  float:left;
  width:40px;
  height:40px;
- background:url(https://ivs.jd.com/slide/i/slide-left-icon2.png) no-repeat
+ background:url(../../../img/account/reg/slide-left-icon2.png) no-repeat
 }
 .JDValidate-wrap .JDJRV-slide-text .JDJRV-slide-center {
- background-image:url(https://ivs.jd.com/slide/i/slide-center-bg.png);
+ background-image:url(../../../img/account/reg/slide-center-bg.png);
  margin-left:40px;
  margin-right:40px;
  overflow:hidden;
@@ -83,7 +83,7 @@
 .JDValidate-wrap .JDJRV-slide-text .JDJRV-slide-right {
  width:40px;
  height:40px;
- background:url(https://ivs.jd.com/slide/i/slide-right-icon2.png) no-repeat;
+ background:url(../../../img/account/reg/slide-right-icon2.png) no-repeat;
  position:absolute;
  right:0;
  top:0
@@ -98,7 +98,7 @@
  width:55px;
  height:55px;
  border-radius:40px;
- background:url(https://ivs.jd.com/slide/i/jd-slide-btn2.png) no-repeat;
+ background:url(../../../img/account/reg/beer-slide-btn2.png) no-repeat;
  cursor:pointer;
  touch-action:none
 }
@@ -109,13 +109,13 @@
  display:none
 }
 .JDValidate-wrap .JDJRV-slide-err .JDJRV-slide-bar .JDJRV-slide-bar-left {
- background:url(https://ivs.jd.com/slide/i/slide-bar-err-left2.png) no-repeat
+ background:url(../../../img/account/reg/slide-bar-err-left2.png) no-repeat
 }
 .JDValidate-wrap .JDJRV-slide-err .JDJRV-slide-bar .JDJRV-slide-bar-center {
- background-image:url(https://ivs.jd.com/slide/i/slide-bar-err-bg.png)
+ background-image:url(../../../img/account/reg/slide-bar-err-bg.png)
 }
 .JDValidate-wrap .JDJRV-slide-err .JDJRV-slide-btn .JDJRV-slide-icon {
- background:url(https://ivs.jd.com/slide/i/slide-err-icon.png) center center no-repeat
+ background:url(../../../img/account/reg/slide-err-icon.png) center center no-repeat
 }
 .JDValidate-wrap .JDJRV-img-panel .JDJRV-img-wrap {
  position:relative;
@@ -159,7 +159,7 @@
  color:#06c
 }
 .JDValidate-wrap .JDJRV-img-panel .JDJRV-img-refresh div {
- background:url(https://ivs.jd.com/slide/i/refresh2.png) center center no-repeat;
+ background:url(../../../img/account/reg/refresh2.png) center center no-repeat;
  width:20px;
  height:20px;
  float:right
@@ -250,7 +250,7 @@
  display:block;
  width:12px;
  height:12px;
- background-image:url(https://ivs.jd.com/slide/i/x.png)
+ background-image:url(../../../img/account/reg/x.png)
 }
 .JDJRV-click-warp {
  border:1px solid #409eff;
@@ -307,13 +307,13 @@
  display:block;
  width:12px;
  height:12px;
- background-image:url(https://ivs.jd.com/slide/i/x.png)
+ background-image:url(../../../img/account/reg/x.png)
 }
 .JDJRV-suspend-warp .JDJRV-arrow {
  z-index:2147483647;
  display:block;
  position:absolute;
- background-image:url(https://ivs.jd.com/slide/i/tips.gif);
+ background-image:url(../../../img/account/reg/tips.gif);
  background-repeat:no-repeat;
  width:16px;
  height:8px;
@@ -382,7 +382,7 @@
  color:#06c
 }
 .JDJRV-dsc .JDJRV-question .JDJRV-question-refresh div {
- background:url(https://ivs.jd.com/slide/i/refresh2.png) center center no-repeat;
+ background:url(../../../img/account/reg/refresh2.png) center center no-repeat;
  width:20px;
  height:20px;
  float:right
@@ -399,12 +399,12 @@
 }
 .JDJRV-dsc .JDJRV-dsc-result-succ {
  display:block;
- background:url(https://ivs.jd.com/slide/i/succ-icon.png) center center no-repeat;
+ background:url(../../../img/account/reg/succ-icon.png) center center no-repeat;
  background-size:100%
 }
 .JDJRV-dsc .JDJRV-dsc-result-err {
  display:block;
- background:url(https://ivs.jd.com/slide/i/err-icon.png) center center no-repeat;
+ background:url(../../../img/account/reg/err-icon.png) center center no-repeat;
  background-size:100%
 }
 .JDJRV-pic-click {
@@ -431,7 +431,7 @@
  color:#06c
 }
 .JDJRV-pic-click .JDJRV-question .JDJRV-question-refresh div {
- background:url(https://ivs.jd.com/slide/i/refresh2.png) center center no-repeat;
+ background:url(../../../img/account/reg/refresh2.png) center center no-repeat;
  width:20px;
  height:20px;
  float:right
@@ -494,41 +494,41 @@
  }
 }
 .JDJRV-joybuy .JDJRV-slide-bar .JDJRV-slide-bar-left {
- background:url(https://static.joybuy.com/risk-cdn/iv/images/slide-bar-left2.png) no-repeat!important
+ background:url(../../../img/account/reg/slide-bar-left2.png) no-repeat!important
 }
 .JDJRV-joybuy .JDJRV-slide-bar .JDJRV-slide-bar-center {
- background-image:url(https://static.joybuy.com/risk-cdn/iv/images/slide-bar-bg.png)!important
+ background-image:url(../../../img/account/reg/slide-bar-bg.png)!important
 }
 .JDJRV-joybuy .JDJRV-slide-bar .JDJRV-slide-bar-right {
- background:url(https://static.joybuy.com/risk-cdn/iv/images/slide-bar-right2.png) no-repeat!important
+ background:url(../../../img/account/reg/slide-bar-right2.png) no-repeat!important
 }
 .JDJRV-joybuy .JDJRV-slide-left {
- background:url(https://static.joybuy.com/risk-cdn/iv/images/slide-left-icon2.png) no-repeat!important
+ background:url(../../../img/account/reg/slide-left-icon2.png) no-repeat!important
 }
 .JDJRV-joybuy .JDJRV-slide-center {
- background-image:url(https://static.joybuy.com/risk-cdn/iv/images/slide-center-bg.png)!important
+ background-image:url(../../../img/account/reg/slide-center-bg.png)!important
 }
 .JDJRV-joybuy .JDJRV-slide-right {
- background:url(https://static.joybuy.com/risk-cdn/iv/images/slide-right-icon2.png) no-repeat!important
+ background:url(../../../img/account/reg/slide-right-icon2.png) no-repeat!important
 }
 .JDJRV-joybuy .JDJRV-slide-btn {
- background:url(https://static.joybuy.com/risk-cdn/iv/images/jd-slide-btn2.png) no-repeat!important
+ background:url(../../../img/account/reg/beer-slide-btn2.png) no-repeat!important
 }
 .JDJRV-joybuy .JDJRV-slide-err .JDJRV-slide-bar-left {
- background:url(https://static.joybuy.com/risk-cdn/iv/images/slide-bar-err-left2.png) no-repeat!important
+ background:url(../../../img/account/reg/slide-bar-err-left2.png) no-repeat!important
 }
 .JDJRV-joybuy .JDJRV-slide-err .JDJRV-slide-bar-center {
- background-image:url(https://static.joybuy.com/risk-cdn/iv/images/slide-bar-err-bg.png)!important
+ background-image:url(../../../img/account/reg/slide-bar-err-bg.png)!important
 }
 .JDJRV-joybuy .JDJRV-slide-err .JDJRV-slide-icon {
- background:url(https://static.joybuy.com/risk-cdn/iv/images/slide-err-icon.png) center center no-repeat!important
+ background:url(../../../img/account/reg/slide-err-icon.png) center center no-repeat!important
 }
 .JDJRV-joybuy .JDJRV-img-refresh div {
- background:url(https://static.joybuy.com/risk-cdn/iv/images/refresh2.png) center center no-repeat!important
+ background:url(../../../img/account/reg/refresh2.png) center center no-repeat!important
 }
 .JDJRV-joybuy .JDJRV-close {
- background-image:url(https://static.joybuy.com/risk-cdn/iv/images/x.png)!important
+ background-image:url(../../../img/account/reg/x.png)!important
 }
 .JDJRV-joybuy .JDJRV-arrow {
- background-image:url(https://static.joybuy.com/risk-cdn/iv/images/tips.gif)!important
+ background-image:url(../../../img/account/reg/tips.gif)!important
 }
