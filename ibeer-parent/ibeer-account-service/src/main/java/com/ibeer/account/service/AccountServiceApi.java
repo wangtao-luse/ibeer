@@ -21,14 +21,6 @@ import com.ibeer.model.Account;
 @RestController
 public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> implements AccountApi{
 
-	@Override
-	public ResponseMessage testFegin(RequestMessage requestMessage, HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		JSONObject jsonObject = requestMessage.getBody().getContent();
-		
-		
-		return null;
-	}
 
 	
 	

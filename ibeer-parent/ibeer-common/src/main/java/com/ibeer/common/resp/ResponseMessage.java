@@ -10,6 +10,8 @@ import lombok.Data;
 
 @Data
 public final class ResponseMessage implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 00:失败
 	 * 10:成功

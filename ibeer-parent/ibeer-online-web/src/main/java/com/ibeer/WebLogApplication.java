@@ -1,5 +1,6 @@
 package com.ibeer;
  
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ibeer.common.req.RequestBody;
 import com.ibeer.common.req.RequestHeader;
@@ -26,11 +27,11 @@ import java.util.Map;
 public class WebLogApplication {
     private static Logger logger = (Logger) LoggerFactory.getLogger(WebLogApplication.class);
        ThreadLocal<Long> time=new ThreadLocal<>();
-    @Pointcut("execution(public * com.example.demo.controller..*.*(..))")
+    @Pointcut("execution(public * com.ibeer.online.controller..*.*(..))")
     public void webLog() {
     }
  
-    @Before("webLog()") //在切入点的方法run之前要干的
+    @Before("webLog()") //在切入点的方法运行的时候
     public void logBeforeController(JoinPoint joinPoint) {
         String string = joinPoint.toString();
         Object[] args = joinPoint.getArgs();
@@ -76,21 +77,24 @@ public class WebLogApplication {
     @AfterReturning(returning = "object", pointcut = "webLog()")
     public void doAfterReturning(JoinPoint JoinPoint ,Object object) throws Throwable {
         // 处理完请求，返回内容
-         System.out.println("########后置通知########");
-         JSONObject jsonObject=new JSONObject();
-        String json=JSONObject.toJSONString(object);
-        ResponseMessage responseMessage = JSONObject.parseObject(json, ResponseMessage.class);
-        long endTime = System.currentTimeMillis();
-        long  t= endTime-time.get();
-        JSONObject jsonObject1 = JSONObject.parseObject(json);
-                   jsonObject1.put("time",t);
-         logger.info(jsonObject1.toJSONString());
-        //logger.info("RESPONSE :" + JSONObject.toJSONString(object));
- 
- 
- 
+    	if(object instanceof JSON) {
+    		 System.out.println("########后置通知########");
+    	        String json=JSONObject.toJSONString(object);   
+    	       
+    	    	   ResponseMessage responseMessage = JSONObject.parseObject(json, ResponseMessage.class);
+    	    	   long endTime = System.currentTimeMillis();
+    	           long  t= endTime-time.get();
+    	           JSONObject jsonObject1 = JSONObject.parseObject(json);
+    	                      jsonObject1.put("time",t);
+    	            logger.info(jsonObject1.toJSONString());
+    	      
+    	}
+        
+        
+        
  
     }
+   
     @After("webLog()")
     public void doAfter(JoinPoint JoinPoint ){
     System.out.println("########最终通知####");

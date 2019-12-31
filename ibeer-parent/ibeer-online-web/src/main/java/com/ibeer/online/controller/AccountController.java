@@ -52,7 +52,6 @@ public class AccountController {
    }
    @RequestMapping("/login")
    public ResponseMessage login(@RequestBody JSONObject jsonObject, HttpServletRequest request) {
-	 ResponseMessage responseMessage =ResponseMessage.getSucess();
 	   try {
 		   String uname = jsonObject.getString("uname");
 		   String pwd = jsonObject.getString("pwd");
@@ -64,11 +63,11 @@ public class AccountController {
 	} catch (UnknownAccountException  e) {
 		// TODO: handle exception
 		e.printStackTrace();
-		return responseMessage.getFailed("账号不存在！");
+		return ResponseMessage.getFailed("账号不存在！");
 	}catch (IncorrectCredentialsException  e) {
 		// TODO: handle exception
 		e.printStackTrace();
-		return responseMessage.getFailed("密码不正确！");
+		return ResponseMessage.getFailed("密码不正确！");
 	}
 	
 	   return ResponseMessage.getSucess();

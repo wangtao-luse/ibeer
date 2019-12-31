@@ -212,7 +212,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <spring.profiles.active>test</spring.profiles.active>
+                <profiles.active>test</profiles.active>
                 <server.account.port>9092</server.account.port>
                 <server.online.port>9093</server.online.port>
                 <server.eureka.port>9090</server.eureka.port>
@@ -231,7 +231,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <spring.profiles.active>pro</spring.profiles.active>
+                <profiles.active>pro</profiles.active>
                 <server.account.port>9092</server.account.port>
                 <server.online.port>9093</server.online.port>
                 <server.eureka.port>9090</server.eureka.port>
