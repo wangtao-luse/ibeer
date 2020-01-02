@@ -111,7 +111,10 @@ $(function(){
     	if(test_phone(phone)){
     		$(".slide-authCode-wraper").css("display","block");
     	}else{
-    		$(".form-item.form-item-phone .input-tip span").attr("id","form-phone-error").attr("class","error").html("<i class='i-error'></i>请输入手机号");
+    		if(phone==""){
+    			$(".form-item.form-item-phone .input-tip span").attr("id","form-phone-error").attr("class","error").html("<i class='i-error'></i>请输入手机号");
+    		}
+    		
     		return;
     	}
     	

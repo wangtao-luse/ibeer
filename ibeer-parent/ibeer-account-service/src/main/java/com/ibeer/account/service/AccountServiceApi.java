@@ -16,7 +16,7 @@ import com.ibeer.account.presist.ContractMapper;
 import com.ibeer.api.AccountApi;
 import com.ibeer.common.req.RequestMessage;
 import com.ibeer.common.resp.ResponseMessage;
-import com.ibeer.model.Account;
+import com.ibeer.model.account.Account;
 
 @RestController
 public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> implements AccountApi{

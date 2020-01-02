@@ -1,7 +1,7 @@
 package com.ibeer.account.presist;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ibeer.model.Account;
+import com.ibeer.model.account.Account;
 
 /**
  * <p>

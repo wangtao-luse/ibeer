@@ -7,6 +7,8 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.ibeer.common.UserV;
+
 
 public class SessionUtil {
 	private final static Logger logger=LoggerFactory.getLogger(SessionUtil.class);
@@ -23,14 +25,23 @@ public class SessionUtil {
 		return null;
 	}
 	
-	/*
-	 * public static AccountV getSessionUser(){ AccountV currentAccount = null; try
-	 * { Subject subject = SecurityUtils.getSubject(); if (null!=subject ) {
-	 * PrincipalCollection principalCollection = subject.getPrincipals(); if (
-	 * null!=principalCollection && !principalCollection.isEmpty()) { currentUser =
-	 * (AccountV) principalCollection .getPrimaryPrincipal(); } } } catch (Exception
-	 * e) { logger.info("获取登录对象的时候出现异常:"+e.getMessage()); } return currentUser; }
-	 */
+	
+	public static UserV getSessionUser(){
+		UserV currentUser = null;
+		try {
+			Subject subject = SecurityUtils.getSubject();
+			if (null!=subject ) {
+				PrincipalCollection principalCollection = subject.getPrincipals();
+				if ( null!=principalCollection && !principalCollection.isEmpty()) {
+					currentUser = (UserV) principalCollection
+							.getPrimaryPrincipal();
+				}
+			}
+		} catch (Exception e) {
+			logger.info("获取登录对象的时候出现异常:"+e.getMessage());
+		}
+		return currentUser;
+	}
 	
 	/**
 	 * 获取sessionId

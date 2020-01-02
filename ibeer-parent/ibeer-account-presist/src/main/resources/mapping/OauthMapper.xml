@@ -4,7 +4,7 @@
 
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.ibeer.model.Oauth">
+    <resultMap id="BaseResultMap" type="com.ibeer.model.account.Oauth">
         <id column="ID" property="id" />
         <result column="U_ID" property="uId" />
         <result column="OAUTH_ID" property="oauthId" />

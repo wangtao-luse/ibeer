@@ -39,7 +39,7 @@ public class AccountController {
    @RequestMapping("/regSub")
    @ResponseBody
    public ResponseMessage regSub(@RequestBody JSONObject jsonObject,HttpServletRequest request) {
-	   System.out.println(jsonObject);
+	   
 	  return ResponseMessage.getSucess(); 
    }
    /**

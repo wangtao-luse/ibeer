@@ -4,7 +4,7 @@
 
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.ibeer.model.Account">
+    <resultMap id="BaseResultMap" type="com.ibeer.model.account.Account">
         <id column="ID" property="id" />
         <result column="UID" property="uid" />
         <result column="SEX" property="sex" />

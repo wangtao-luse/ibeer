@@ -1,4 +1,4 @@
-package com.ibeer.model;
+package com.ibeer.model.account;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -21,25 +21,39 @@ import java.io.Serializable;
 public class Account extends Model<Account> {
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     * 主键
+     */
     @TableId(value = "ID", type = IdType.AUTO)
     private Integer id;
-
+    /**
+     * 用户唯一号
+     */
     @TableField("UID")
     private Integer uid;
-
+    /**
+     * 性别
+     */
     @TableField("SEX")
     private String sex;
-
+    /**
+     * 注册日期
+     */
     @TableField("CREATEDATE")
     private Long createdate;
-
+    /**
+     * 注册IP
+     */
     @TableField("CREATEIP")
     private String createip;
-
+    /**
+     * 上次登录时间
+     */
     @TableField("LASTTIME")
     private Long lasttime;
-
+    /*
+     * 用户状态
+     */
     @TableField("STATUS")
     private String status;   
 
