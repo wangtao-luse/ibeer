@@ -79,15 +79,20 @@ public class WebLogApplication {
         // 处理完请求，返回内容
     	if(object instanceof JSON) {
     		 System.out.println("########后置通知########");
-    	        String json=JSONObject.toJSONString(object);   
-    	       
-    	    	   ResponseMessage responseMessage = JSONObject.parseObject(json, ResponseMessage.class);
+    	        String json=JSONObject.toJSONString(object);     	       
     	    	   long endTime = System.currentTimeMillis();
     	           long  t= endTime-time.get();
     	           JSONObject jsonObject1 = JSONObject.parseObject(json);
     	                      jsonObject1.put("time",t);
-    	            logger.info(jsonObject1.toJSONString());
+    	            logger.info("RESPONSE:"+jsonObject1.toJSONString());
     	      
+    	}else {
+    		 long endTime = System.currentTimeMillis();
+	           long  t= endTime-time.get();
+	           JSONObject result = new JSONObject();
+	           result.put("time",t);
+	           result.put("page", object);
+	            logger.info("RESPONSE:"+result.toJSONString());
     	}
         
         
