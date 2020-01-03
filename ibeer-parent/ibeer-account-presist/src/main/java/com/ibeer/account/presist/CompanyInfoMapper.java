@@ -1,7 +1,7 @@
 package com.ibeer.account.presist;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ibeer.model.account.Account;
+import com.ibeer.model.account.CompanyInfo;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import com.ibeer.model.account.Account;
  * </p>
  *
  * @author wangtao
- * @since 2019-12-31
+ * @since 2020-01-03
  */
-public interface AccountMapper extends BaseMapper<Account> {
-  public Integer getAccountMaxId();
+public interface CompanyInfoMapper extends BaseMapper<CompanyInfo> {
+
 }

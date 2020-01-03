@@ -12,10 +12,15 @@
         <result column="CREATEIP" property="createip" />
         <result column="LASTTIME" property="lasttime" />
         <result column="STATUS" property="status" />
+        <result column="UTYPE" property="utype"/>
     </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        ID, UID, SEX, CREATEDATE, CREATEIP, LASTTIME, STATUS
+        ID, UID, SEX, CREATEDATE, CREATEIP, LASTTIME, STATUS, UTYPE
     </sql>
+    <select id="getAccountMaxId" resultType="Integer">
+      SELECT MAX(ID) FROM T_A_ACCOUNT
+    </select>
+    
 
 </mapper>

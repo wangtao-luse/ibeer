@@ -30,7 +30,7 @@ public class Account extends Model<Account> {
      * 用户唯一号
      */
     @TableField("UID")
-    private Integer uid;
+    private String uid;
     /**
      * 性别
      */
@@ -56,7 +56,11 @@ public class Account extends Model<Account> {
      */
     @TableField("STATUS")
     private String status;   
-
+   /**
+    * 用户类型 1:个人；2:公司
+    */
+    @TableField("UTYPE")
+    private String utype;
     @Override
     protected Serializable pkVal() {
         return null;

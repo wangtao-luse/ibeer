@@ -1,3 +1,8 @@
+-- 修改字段类型语法 
+ALTER TABLE  table_name MODIFY COLUMN column_name 数据类型;
+-- 添加字段语法
+ALTER TABLE table_name ADD column_name 数据类型;
+
 -- 显示数据库
 SHOW DATABASES;
 -- 创建数据库
@@ -22,7 +27,9 @@ CREATE TABLE T_A_ACCOUNT (
 	-- 注册IP	
 	LASTTIME INT,
 	-- 上次登录时间	
-	STATUS CHAR (2) -- 状态	0：禁用；1：正常
+	STATUS CHAR (2),
+	-- 状态	0：禁用；1：正常
+	UTYPE  CHAR (2) --用户类型: 1:个人;2:公司;
 );
 
 -- 2.	用户认证表(T_A_OAUTH)
@@ -32,7 +39,7 @@ CREATE TABLE T_A_OAUTH (
 	U_ID INT,
 	-- 用户唯一号	外键来源于用户表中的UID
 	OAUTH_ID VARCHAR (50),
-	-- 第三方登录唯一ID	
+	-- 第三方登录唯一ID	,手机号,用户名,邮箱
 	OAUTH_TYPE VARCHAR (18),
 	-- 第三方登录平台标识(手机号，邮箱，用户名，第三方应用名称（微信，QQ，微博…）)	phone,email,uname,wechat,qq,weibo
 	CREDENTIAL VARCHAR (50),

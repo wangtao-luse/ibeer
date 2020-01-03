@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ibeer.common.req.RequestBody;
 import com.ibeer.common.req.RequestHeader;
 import com.ibeer.common.req.RequestMessage;
+import com.ibeer.dto.UserV;
 import com.ibeer.util.SessionUtil;
 
 
@@ -15,11 +16,15 @@ public static RequestMessage postData(JSONObject content,HttpServletRequest requ
 	RequestMessage requestMessage = new RequestMessage();
 	RequestHeader header = new RequestHeader();
 	header.setRemoteAddr(request.getRemoteAddr());
-	SessionUtil.getSessionUser();
-
-	requestMessage.setRequestHeader(header);
-	
+	requestMessage.setRequestHeader(header);	
 	RequestBody body = new RequestBody();
+	UserV sessionUser = SessionUtil.getSessionUser();
+	if(null != sessionUser) {
+		body.setUId(sessionUser.getUId());
+		body.setNickname(sessionUser.getNickname());
+		body.setAvatar(sessionUser.getAvatar());
+		body.setOauthType(sessionUser.getOauthType());	
+	}
 	body.setContent(content);
 	requestMessage.setBody(body);
 	return requestMessage;

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ibeer.account.presist.CompanyInfoMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ibeer.model.account.CompanyInfo">
+        <id column="ID" property="id" />
+        <result column="U_ID" property="uId" />
+        <result column="COMPANY_TYPE" property="companyType" />
+        <result column="COMPANY_NAME" property="companyName" />
+        <result column="CREDIT_ID" property="creditId" />
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, U_ID, COMPANY_TYPE, COMPANY_NAME, CREDIT_ID
+    </sql>
+
+</mapper>

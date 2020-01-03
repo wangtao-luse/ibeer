@@ -38,7 +38,6 @@ public class TestServiceApi implements TestApi {
 		return responseMessage;
 	}
 	@RequestMapping(value = "/testFegin",produces = {"application/json;charset=UTF-8"})
-	@Override
 	public ResponseMessage testFegin() {
 		// TODO Auto-generated method stub
 		return ResponseMessage.getSucess().add("wangtao");

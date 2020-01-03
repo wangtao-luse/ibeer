@@ -282,25 +282,8 @@ $(function(){
     	
     });
     $("#form-register").click(function(){
-    	
-    	var  nickName = $("#form-account").val();
-    	//检查用户名和密码
-    	if(!test_nickName(nickName)){
-    		return;
-    	}
-    	
-    	/*if(!reg.test(nickName)){
-    		var input-tip = $("#form-item-account").next();
-    		input-tip.find("span").addClass("error").attr("id","form-account-error").html("<i class='i-error'></i>不正确");
-    		return;
-    	}*/
-    	
-    	
-    	
-    	
-    	
     	var url="/account/regSub";
-    	var postData =$("#register-form").serialize();
+    	var postData =$("#register-form").serializeJSON();
     	postAjax(url,JSON.stringify(postData),function(data){
     		console.log(data);
     	}, {errorFunction:function(data){

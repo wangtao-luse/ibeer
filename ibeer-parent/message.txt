@@ -1,2 +1,5 @@
 1.SpringBoot引用Eureka导致返回结果由json变为xml解决方案
 https://blog.csdn.net/zyb2017/article/details/80265070
+
+2.fegin 相关
+https://segmentfault.com/a/1190000012496398?utm_source=tag-newest

@@ -30,7 +30,7 @@ public class Oauth extends Model<Oauth> {
      * 用户唯一号
      */
     @TableField("U_ID")
-    private Integer uId;
+    private String uId;
     /**
      * 第三方登录唯一ID
      */

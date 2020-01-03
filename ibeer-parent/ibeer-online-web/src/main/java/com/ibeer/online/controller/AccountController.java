@@ -17,11 +17,13 @@ import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ibeer.common.resp.ResponseMessage;
+import com.ibeer.conector.AccountConnector;
 
 @Controller
 @RequestMapping("/account")
 public class AccountController {
-	
+	@Autowired
+	AccountConnector accountConnector;
 	/**
 	 * 注册页面
 	 * @return
@@ -39,8 +41,8 @@ public class AccountController {
    @RequestMapping("/regSub")
    @ResponseBody
    public ResponseMessage regSub(@RequestBody JSONObject jsonObject,HttpServletRequest request) {
-	   
-	  return ResponseMessage.getSucess(); 
+	   ResponseMessage regSub = accountConnector.regSub(jsonObject, request);
+	  return regSub; 
    }
    /**
     * 登录页面

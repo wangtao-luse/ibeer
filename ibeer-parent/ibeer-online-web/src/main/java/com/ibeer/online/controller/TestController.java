@@ -22,8 +22,8 @@ import com.ibeer.model.Contract;
 public class TestController {
 	@Autowired
     RestTemplate restTemplate;
-	@Autowired
-	TestApi testApi;
+	//@Autowired
+	//TestApi testApi;
 
 @RequestMapping("test/hello")
 @ResponseBody
@@ -48,9 +48,9 @@ public ResponseMessage getResponseMessage(@RequestBody(required = false) JSONObj
 public ResponseMessage testFegin() {
 	ResponseMessage resp = ResponseMessage.getSucess();
 	resp.setReturnResult("333");
-	ResponseMessage testFegin = testApi.testFegin();
+	//ResponseMessage testFegin = testApi.testFegin();
 	
-	return testFegin;
+	return null;
 }
 
 
