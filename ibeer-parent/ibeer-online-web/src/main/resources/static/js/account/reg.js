@@ -14,12 +14,22 @@ $(function(){
     });
     //注册 下一步按钮
     $("#step1-next").click(function(){
-    	$("#step1-wrap").css("display","none");
-    	$("#step2-wrap").css("display","block");
-    	$(".cur-step").addClass("done-step");
-    	$(".cur-step span").text("");
-    	$(".cur-step").removeClass("cur-step");    	
-    	$(".person-pro-step2").addClass("cur-step");
+    	var phone = $("#form-phone").val();
+    	if(phone==""){
+    		$(".form-item.form-item-phone .input-tip span").attr("id","form-phone-error").attr("class","error").html("<i class='i-error'></i>请输入手机号");
+    		return;
+    	}
+    	if(!test_phone(phone)){
+    		$("#form-phone").blur();
+    	}else{
+    		$("#step1-wrap").css("display","none");
+        	$("#step2-wrap").css("display","block");
+        	$(".cur-step").addClass("done-step");
+        	$(".cur-step span").text("");
+        	$(".cur-step").removeClass("cur-step");    	
+        	$(".person-pro-step2").addClass("cur-step");
+    	}
+    	
     })
     //选择区号
     $(".form-item.form-item-phone").mouseover(function(){

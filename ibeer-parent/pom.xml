@@ -32,6 +32,7 @@
   	<beetl.version>1.2.19.RELEASE</beetl.version>
   	<pagehelper.version>5.1.11</pagehelper.version>
   	<shiro-spring.version>1.4.2</shiro-spring.version>
+  	<guava.version>28.1-jre</guava.version>
   </properties> 
   <dependencies>
   <!-- springboot web -->
@@ -99,6 +100,11 @@
 	    <groupId>com.fasterxml.jackson.core</groupId>
 	    <artifactId>jackson-databind</artifactId>
 	</dependency>	
+	<dependency>
+    <groupId>com.google.guava</groupId>
+    <artifactId>guava</artifactId>
+    <version>${guava.version}</version>
+</dependency>
 	
 	
   </dependencies>

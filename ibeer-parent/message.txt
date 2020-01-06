@@ -3,3 +3,19 @@ https://blog.csdn.net/zyb2017/article/details/80265070
 
 2.fegin 相关
 https://segmentfault.com/a/1190000012496398?utm_source=tag-newest
+
+2020-01-06
+1.feign
+https://blog.csdn.net/wo18237095579/article/details/83343915
+1.1 feign介绍
+2.java获取IP为 0:0:0:0:0:0:0:1 解决办法
+https://blog.csdn.net/u010919083/article/details/79907821
+2.问题
+feigin 超时调用两次
+ 暂时解决：在消费模块中添加了
+ #全局配置 
+# 请求连接的超时时间 默认的时间为 1 秒
+ribbon.ConnectTimeout=5000
+# 请求处理的超时时间
+ribbon.ReadTimeout=5000
+ 

@@ -154,8 +154,9 @@ public class MD5{
     private MD5(){};
      
     public static void main(String[] args){
-        String str=MD5.getInstance().getMD5("taotao141421");
-        System.out.println(str);
+        String str=MD5.getInstance().getMD5("1001taotao141421");
+        System.out.println(str+"---"+str.length());
+        System.out.println("95364dcd892b6b2ed3276433ceabeacc".length());
     }
 }
  

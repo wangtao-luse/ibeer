@@ -3,6 +3,7 @@ package com.ibeer.account.service;
 
 
 import java.util.Base64;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,7 @@ import com.ibeer.common.resp.ResponseMessage;
 import com.ibeer.model.account.Account;
 import com.ibeer.model.account.CompanyInfo;
 import com.ibeer.model.account.Oauth;
+import com.ibeer.util.DateUtil;
 import com.ibeer.util.MD5;
 
 @RestController
@@ -34,7 +36,7 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
    @Autowired
     CompanyInfoMapper companyInfoMapper;
     /**注册提交
-     * 1.向用户表(t_a_account),用户认证表(T_A_OAUTH),公司表(T_A_COMPANY_INFO)添加一条数据;
+     * 1.向用户表(t_a_account),用户认证表(T_A_OAUTH),公司表(T_A_COMPANY_INFO)添加一条数据;     *   
      *   a.查询t_a_account表(根据MAX(ID),如果为null,UID为10000,否则UID=10000+ID;
      *   b.插入T_A_OAUTH表;(密码(MD5)和手机(Base64)需要加密)
      *   c.如果是企业注册插入T_A_COMPANY_INFO;
@@ -51,26 +53,28 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 			//得到UID
 			Integer accountid = accountMapper.getAccountMaxId();
 			Integer start=10000;
-			String uid=null;
+			String uid="10000";
 			if(null!=accountid) {
 			  Integer result = start+accountid;
 			  uid = result.toString();	
 			}
 			//插入用户表数据
 			Account account = new Account();
-			account.setUid(uid);
-			account.setCreatedate(System.currentTimeMillis());
+			account.setUid(uid);			
+			account.setCreatedate(DateUtil.setDate(new Date()));
 			account.setCreateip(requestMessage.getRequestHeader().getRemoteAddr());
 			account.setStatus("1");
+			account.setUtype(utype);
+			account.setSex("1");
 			accountMapper.insert(account);
 			//插入用户认证表数据
 			oauth.setUId(uid);
 			oauth.setOauthType("phone");
-			//加密密码
+			//加密密码MD5
 			String credential = oauth.getCredential();
 			String md5 = MD5.getInstance().getMD5(uid+credential);
 			oauth.setCredential(md5);			
-			//加密手机号码			
+			//加密手机号码	Base64		
 			String encodeToString = Base64.getEncoder().encodeToString(oauth.getOauthId().getBytes());
 			oauth.setOauthId(encodeToString);
 			oauthMapper.insert(oauth);	

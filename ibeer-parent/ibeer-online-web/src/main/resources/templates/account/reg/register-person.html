@@ -31,26 +31,12 @@
       
    </style>
     <script>
-    
-    /*  $(function(){
-	 $("#form-register").click(function(){
-    	 var url="/account/regSub";
-    	//var postData =$("#register-form").serializeJSON();
-    	var postData = $.serializeObject($("#register-form"));
-    	//var postData={"vo":{"name":"wangtao"},"page":{"size":"10","current":"10"}}
-    	console.log(JSON.stringify(postData));    	
-    	postAjax(url,JSON.stringify(postData),function(data){
-    		console.log(data);
-    		alert(data);
-    	}, {errorFunction:function(data){
-    		
-    	},cache: false, async: false});
-    });
- })  */
+   
     </script>
     
  <!--    <script type="text/javascript" async="" src="register-person_files/wl.js"></script>
-    <script type="text/javascript" async="" src="register-person_files/s.js"></script><script type="text/javascript">window.pageConfig = { compatible: true };</script>
+    <script type="text/javascript" async="" src="register-person_files/s.js"></script>
+    <script type="text/javascript">window.pageConfig = { compatible: true };</script>
     <script type="text/javascript" src="register-person_files/a"></script> -->
     <script>
        /*  seajs.off('load');
@@ -185,7 +171,7 @@
                     </div>
                     <div class="form-agreen">
                                             </div>
-                    <div id="step1-next" class="btn-register" clstag="pageclick|keycount|reg_puser_201804031|3">下一步</div>
+                    <div id="step1-next" class="btn-register" >下一步</div>
                 </div>
                 <div id="step2-wrap">
                     <div class="form-item form-item-account" id="form-item-account">
@@ -239,7 +225,7 @@
                             </div>
                         </div>
                     </div>
-                    <div><button class="btn-register" id="form-register" clstag="pageclick|keycount|reg_puser_201804031|18">立即注册</button></div>
+                    <div><button class="btn-register" id="form-register" type="button" >立即注册</button></div>
                     <div class="input-tip">
                         <span></span>
                     </div>
@@ -314,7 +300,7 @@
            <a href="/account/regPage?source=buser" class="reg-other-item reg-other-person" clstag="pageclick|keycount|reg_puser_201804031|4">
                     <i class="reg-ohter-icon"></i>企业用户注册  
            </a>
-          <a href="https://reg.jd.com/p/regPage?source=IBG&amp;ReturnUrl=http%3A//hk.jd.com/" class="reg-other-item reg-other-inter" clstag="pageclick|keycount|reg_puser_201804031|5">
+          <a href="#" class="reg-other-item reg-other-inter" clstag="pageclick|keycount|reg_puser_201804031|5" style="display:none">
                         <i class="reg-ohter-icon"></i>海外用户注册
          </a>
       </div>
