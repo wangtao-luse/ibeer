@@ -11,7 +11,8 @@ https://blog.csdn.net/wo18237095579/article/details/83343915
 2.java获取IP为 0:0:0:0:0:0:0:1 解决办法
 https://blog.csdn.net/u010919083/article/details/79907821
 2.问题
-feigin 超时调用两次
+feigin 超时调用两次https://blog.csdn.net/qq_38526573/article/details/91355785
+https://blog.csdn.net/east123321/article/details/82385816
  暂时解决：在消费模块中添加了
  #全局配置 
 # 请求连接的超时时间 默认的时间为 1 秒
