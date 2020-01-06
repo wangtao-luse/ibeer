@@ -19,4 +19,16 @@ https://blog.csdn.net/east123321/article/details/82385816
 ribbon.ConnectTimeout=5000
 # 请求处理的超时时间
 ribbon.ReadTimeout=5000
+
+3.#button会刷新页面问题
+https://blog.csdn.net/muzidigbig/article/details/84025367
+4.redis和MogoDB的选择
+https://blog.csdn.net/weixin_43160039/article/details/83544228
+ 
+ 
+5.防重复提交
+  1.拦截器
+  2.Spring AOP
+  3.服务单生成uuid;
+ 
  

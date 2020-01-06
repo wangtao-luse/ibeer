@@ -292,13 +292,18 @@ $(function(){
     	
     });
     $("#form-register").click(function(){
-    	var url="/account/regSub";
-    	var postData =$("#register-form").serializeJSON();
-    	postAjax(url,JSON.stringify(postData),function(data){
-    		console.log(data);
-    	}, {errorFunction:function(data){
-    		
-    	},cache: false, async: false});
+    	var hasError = $("#register-form").find(".input-tip span").hasClass("error");
+    	if(!hasError){
+    		var url="/account/regSub";
+        	var postData =$("#register-form").serializeJSON();
+        	postAjax(url,JSON.stringify(postData),function(data){
+        		console.log(data);
+        	}, {errorFunction:function(data){
+        		
+        	},cache: false, async: false});
+    	}
+    	
+    	
     });
 });
 var test_phone = function(phone){

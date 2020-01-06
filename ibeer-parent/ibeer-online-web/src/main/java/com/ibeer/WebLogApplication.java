@@ -2,14 +2,19 @@ package com.ibeer;
  
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import com.ibeer.common.DuplicateSubmitToken;
 import com.ibeer.common.req.RequestBody;
 import com.ibeer.common.req.RequestHeader;
 import com.ibeer.common.req.RequestMessage;
 import com.ibeer.common.resp.ResponseMessage;
 
+import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -17,9 +22,12 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
  
 import javax.servlet.http.HttpServletRequest;
+
+import java.lang.reflect.Method;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
  
  
 @Aspect
@@ -27,6 +35,12 @@ import java.util.Map;
 public class WebLogApplication {
     private static Logger logger = (Logger) LoggerFactory.getLogger(WebLogApplication.class);
        ThreadLocal<Long> time=new ThreadLocal<>();
+       private static final Cache<String, Object> CACHES = CacheBuilder.newBuilder()
+               // 最大缓存 100 个
+               .maximumSize(100)
+               // 设置缓存过期时间为S
+               .expireAfterWrite(3, TimeUnit.SECONDS)
+               .build();
     @Pointcut("execution(public * com.ibeer.online.controller..*.*(..))")
     public void webLog() {
     }
@@ -111,8 +125,24 @@ public class WebLogApplication {
     @Around("webLog()")
   public Object  doAround(ProceedingJoinPoint proceedingJoinPoint ){
         try {
-            time.set(System.currentTimeMillis());
-            System.out.println("###########方法前#########");
+        	 time.set(System.currentTimeMillis());
+             System.out.println("###########方法前#########");
+        	//获取被增强的方法相关信息
+        	MethodSignature signature =(MethodSignature)proceedingJoinPoint.getSignature();
+        	Method method = signature.getMethod();
+        	DuplicateSubmitToken annotation = method.getAnnotation(DuplicateSubmitToken.class);
+        	String name = method.getName();
+        	Object[] args = proceedingJoinPoint.getArgs();
+        	String key =name +args;
+        	if(StringUtils.isEmpty(key)) {
+        		if(CACHES.getIfPresent(key)!=null) {
+        			ResponseMessage resp = new ResponseMessage();
+        			resp.setResultCode("00");
+        			resp.setResultMessage("请勿重复请求");
+        			return resp;
+        		}
+        	}
+        	CACHES.put(key, key);           
             Object proceed = proceedingJoinPoint.proceed();
             System.out.println("###########方法后#########");
             return proceed;
