@@ -12,7 +12,7 @@ public static final SimpleDateFormat DEFULAT_DATE_PATTERN = new SimpleDateFormat
 		 long result = parse.getTime()/1000;
    	return result;
    }
-	public static long setDate(Date date) throws ParseException {		 
+	public static long setDate(Date date){		 
 		 long result = date.getTime()/1000;
   	return result;
   }

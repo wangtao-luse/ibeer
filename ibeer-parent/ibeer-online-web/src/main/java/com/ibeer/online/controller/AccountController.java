@@ -22,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 import com.alibaba.fastjson.JSONObject;
 import com.ibeer.common.resp.ResponseMessage;
 import com.ibeer.conector.AccountConnector;
+import com.ibeer.dto.MyUsernamePasswordToken;
 
 @Controller
 @RequestMapping("/account")
@@ -73,27 +74,28 @@ public class AccountController {
 	   return "/account/login/login";
    }
    @RequestMapping("/login")
-   public ResponseMessage login(@RequestBody JSONObject jsonObject, HttpServletRequest request) {
-	   try {
-		   String uname = jsonObject.getString("uname");
-		   String pwd = jsonObject.getString("pwd");
-		   // 获取当前的Subject
-	    Subject currenAccount = SecurityUtils.getSubject();
-	    UsernamePasswordToken  token = new UsernamePasswordToken(uname,pwd.toCharArray());
-		currenAccount.login(token);
-		
-	} catch (UnknownAccountException  e) {
-		// TODO: handle exception
-		e.printStackTrace();
-		return ResponseMessage.getFailed("账号不存在！");
-	}catch (IncorrectCredentialsException  e) {
-		// TODO: handle exception
-		e.printStackTrace();
-		return ResponseMessage.getFailed("密码不正确！");
+	public ResponseMessage login(@RequestBody JSONObject jsonObject, HttpServletRequest request) {
+		try {
+			String uname = jsonObject.getString("loginname");
+			String pwd = jsonObject.getString("nloginpwd");
+			// 获取当前的Subject
+			Subject currenAccount = SecurityUtils.getSubject();
+			char[] charArray = pwd.toCharArray();
+			MyUsernamePasswordToken token = new MyUsernamePasswordToken(uname,charArray , request);
+			currenAccount.login(token);
+
+		} catch (UnknownAccountException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return ResponseMessage.getFailed("账号不存在！");
+		} catch (IncorrectCredentialsException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return ResponseMessage.getFailed("密码不正确！");
+		}
+
+		return ResponseMessage.getSucess();
 	}
-	
-	   return ResponseMessage.getSucess();
-   }
    @RequestMapping("/surveyPage")
    public String surveyPage() {
 	   return "/account/login/survey";

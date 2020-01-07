@@ -27,7 +27,15 @@ $(function(){
     	$("#qrcode-error-2016").css("left","0px");
     });
     
-   
+   $("#loginsubmit").click(function(){
+		var url="/account/login";
+    	var postData =$("#formlogin").serializeJSON();
+    	postAjax(url,JSON.stringify(postData),function(data){
+    		console.log(data);
+    	}, {errorFunction:function(data){
+    		
+    	},cache: false, async: false});
+   });
 })
 
 

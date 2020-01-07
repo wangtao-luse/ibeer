@@ -5,15 +5,19 @@ package com.ibeer.account.service;
 import java.util.Base64;
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ctc.wstx.util.StringUtil;
 import com.ibeer.account.presist.AccountMapper;
 import com.ibeer.account.presist.CompanyInfoMapper;
+import com.ibeer.account.presist.LoginListMapper;
 import com.ibeer.account.presist.OauthMapper;
 import com.ibeer.api.AccountApi;
 import com.ibeer.common.BaseException;
@@ -22,9 +26,12 @@ import com.ibeer.common.req.RequestMessage;
 import com.ibeer.common.resp.ResponseMessage;
 import com.ibeer.model.account.Account;
 import com.ibeer.model.account.CompanyInfo;
+import com.ibeer.model.account.LoginList;
 import com.ibeer.model.account.Oauth;
+import com.ibeer.util.AddressUtils;
 import com.ibeer.util.DateUtil;
 import com.ibeer.util.MD5;
+import com.ibeer.util.PBKDF2Util;
 
 @RestController
 @RequestMapping("/account")
@@ -35,6 +42,8 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
     OauthMapper oauthMapper;
    @Autowired
     CompanyInfoMapper companyInfoMapper;
+   @Autowired
+   LoginListMapper loginListMapper; 
     /**注册提交
      * 1.向用户表(t_a_account),用户认证表(T_A_OAUTH),公司表(T_A_COMPANY_INFO)添加一条数据;     *   
      *   a.查询t_a_account表(根据MAX(ID),如果为null,UID为10000,否则UID=10000+ID;
@@ -70,10 +79,11 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 			//插入用户认证表数据
 			oauth.setUId(uid);
 			oauth.setOauthType("phone");
-			//加密密码MD5
+			//加密密码
 			String credential = oauth.getCredential();
-			String md5 = MD5.getInstance().getMD5(uid+credential);
-			oauth.setCredential(md5);			
+			 String salt = PBKDF2Util.generateSalt();
+		    String pbkdf2 = PBKDF2Util.getEncryptedPassword(credential,salt);
+			oauth.setCredential(pbkdf2);			
 			//加密手机号码	Base64		
 			String encodeToString = Base64.getEncoder().encodeToString(oauth.getOauthId().getBytes());
 			oauth.setOauthId(encodeToString);
@@ -92,8 +102,49 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 		
 		return ResponseMessage.getSucess();
 	}
-
-
+   @RequestMapping("/login")
+   /**登录提交
+    * 1.使用用户名和密码去用户信息认证表(T_A_OAUTH)查看是否有对应的记录;
+    * 2.有记录,插入登录记录表(T_A_LOGIN_LIST)信息;
+    * 
+    */
+   @Override
+   @Transactional
+   public ResponseMessage login(RequestMessage requestMessage) {
+	   ResponseMessage responseMessage = ResponseMessage.getSucess();
+	   try {
+		   JSONObject jsonObject = requestMessage.getBody().getContent();
+		   Oauth oauth = jsonObject.toJavaObject(Oauth.class);
+		   //验证用户名和密码
+		   QueryWrapper<Oauth> queryWrapper = new QueryWrapper<Oauth>();
+		   queryWrapper.eq("credential", oauth.getCredential()).eq("oauthId", oauth.getOauthId());
+		   Oauth selectOne = oauthMapper.selectOne(queryWrapper);
+		   //插入记录表
+		   if(null!=selectOne) {
+			   LoginList loginList = new LoginList();
+			   loginList.setLoginTime(DateUtil.setDate(new Date()));
+			   loginList.setLoginIp(requestMessage.getRequestHeader().getRemoteAddr());	
+			   if(StringUtils.isEmpty(selectOne.getUId())) {
+				   loginList.setUId(selectOne.getUId());
+			   }
+			   String address = AddressUtils.getAddress(requestMessage.getRequestHeader().getRemoteAddr());
+			   if(StringUtils.isEmpty(address)) {
+				   loginList.setLoginIpLookup(address);
+			   }
+			   loginListMapper.insert(loginList);
+			   responseMessage.setReturnResult(oauth);
+		   }else {
+			   throw new BaseException("该用户不存在");
+		   }
+		  
+	} catch (Exception e) {
+		// TODO: handle exception
+		e.printStackTrace();
+		throw new BaseException(ConstantBase.FAILED_SYSTEM_ERROR);
+	}
+	   
+	   return responseMessage;
+   }
 	
 	
 

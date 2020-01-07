@@ -135,21 +135,25 @@ $(function(){
     });
     	
     
-   /* var dX;
-    var dY;
-	  $(".JDJRV-slide-inner.JDJRV-slide-btn").mousedown(function(e){
-		  var event = e || window.event;
-		  //console.log(event.pageX,event.pageY);
-		   dX = $(this).offset().left;
-           dY = $(this).offset().top;
-         // console.log(dX,dY);
-	  });
-	  $(".JDJRV-slide-inner.JDJRV-slide-btn").mousemove(function(e){
-		  var event = e || window.event;
-		  var x= event.pageX;
-		  console.log(x);
-	  })
-	  */
+    $(".JDJRV-slide-inner.JDJRV-slide-btn").mousedown(function(e){
+    	var d = e || event;
+    	/*console.log(d.clientX+","+d.clientY);
+    	$(this).css("left",d.clientX-576)*/
+      
+    });
+    $(".JDJRV-slide-inner.JDJRV-slide-btn").mouseup(function(){
+    	
+    });
+    $(".JDJRV-slide-inner.JDJRV-slide-btn").mousemove(function(e){
+    	var d = e || event;
+    	console.log(d.clientX+","+d.clientY);
+    	 var cx = d.clientX-576;
+    	 if(cx<0){
+    		 cx=0;
+    	 }
+    	$(this).css("left",cx+"px");
+    });
+    
     //用户名
     $("#form-account").focus(function(){
     	var df=$(this).attr("default");

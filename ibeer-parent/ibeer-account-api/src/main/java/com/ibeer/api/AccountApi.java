@@ -10,4 +10,6 @@ import com.ibeer.common.resp.ResponseMessage;
 public interface AccountApi  {
 	@RequestMapping(value = "account/regSub",produces = {"application/json;charset=UTF-8"})
 	public ResponseMessage regSub(@RequestBody RequestMessage requestMessage);
+	@RequestMapping(value = "account/login",produces = {"application/json;charset=UTF-8"})
+	public ResponseMessage login(@RequestBody RequestMessage requestMessage);
 }
