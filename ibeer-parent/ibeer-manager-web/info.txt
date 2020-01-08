@@ -1,0 +1,15 @@
+基本框架
+1.springboot+springCloud+mysql
+2.前端
+ a. eaayUI
+ b.bootstrap
+ 
+3.模板选择:
+ http://x.xuebingsi.com/
+ https://blog.csdn.net/qq_41874847/article/details/94717416
+ http://www.cssmoban.com/cssthemes/houtaimoban/
+ https://panjiachen.github.io/vue-element-admin-site/zh/guide/#%E5%8A%9F%E8%83%BD
+ https://blog.csdn.net/weixin_41846320/article/details/82866086
+ https://blog.csdn.net/Mr_Quinn/article/details/88565830
+ http://www.daimajiayuan.com/sitejs-18152-1.html
+ 

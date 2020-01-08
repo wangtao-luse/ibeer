@@ -14,6 +14,7 @@
     <module>ibeer-account-presist</module>
     <module>ibeer-online-web</module>
     <module>ibeer-account-api</module>
+    <module>ibeer-manager-web</module>
   </modules>
   <!-- 将当前项目作为一个springboot-starter的子模块 -->
   <parent>
