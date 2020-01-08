@@ -40,6 +40,8 @@ https://blog.csdn.net/weixin_43160039/article/details/83544228
   https://www.jianshu.com/p/c863556f8de1
 3.滑动验证码java
 https://blog.csdn.net/YTenderness/article/details/99969355 
+https://www.lisa33xiaoq.net/1232.html
+https://blog.csdn.net/github_39319000/article/details/85288899
 
 2020-01-08
 1.shiro博客：
@@ -54,3 +56,6 @@ https://www.cnblogs.com/zhangzhonghui/p/11648762.html 未解决
 最终解决方法：shiro的配置类上没有加@configration注解
 3.input的blur事件隐藏div,div上的onclick事件不生效解决方案
 https://blog.csdn.net/LLDD2014425/article/details/79472908
+4.zuul :https://blog.csdn.net/weixin_34377919/article/details/94462641
+
+

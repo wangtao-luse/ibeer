@@ -135,7 +135,7 @@ $(function(){
     	
     	
     });
-    //验证码验证
+    //验证码验证 跳出滑块验证
     $(".form-item.form-item-getcode").click(function(){
     	var phone=$("#form-phone").val(); 
     	//验证手机号码
@@ -150,31 +150,30 @@ $(function(){
     	}
     	
     });
-    //验证码 关闭
+    //滑块验证码 关闭
     $(document).on("click",".slide-authCode-wraper .close",function(){
     	$(".slide-authCode-wraper").css("display","none");
     });
     	
-    
+    var downX=0;
     $(".JDJRV-slide-inner.JDJRV-slide-btn").mousedown(function(e){
     	var d = e || event;
-    	/*console.log(d.clientX+","+d.clientY);
-    	$(this).css("left",d.clientX-576)*/
+    	downX=d.clientX;
+    	var result={"offsetWidth":$(".JDJRV-slide-inner.JDJRV-slide-btn").offsetWidth,"clientX":d.clientX,"clientY":d.clientY,"pageX":d.pageX,"pageY":d.pageY,"screenX":screenX,"screenY":screenY}
+    	console.log(result);
+    	$(this).mousemove();
       
     });
-    $(".JDJRV-slide-inner.JDJRV-slide-btn").mouseup(function(){
+   /* $(".JDJRV-slide-inner.JDJRV-slide-btn").mouseup(function(){
     	
-    });
+    });*/
     $(".JDJRV-slide-inner.JDJRV-slide-btn").mousemove(function(e){
     	var d = e || event;
-    	console.log(d.clientX+","+d.clientY);
-    	 var cx = d.clientX-576;
-    	 if(cx<0){
-    		 cx=0;
-    	 }
-    	$(this).css("left",cx+"px");
+    	var moveX = d.clientX;
+    	
     });
-    
+   
+
     //用户名
     $("#form-account").focus(function(){
     	var df=$(this).attr("default");
@@ -188,12 +187,14 @@ $(function(){
     //用户名
     $("#form-account").blur(function(){
     	var df=$(this).attr("default");
+    	//清除默认的提示信息
     	$(this).parent().next().find("span").html("");
     	var nickName = $(this).val();
     	if(test_nickName(nickName)){
     		$(this).parent().find(".i-status").css("display","block");
     		$(this).parent().find(".i-cancel").css("display","none");
     		$(this).parent().addClass("form-item-valid");
+    		$(this).parent().next().find("span").html("").removeClass("error");
     	}else{
     		$(this).parent().find(".i-status").css("display","none");
     		if(nickName!=""){
@@ -241,6 +242,7 @@ $(function(){
     		$(this).parent().find(".i-status").css("display","block");
     		$(this).parent().find(".i-cancel").css("display","none");
     		$(this).parent().addClass("form-item-valid");
+    		$(this).parent().next().find("span").html("").removeClass("error");
     	}else{
     		$(this).parent().find(".i-status").css("display","none");
     		if(pwd!=""){
@@ -287,6 +289,7 @@ $(function(){
     		$(this).parent().find(".i-status").css("display","block");
     		$(this).parent().find(".i-cancel").css("display","none");
     		$(this).parent().addClass("form-item-valid");
+    		$(this).parent().next().find("span").html("").removeClass("error");
     	}else{
     		$(this).parent().find(".i-status").css("display","none");
     		if(pwd!=""){
@@ -325,7 +328,7 @@ $(function(){
         	postAjax(url,JSON.stringify(postData),function(data){
         		console.log(data);
         	}, {errorFunction:function(data){
-        		
+        		alert(data.resultMessage);
         	},cache: false, async: false});
     	}
     	
