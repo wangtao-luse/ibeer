@@ -8,6 +8,7 @@ import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,7 +54,7 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 	@Override
 	@Transactional
 	@RequestMapping("/regSub")
-	public ResponseMessage regSub(RequestMessage requestMessage) {
+	public ResponseMessage regSub(@RequestBody RequestMessage requestMessage) {
 		// TODO Auto-generated method stub
 		try {
 			JSONObject jsonObject = requestMessage.getBody().getContent();
@@ -102,22 +103,23 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 		
 		return ResponseMessage.getSucess();
 	}
-   @RequestMapping("/login")
+   
    /**登录提交
     * 1.使用用户名和密码去用户信息认证表(T_A_OAUTH)查看是否有对应的记录;
     * 2.有记录,插入登录记录表(T_A_LOGIN_LIST)信息;
     * 
     */
-   @Override
+   @RequestMapping("/login")   
    @Transactional
-   public ResponseMessage login(RequestMessage requestMessage) {
+   @Override
+   public ResponseMessage login(@RequestBody RequestMessage requestMessage) {
 	   ResponseMessage responseMessage = ResponseMessage.getSucess();
 	   try {
 		   JSONObject jsonObject = requestMessage.getBody().getContent();
 		   Oauth oauth = jsonObject.toJavaObject(Oauth.class);
 		   //验证用户名和密码
 		   QueryWrapper<Oauth> queryWrapper = new QueryWrapper<Oauth>();
-		   queryWrapper.eq("credential", oauth.getCredential()).eq("oauthId", oauth.getOauthId());
+		   queryWrapper.eq("CREDENTIAL", oauth.getCredential()).eq("OAUTH_ID", oauth.getOauthId());
 		   Oauth selectOne = oauthMapper.selectOne(queryWrapper);
 		   //插入记录表
 		   if(null!=selectOne) {

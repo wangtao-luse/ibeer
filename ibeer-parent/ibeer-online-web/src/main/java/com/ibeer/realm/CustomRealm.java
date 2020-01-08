@@ -19,14 +19,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ctc.wstx.util.StringUtil;
 import com.ibeer.common.BaseException;
 import com.ibeer.common.constant.ConstantBase;
 import com.ibeer.common.resp.ResponseMessage;
 import com.ibeer.conector.AccountConnector;
 import com.ibeer.dto.MyUsernamePasswordToken;
 import com.ibeer.dto.UserV;
-import com.ibeer.util.MD5;
 import com.ibeer.util.PBKDF2Util;
 import com.ibeer.util.SessionUtil;
 
@@ -80,6 +78,7 @@ public class CustomRealm extends AuthorizingRealm {
 			e.printStackTrace();
 		}catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			throw new BaseException(ConstantBase.FAILED_SYSTEM_ERROR);
 		}
 		

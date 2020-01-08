@@ -7,11 +7,18 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import com.ibeer.realm.CustomRealm;
-
+@Configuration
 public class ShiroConfig {
-public ShiroFilterFactoryBean hiroFilter(SecurityManager securityManager) {
+	/**
+	 * shiro的过滤器
+	 * @param securityManager
+	 * @return
+	 */
+@Bean("shiroFilter")
+public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
 	ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 	shiroFilterFactoryBean.setSecurityManager(securityManager);	
 	shiroFilterFactoryBean.setUnauthorizedUrl("/notRole");//未授权界面;
@@ -43,4 +50,22 @@ public CustomRealm customRealm() {
     CustomRealm customRealm = new CustomRealm();
     return customRealm;
 }
+	/*
+	 * @Bean public FilterRegistrationBean delegatingFilterProxy(){
+	 * FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+	 * DelegatingFilterProxy proxy = new DelegatingFilterProxy();
+	 * proxy.setTargetFilterLifecycle(true); proxy.setTargetBeanName("shiroFilter");
+	 * filterRegistrationBean.setFilter(proxy); return filterRegistrationBean; }
+	 */
+
+	/*
+	 * @Bean public MethodInvokingFactoryBean getMethodInvokingFactoryBean() {
+	 * MethodInvokingFactoryBean methodInvokingFactoryBean=new
+	 * MethodInvokingFactoryBean(); methodInvokingFactoryBean.setStaticMethod(
+	 * "org.apache.shiro.SecurityUtils.setSecurityManager");
+	 * methodInvokingFactoryBean.setArguments(securityManager()); return
+	 * methodInvokingFactoryBean; }
+	 */
+
+
 }

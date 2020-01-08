@@ -31,6 +31,7 @@ $(function(){
     	}
     	
     })
+
     //选择区号
     $(".form-item.form-item-phone").mouseover(function(){
     	$("#select-country").css("border-color","rgb(153,153,153)");
@@ -45,33 +46,53 @@ $(function(){
     	$("#select-country").css("border-width","1px medium 1px 1px");
     	$(this).find(".item-input-wrap").css("border-color","rgb(221,221,221)");
     });
+    $(".i-cancel").mousedown(function(){//https://blog.csdn.net/LLDD2014425/article/details/79472908
+    	console.log("i-cancel")
+    	 $(this).parent().find("input").val("");//清除文本框的值
+    	 $(this).parent().find("input").prev().css("display","block");
+    })
     //手机号码
     $("#form-phone").focus(function(){
-    	$(this).prev().css("display","none");    	
+    	//隐藏提示信息
+    	$(this).prev().css("display","none");
+    	//修改边框样式
+    	$(this).parent().css("border","1px solid rgb(102, 102, 102)");
+    	$("#select-country").css("border-color","rgb(221,221,221)");
+    	if($(this).val()!=""){//不为空校验phone
+    		if(!test_phone($(this).val())){//校验不通过
+    			$(this).parent().removeClass("form-item-valid");//移除校验成功标识
+    		}
+    		
+    	}
+    	//如果没有错误信息,显示默认的提示信息
     	var hasError = $(this).parent().next().find("span").hasClass("error");
     	if(!hasError){
     		var tip = $(this).attr("default");
     		$(this).parent().next().find("span").html(tip);
     	}
     	
-    	$(this).parent().css("border","1px solid rgb(102, 102, 102)");
-    	$("#select-country").css("border-color","rgb(221,221,221)");
+    	
     });
     //手机号码
     $("#form-phone").blur(function(){
+    	//如果文本框为空显示提示信息,否则不显示;
     	if($(this).val()==""){
     		$(this).prev().css("display","inline");
     	}else{
     		$(this).prev().css("display","none");
     	}
-    	
+    	//修改边框的样式
     	$(this).parent().css("border","1px solid rgb(221, 221, 221)");
+    	//清除默认的提示信息
     	$(this).parent().next().find("span").html("");
+    	//隐藏取消按钮
     	$(this).parent().find(".i-cancel").css("display","none");
-    	if(test_phone($(this).val())){
-    		$(this).parent().addClass("form-item-valid");
-    	}else{
-    		if($(this).val()!=""){
+    	if(test_phone($(this).val())){//校验通过
+    		$(this).parent().addClass("form-item-valid");//添加成功的图标
+    		$(this).parent().next().find("span").html("").removeClass("error");
+    		
+    	}else{//校验失败
+    		if($(this).val()!=""){//文本框中有值添加错误信息
     			$(this).parent().next().find("span").addClass("error").attr("id","form-phone-error").html("<i class='i-error'></i>格式错误");
     		}
     		
@@ -82,15 +103,15 @@ $(function(){
     //手机号码
     $("#form-phone").keyup(function(){//事件会在按键释放时触发，也就是你按下键盘起来后的事件
     	var phone = $(this).val();
-    	if(phone == ""){
+    	if(phone == ""){//phone为空隐藏取消图标
     		$(this).parent().find(".i-cancel").css("display","none");
-    		var tip = $(this).attr("default");
+    		var tip = $(this).attr("default");//添加默认的提示信息,移除error
     		$(this).parent().next().find("span").removeClass("error").html(tip);
     			
-    	}else{
-    		if(!test_phone(phone)){    
+    	}else{//phone 不为空
+    		if(!test_phone(phone)){ //校验phone 校验失败显示取消图标   
         		$(this).parent().find(".i-cancel").css("display","block");
-        		$(this).parent().removeClass("form-item-valid");
+        		$(this).parent().removeClass("form-item-valid");//移除成功图片
         		
         	}
     	}
@@ -295,6 +316,7 @@ $(function(){
     	}
     	
     });
+    //注册提交
     $("#form-register").click(function(){
     	var hasError = $("#register-form").find(".input-tip span").hasClass("error");
     	if(!hasError){

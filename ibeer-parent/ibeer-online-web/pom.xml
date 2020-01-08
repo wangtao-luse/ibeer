@@ -32,10 +32,7 @@
 	    <groupId>com.ibeetl</groupId>
 	    <artifactId>beetl-framework-starter</artifactId>
 	</dependency>
-	<dependency>
-	    <groupId>org.apache.shiro</groupId>
-	    <artifactId>shiro-spring</artifactId>
-	</dependency>
+	
   </dependencies>
   <build>
     <finalName>ibeer-online-web</finalName>

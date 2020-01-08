@@ -40,4 +40,17 @@ https://blog.csdn.net/weixin_43160039/article/details/83544228
   https://www.jianshu.com/p/c863556f8de1
 3.滑动验证码java
 https://blog.csdn.net/YTenderness/article/details/99969355 
- 
+
+2020-01-08
+1.shiro博客：
+https://www.iteye.com/blog/jinnianshilongnian-2049092
+2.springboot整合shiro
+https://blog.csdn.net/bicheng4769/article/details/86668209
+https://blog.csdn.net/taojin12/article/details/88343990
+2.Spring Boot整合shiro出现UnavailableSecurityManagerException
+https://www.cnblogs.com/ginponson/p/6217057.html 未解决
+https://bbs.csdn.net/topics/391924615            为解决
+https://www.cnblogs.com/zhangzhonghui/p/11648762.html 未解决
+最终解决方法：shiro的配置类上没有加@configration注解
+3.input的blur事件隐藏div,div上的onclick事件不生效解决方案
+https://blog.csdn.net/LLDD2014425/article/details/79472908
