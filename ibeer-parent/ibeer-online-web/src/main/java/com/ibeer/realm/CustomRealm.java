@@ -1,7 +1,6 @@
 package com.ibeer.realm;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -9,12 +8,12 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
@@ -23,9 +22,10 @@ import com.ibeer.common.BaseException;
 import com.ibeer.common.constant.ConstantBase;
 import com.ibeer.common.resp.ResponseMessage;
 import com.ibeer.conector.AccountConnector;
+import com.ibeer.dto.MySimpleAuthorizationInfo;
 import com.ibeer.dto.MyUsernamePasswordToken;
 import com.ibeer.dto.UserV;
-import com.ibeer.util.PBKDF2Util;
+import com.ibeer.util.JMMD5;
 import com.ibeer.util.SessionUtil;
 
 public class CustomRealm extends AuthorizingRealm {
@@ -36,7 +36,7 @@ public class CustomRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		// TODO Auto-generated method stub
 		//加载用户权限
-		SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
+		MySimpleAuthorizationInfo simpleAuthorInfo = new MySimpleAuthorizationInfo();
 		ResponseMessage responseMessage = ResponseMessage.getSucess();
 		Map<String, Object> returnResult = responseMessage.getReturnResult();
 		List permissions = (List)returnResult.get("result");
@@ -51,33 +51,27 @@ public class CustomRealm extends AuthorizingRealm {
 	@Override
 	//身份认证/登录，验证用户是不是拥有相应的身份
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		SimpleAuthenticationInfo simpleAuthenticationInfo = null;
-		
+		SimpleAuthenticationInfo simpleAuthenticationInfo = null;		
 		try {
+			//得到用户信息且进行加密
 			MyUsernamePasswordToken authToken =(MyUsernamePasswordToken)token;
 			String username = authToken.getUsername();
 			char[] password = authToken.getPassword();
-			String salt = PBKDF2Util.generateSalt();
-			String pbkdf2 = PBKDF2Util.getEncryptedPassword(String.valueOf(password),salt);
+			byte[] salt = null;
+			Object md5 = new SimpleHash("MD5", password, ByteSource.Util.bytes(salt), 1024);
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("oauthId",username);
-			jsonObject.put("credential", pbkdf2);
-			 
+			jsonObject.put("oauthId",Base64.getEncoder().encodeToString(username.getBytes()));
+			jsonObject.put("credential", md5);
+			 //去数据库进行验证
 			ResponseMessage responseMessage = accountConnector.login(jsonObject, authToken.getRequest());
 			if("00".equals(responseMessage.getResultCode())&&StringUtils.isEmpty(responseMessage.getReturnResult())) {
 				throw new BaseException(responseMessage.getResultMessage());
 			}
 			Map<String, Object> map = responseMessage.getReturnResult();
-			UserV userV = new JSONObject(map).toJavaObject(UserV.class);
-		    simpleAuthenticationInfo = new SimpleAuthenticationInfo(userV, pbkdf2, username);
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}catch (Exception e) {
-			// TODO: handle exception
+			Object object = map.get("result");
+			UserV userV = JSONObject.parseObject(JSONObject.toJSONString(object), UserV.class);
+		    simpleAuthenticationInfo = new SimpleAuthenticationInfo(userV,md5, getName());
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BaseException(ConstantBase.FAILED_SYSTEM_ERROR);
 		}

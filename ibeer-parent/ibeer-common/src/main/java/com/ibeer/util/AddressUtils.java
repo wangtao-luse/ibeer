@@ -18,8 +18,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
+
 
 
 /**
@@ -181,7 +181,7 @@ public static String getAddress(String ip) {
 	String result="";
 	try {
 	    address = addressUtils.getAddresses("ip=" + ip, "utf-8");
-	    JSONObject jsonObject = new JSONObject(address);
+	    JSONObject jsonObject = new JSONObject(JSONObject.parseObject(address));
 		jsonObject = jsonObject.getJSONObject("data");
 		String county_id = jsonObject.getString("country_id");//国家编号
 		String country = jsonObject.getString("country");//国家
@@ -193,10 +193,7 @@ public static String getAddress(String ip) {
 	}
 	catch (UnsupportedEncodingException e) {
 	    e.printStackTrace();
-	} catch (JSONException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+	} 
 	
 	return result;
 }
@@ -205,6 +202,7 @@ public static void main(String[] args) throws Exception {
 AddressUtils addressUtils = new AddressUtils();
 String ip = "222.221.10.111";
 ip="58.37.157.3";
+ip="127.0.0.1";
 String address = "";
 try {
     address = addressUtils.getAddresses("ip=" + ip, "utf-8");
@@ -212,7 +210,7 @@ try {
 catch (UnsupportedEncodingException e) {
     e.printStackTrace();
 }
-JSONObject jsonObject = new JSONObject(address);
+JSONObject jsonObject = new JSONObject(JSONObject.parseObject(address));
 jsonObject = jsonObject.getJSONObject("data");
 //通过相应的get方法,获取相应的属性
 String county = jsonObject.getString("country_id");//国家

@@ -27,8 +27,14 @@ public class UserV {
     * 头像
     */
     private String avatar;
-
-   
+    /**
+     * 凭证
+     */
+    private String credential;
+    /**
+     * 第三方登录唯一号
+     */
+    private String oauthId;
 
     
 

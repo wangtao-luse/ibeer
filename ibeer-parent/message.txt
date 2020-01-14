@@ -58,4 +58,6 @@ https://www.cnblogs.com/zhangzhonghui/p/11648762.html 未解决
 https://blog.csdn.net/LLDD2014425/article/details/79472908
 4.zuul :https://blog.csdn.net/weixin_34377919/article/details/94462641
 
-
+2020-1-10
+1.加密相关 
+https://blog.csdn.net/sihai12345/article/details/79313574

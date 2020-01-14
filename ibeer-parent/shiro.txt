@@ -1,0 +1,194 @@
+https://blog.csdn.net/qq_36761831/article/details/100138047
+1.shiro 简介
+  a.Apache Shiro 是Java的一个权限框架;
+  b.Shiro可以非常容易的开发出足够好的应用,
+    不仅可以用在JavaEE环境，也可以用在JavaEE环境;
+  c.Shiro 可以完成：认证，授权,加密,会话管理,与Web集成,缓存等;
+2.功能简介
+  a.Authentication：身份认证/登录;
+  b.Authorization：授权，即权限验证
+  c.ession Manager：会话管理
+  d.Cryptography：加密
+  e.Web Support：Web 支持
+  f.Caching：缓存
+  g.Concurrency：Shiro 支持多线程应用的并发验证
+  h.Testing：提供测试支持；
+  i.Run As：允许一个用户假装为另一个用户（如果他们允许）的身份进行访问
+  j.Remember Me：记住我
+3.Shiro架构
+  1.从外部看  Application code--->Subject--->SecurityManager--->Realm
+  Subject：应用代码直接交互的对象是 Subject;
+		   与 Subject 的所有交互都会委托给 SecurityManager；
+		   Subject 其实是一个门面，SecurityManager 才是实际的执行者;
+  SecurityManager:所有与安全有关的操作都会与 SecurityManager 交互;
+				 是 Shiro 的核心，它负责与 Shiro 的其他组件进行交互; 
+  Realm：Shiro 从 Realm 获取安全数据（如用户、角色、权限);
+  2.从内部看
+   Subject: 任何可以与应用交互的“用户” ;
+   SecurityManager :相当于SpringMVC 中的 DispatcherServlet;
+   Authenticator：负责 Subject 认证;
+   Authorizer：授权器;控 制着用户能访问应用中的哪些功能
+   Realm:可以有 1 个或多个 Realm;一般需要自己实现;
+   SessionManager：管理 Session 生命周期的组件;
+   CacheManager：缓存控制器，来管理如用户、角色、权限等的缓存;
+   Cryptography:密码模块,Shiro 提高了一些常见的加密组件用于如密码加密/解密;
+ 4.关键代码
+ //获取当前的Subject
+ Subject currentUser = SecurityUtils.getSubject();
+ //获取session
+ Session session = currentUser.getSession();
+ //判断当前用户是否已经认证(登录)
+ currentUser.isAuthenticated();
+ //当前用户没登录将用户名和密码封装为UsernamePasswordToken
+ UsernamePasswordToken token = UsernamePasswordToken(username,password);
+ //执行登录
+ currentUser.login(token);
+ //登出 
+ currentUser.logout();
+ 
+5.和spring集成
+https://blog.csdn.net/wn084/article/details/79545307
+ 1.添加spring和shiro的jar
+ 2.配置spring及springmvc 
+   1.shiro的shiroFilter(web.xml)
+   7.2DelegatingFilterProxy实际上是Filter的一个代理对象,默认情况spring会去IOC容器中查找和<filter-name> 名字对应的 filter,
+	    也可以通过targetFilterLifecycle的初始化参数来配置filter bean 的id;
+   <filter>
+    <!--DelegatingFilterProxy作用是自动到Spring容器查找名为filter-name的bean，并把所有
+    Filter的操作委托给它，所以需要将shiroFilter注册到Spring。-->
+    <filter-name>shiroFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> 
+    <!--可以不写-->
+    <init-param>
+        <param-name>targetFilterLifecycle</param-name>
+        <param-value>true</param-value>
+    </init-param>
+</filter>
+<filter-mapping>
+    <filter-name>shiroFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+   2.SecurityManager
+   <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+           <!--Sigle reaml app. If you have multiple reamls,use the 'reamls' property instead-->
+          <property name="reaml" ref="myReaml"></property>
+   </bean>
+   3.配置缓存
+   4.配置reaml
+     配置自定义实现的reaml
+   5.配置生命周期
+   <!--配置 LifecycleBeanPostProcessor. 可以自定的来调用配置在 Spring IOC 容器中 shiro bean 的生命周期方法-->
+   <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+   6.
+   <!--启用 IOC 容器中使用 shiro 的注解. 但必须在配置了 LifecycleBeanPostProcessor 之后才可以使用.-->
+<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+	  depends-on="lifecycleBeanPostProcessor"/>
+<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+	<property name="securityManager" ref="securityManager"/>
+</bean>
+7.配置shiro的ShiroFilter
+<!--7. 配置 ShiroFilter.
+	7.1 id 必须和 web.xml 文件中配置的 DelegatingFilterProxy 的 <filter-name> 一致.
+	若不一致, 则会抛出: NoSuchBeanDefinitionException. 因为 Shiro 会来 IOC 容器中查找和 <filter-name> 名字对应的 filter bean.
+	
+	-->
+<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+	<property name="securityManager" ref="securityManager"/>
+	<property name="loginUrl" value="..."/>
+	<property name="successUrl" value="..."/>
+	<property name="unauthorizedUrl" value="..."/>
+	<!--
+		配置哪些页面需要受保护.
+		以及访问这些页面需要的权限.
+		1). anon 可以被匿名访问
+		2). authc 必须认证(即登录)后才可能访问的页面.
+		3). logout 登出.
+		4). roles 角色过滤器
+	-->
+	<property name="filterChainDefinitions">
+		<value>
+			<!-- /login.jsp = anon -->
+ 
+			# everything else requires authentication:
+			<!-- /** = authc -->
+		</value>
+	</property>
+</bean>
+
+8.与web集成https://blog.csdn.net/qq_41128201/article/details/85260427
+   1.Shiro提供了与Web集成的支持，主要是通过配置一个ShiroFilter拦截需要安全控制的URL，然后进行相应的控制;
+   2.ShiroFilter类似于如Strut2/SpringMVC这种web框架的前端控制器，是安全控制的入口点，负责根据配置（如ini配置文件），
+    判断请求进入URL是否需要登录/权限等工作。 
+7.url的部分细节
+ 1.[urls]的部分的配置格式:url=拦截器[参数],拦截器[参数]；
+ 2.如果当前请求的url匹配[urls]部分的某个url模式,将会执行其配置的拦截器
+ 3.anon(anonymous)拦截器表示匿名访问（即不需要登录即可访问）
+ 4.authc(authentication)表示需要通过省份认证后才能访问
+8.URL的匹配模式
+  1.URL模式使用ANT模式
+  2.Ant模式路径通配符支持?,*,**,注意通配符不包含目录分隔符"/";
+  3.-? 匹配1个字符 /admin? 匹配/admin1,但不匹配/adimin或/admin/
+    -*匹配零个或多个字符串 /admin* 匹配 /admin1，/admin123,但不匹配/admin/1
+	-**：匹配路径中的零个或多个路径 /admin/** 匹配/adming/1 或/admin/1/a
+9.URL的匹配顺序
+   URL采取第一次匹配优先的方式,从头开始使用第一个匹配的url模式对应的拦截器链;
+    -admin/**=filter1
+	-admin/aa=filter2
+	-/**=filter3
+	如果请求的url为admin/aa将按照声明的顺序匹配，filter1进行拦截;
+
+ 10.从应用程序的角度看shiro工作流程
+1. 获取当前的Subject,调用SecurityUtils.getSubject();
+2. 测试当前用户是否已被验证,即是否已登录调用Subject的isAuthenticated();
+3.若没有认证则把用户名和密码封装为UsernamePasswordToken对象;
+  1)创建一个表单
+  2)把请求交割springmvc的handler
+  3)获取用户名和密码
+4.执行登录 调用Subject的login(AuthenticationToken)方法;
+5.自定义Realm的方法,从数据库中获取对应的记录，返回个shiro
+	1)实际上是需要集成org.apache.shiro.realm.AuthenticatingReaml类;
+	2)实现doGetAuthenticationInfo(AuthenticationToken)方法;
+	   1.把AuthenticationToken转换为UsernamePasswordToken；
+	   2.从UsernamePasswordToken中来获取username和密码;
+	   3.调用数据库方法,从数据库中查询username和密码对应的用户记录
+	   4.若用户不存在，则会抛出UnknownAccountException异常;
+	   5.根据用户信息情况，决定是否需要抛出其他的AuthenticationException异常;
+	   6.根据用户的情况,来构建AuthenticationInfo (一般使用实现类SimpleAuthenticationInfo)
+		 a.构建的信息从数据库中获取;
+		   1.principal：认证的实体信息,可以使用username,也可以是数据表对应的用户的实体类对象;
+		   2.credentials：密码
+		   3.reamlName:当前reaml对象的name，调用父类的getName();
+6.由shiro完成对密码的比对;
+	1.通过AuthenticationReaml的credentialsMatcher 属性来进行的密码的比对;
+	
+ 
+11.如何把一个字符串加密为Md5
+ new SimpleHash("MD5", "taotao141421", ByteSource.Util.bytes("salt"), 1024);
+12.替换当前的Realm的credentialsMatcher属性，直接使用HashedCredentialsMatcher并设置加密算法即可;
+ spring xml方式:https://www.jianshu.com/p/b12b44219470
+ <bean id="myRealm" class="com.zhu.shiroweb.realm.MyRealm">
+        
+        <!-- 配置MD5加密，若不进行MD5加密，这段代码不用 -->
+        <property name="credentialsMatcher">
+            <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                <!-- MD5加密 -->
+                <property name="hashAlgorithmName" value="MD5"/>
+                <!-- 加密次数 -->
+                <property name="hashIterations" value="1024"/>
+            </bean>
+        </property> 
+        <!-- 配置MD5加密，若不进行MD5加密，这段代码不用 -->
+        
+    </bean> 
+
+springboot 使用javaBena方式配置
+ https://blog.csdn.net/ljh1993531/article/details/82591524
+ 
+ 13.为什么要使用MD5盐值加密
+ 14.如何做到
+  1)在doGetAuthenticationInfo()返回创建AuthenticationInfo对象时使用
+    new SimpleAuthenticationInfo(principal, hashedCredentials, credentialsSalt, realmName)构造器;
+  2)使用ByteSource.Util.bytes()计算盐值；
+  3)盐值需要唯一:一般为使用随机字符串或用户名;
+  4)new SimpleAuthenticationInfo(principal, hashedCredentials, credentialsSalt, realmName)来计算盐值加密的密码值;
+           

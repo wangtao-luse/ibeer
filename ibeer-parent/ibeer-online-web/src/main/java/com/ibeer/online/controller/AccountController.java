@@ -73,7 +73,7 @@ public class AccountController {
    public String loginPage() {
 	   return "/account/login/login";
    }
-   @RequestMapping("/login")
+   @RequestMapping(value = "/login")
 	public ResponseMessage login(@RequestBody JSONObject jsonObject, HttpServletRequest request) {
 		try {
 			String uname = jsonObject.getString("loginname");

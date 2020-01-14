@@ -4,8 +4,11 @@ package com.ibeer.account.service;
 
 import java.util.Base64;
 import java.util.Date;
+import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ctc.wstx.util.StringUtil;
@@ -31,6 +35,7 @@ import com.ibeer.model.account.LoginList;
 import com.ibeer.model.account.Oauth;
 import com.ibeer.util.AddressUtils;
 import com.ibeer.util.DateUtil;
+import com.ibeer.util.JMMD5;
 import com.ibeer.util.MD5;
 import com.ibeer.util.PBKDF2Util;
 
@@ -75,16 +80,17 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 			account.setCreateip(requestMessage.getRequestHeader().getRemoteAddr());
 			account.setStatus("1");
 			account.setUtype(utype);
-			account.setSex("1");
+			account.setSex("1");		
 			accountMapper.insert(account);
 			//插入用户认证表数据
 			oauth.setUId(uid);
 			oauth.setOauthType("phone");
 			//加密密码
+			String salt = UUID.randomUUID().toString();	
+			oauth.setSalt(salt);
 			String credential = oauth.getCredential();
-			 String salt = PBKDF2Util.generateSalt();
-		    String pbkdf2 = PBKDF2Util.getEncryptedPassword(credential,salt);
-			oauth.setCredential(pbkdf2);			
+			Object result = new SimpleHash("MD5", credential, ByteSource.Util.bytes(salt), 1024);			 
+			oauth.setCredential((String)result);			
 			//加密手机号码	Base64		
 			String encodeToString = Base64.getEncoder().encodeToString(oauth.getOauthId().getBytes());
 			oauth.setOauthId(encodeToString);
@@ -126,20 +132,26 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 			   LoginList loginList = new LoginList();
 			   loginList.setLoginTime(DateUtil.setDate(new Date()));
 			   loginList.setLoginIp(requestMessage.getRequestHeader().getRemoteAddr());	
-			   if(StringUtils.isEmpty(selectOne.getUId())) {
+			   if(!StringUtils.isEmpty(selectOne.getUId())) {
 				   loginList.setUId(selectOne.getUId());
 			   }
-			   String address = AddressUtils.getAddress(requestMessage.getRequestHeader().getRemoteAddr());
-			   if(StringUtils.isEmpty(address)) {
-				   loginList.setLoginIpLookup(address);
-			   }
+			   String remoteAddr = requestMessage.getRequestHeader().getRemoteAddr();
+				  String address =AddressUtils.getAddress(remoteAddr);
+				  if(!StringUtils.isEmpty(address)) {
+					  if("127.0.0.1".equals(remoteAddr)) {
+						  loginList.setLoginIpLookup(remoteAddr);
+					  }else {
+					      loginList.setLoginIpLookup(address);
+					  }
+				 }
 			   loginListMapper.insert(loginList);
 			   responseMessage.setReturnResult(oauth);
 		   }else {
+			   
 			   throw new BaseException("该用户不存在");
 		   }
 		  
-	} catch (Exception e) {
+	}catch (Exception e) {
 		// TODO: handle exception
 		e.printStackTrace();
 		throw new BaseException(ConstantBase.FAILED_SYSTEM_ERROR);
@@ -148,6 +160,12 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 	   return responseMessage;
    }
 	
-	
+	public ResponseMessage queryByOauthId(@RequestBody RequestMessage requestMessage) {
+		String oauthId = requestMessage.getBody().getOauthId();
+		QueryWrapper<Oauth> queryWrapper = new QueryWrapper<Oauth>();
+		queryWrapper.eq("OAUTH_ID", oauthId);
+		oauthMapper.selectOne(queryWrapper);
+		return null;
+	}
 
 }

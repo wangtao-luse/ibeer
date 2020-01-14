@@ -56,8 +56,10 @@ public class Oauth extends Model<Oauth> {
     */
     @TableField("AVATAR")
     private String avatar;
-
-   
+   /**
+    * 盐
+    */
+    private String salt;
 
     @Override
     protected Serializable pkVal() {
