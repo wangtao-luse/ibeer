@@ -59,7 +59,7 @@ public class Oauth extends Model<Oauth> {
    /**
     * 盐
     */
-    private String salt;
+    private String pwd;
 
     @Override
     protected Serializable pkVal() {

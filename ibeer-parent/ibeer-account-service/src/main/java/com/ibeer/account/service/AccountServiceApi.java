@@ -87,10 +87,11 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 			oauth.setOauthType("phone");
 			//加密密码
 			String salt = UUID.randomUUID().toString();	
-			oauth.setSalt(salt);
+			oauth.setPwd(salt);
 			String credential = oauth.getCredential();
-			Object result = new SimpleHash("MD5", credential, ByteSource.Util.bytes(salt), 1024);			 
-			oauth.setCredential((String)result);			
+			String result = new SimpleHash("MD5", credential, ByteSource.Util.bytes(salt), 1024).toHex();
+			
+			oauth.setCredential(result);			
 			//加密手机号码	Base64		
 			String encodeToString = Base64.getEncoder().encodeToString(oauth.getOauthId().getBytes());
 			oauth.setOauthId(encodeToString);
@@ -111,7 +112,7 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 	}
    
    /**登录提交
-    * 1.使用用户名和密码去用户信息认证表(T_A_OAUTH)查看是否有对应的记录;
+    * 1.使用用户名去用户信息认证表(T_A_OAUTH)查看是否有对应的记录;
     * 2.有记录,插入登录记录表(T_A_LOGIN_LIST)信息;
     * 
     */
@@ -125,7 +126,7 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 		   Oauth oauth = jsonObject.toJavaObject(Oauth.class);
 		   //验证用户名和密码
 		   QueryWrapper<Oauth> queryWrapper = new QueryWrapper<Oauth>();
-		   queryWrapper.eq("CREDENTIAL", oauth.getCredential()).eq("OAUTH_ID", oauth.getOauthId());
+		   queryWrapper.eq("OAUTH_ID", oauth.getOauthId());
 		   Oauth selectOne = oauthMapper.selectOne(queryWrapper);
 		   //插入记录表
 		   if(null!=selectOne) {
@@ -145,7 +146,7 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 					  }
 				 }
 			   loginListMapper.insert(loginList);
-			   responseMessage.setReturnResult(oauth);
+			   responseMessage.setReturnResult(selectOne);
 		   }else {
 			   
 			   throw new BaseException("该用户不存在");
@@ -167,5 +168,6 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 		oauthMapper.selectOne(queryWrapper);
 		return null;
 	}
+	
 
 }

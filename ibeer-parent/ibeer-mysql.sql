@@ -2,7 +2,8 @@
 ALTER TABLE  table_name MODIFY COLUMN column_name 数据类型;
 -- 添加字段语法
 ALTER TABLE table_name ADD column_name 数据类型;
-
+--修改字段名称
+ALTER  TABLE table_name CHANGE old_column new_column 新数据类型 [DEFAULT 默认值 COMMENT '注释'];	
 -- 显示数据库
 SHOW DATABASES;
 -- 创建数据库

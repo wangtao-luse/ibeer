@@ -58,29 +58,12 @@ public HashedCredentialsMatcher credentialsMatcher(){
     //加密算法的名字，也可以设置MD5等其他加密算法名字
     credentialsMatcher.setHashAlgorithmName("MD5");
     //加密次数
-    credentialsMatcher.setHashIterations(1);
+    credentialsMatcher.setHashIterations(1024);
     //加密为哈希
-    credentialsMatcher.setStoredCredentialsHexEncoded(true);
-
+   // credentialsMatcher.setStoredCredentialsHexEncoded(true);
     return credentialsMatcher;
 }
 
-	/*
-	 * @Bean public FilterRegistrationBean delegatingFilterProxy(){
-	 * FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-	 * DelegatingFilterProxy proxy = new DelegatingFilterProxy();
-	 * proxy.setTargetFilterLifecycle(true); proxy.setTargetBeanName("shiroFilter");
-	 * filterRegistrationBean.setFilter(proxy); return filterRegistrationBean; }
-	 */
-
-	/*
-	 * @Bean public MethodInvokingFactoryBean getMethodInvokingFactoryBean() {
-	 * MethodInvokingFactoryBean methodInvokingFactoryBean=new
-	 * MethodInvokingFactoryBean(); methodInvokingFactoryBean.setStaticMethod(
-	 * "org.apache.shiro.SecurityUtils.setSecurityManager");
-	 * methodInvokingFactoryBean.setArguments(securityManager()); return
-	 * methodInvokingFactoryBean; }
-	 */
-
+	
 
 }

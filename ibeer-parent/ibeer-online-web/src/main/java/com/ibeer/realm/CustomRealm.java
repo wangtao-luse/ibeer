@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -25,6 +26,7 @@ import com.ibeer.conector.AccountConnector;
 import com.ibeer.dto.MySimpleAuthorizationInfo;
 import com.ibeer.dto.MyUsernamePasswordToken;
 import com.ibeer.dto.UserV;
+import com.ibeer.model.account.Oauth;
 import com.ibeer.util.JMMD5;
 import com.ibeer.util.SessionUtil;
 
@@ -56,21 +58,31 @@ public class CustomRealm extends AuthorizingRealm {
 			//得到用户信息且进行加密
 			MyUsernamePasswordToken authToken =(MyUsernamePasswordToken)token;
 			String username = authToken.getUsername();
-			char[] password = authToken.getPassword();
-			byte[] salt = null;
-			Object md5 = new SimpleHash("MD5", password, ByteSource.Util.bytes(salt), 1024);
+			char[] password = authToken.getPassword();			
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("oauthId",Base64.getEncoder().encodeToString(username.getBytes()));
-			jsonObject.put("credential", md5);
-			 //去数据库进行验证
+			jsonObject.put("oauthId",username);
+			 //使用用户名去数据库查找对应的盐(用户名必须唯一(手机号))
 			ResponseMessage responseMessage = accountConnector.login(jsonObject, authToken.getRequest());
 			if("00".equals(responseMessage.getResultCode())&&StringUtils.isEmpty(responseMessage.getReturnResult())) {
 				throw new BaseException(responseMessage.getResultMessage());
 			}
+			Map<String, Object> returnResult = responseMessage.getReturnResult();
+			Oauth oauth =(Oauth)returnResult.get("result");
+			//将一个字符串进行盐值加密
+			byte[] salt =  oauth.getPwd().getBytes();
+			Object md5 = new SimpleHash("MD5", password, ByteSource.Util.bytes(salt), 1024);
+		
+			//验证数据库密码
+			if(!md5.equals(oauth.getOauthId())) {
+				throw new IncorrectCredentialsException();
+			}		
+			
 			Map<String, Object> map = responseMessage.getReturnResult();
 			Object object = map.get("result");
 			UserV userV = JSONObject.parseObject(JSONObject.toJSONString(object), UserV.class);
-		    simpleAuthenticationInfo = new SimpleAuthenticationInfo(userV,md5, getName());
+			//构建AuthenticationInfo对象
+			String credentials = oauth.getOauthId();
+		    simpleAuthenticationInfo = new SimpleAuthenticationInfo(userV, credentials,ByteSource.Util.bytes(salt), getName());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BaseException(ConstantBase.FAILED_SYSTEM_ERROR);

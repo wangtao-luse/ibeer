@@ -164,7 +164,8 @@ https://blog.csdn.net/wn084/article/details/79545307
  
 11.如何把一个字符串加密为Md5
  new SimpleHash("MD5", "taotao141421", ByteSource.Util.bytes("salt"), 1024);
-12.替换当前的Realm的credentialsMatcher属性，直接使用HashedCredentialsMatcher并设置加密算法即可;
+12.shiro的加密方式:
+	替换当前的Realm的credentialsMatcher属性，直接使用HashedCredentialsMatcher并设置加密算法即可;
  spring xml方式:https://www.jianshu.com/p/b12b44219470
  <bean id="myRealm" class="com.zhu.shiroweb.realm.MyRealm">
         

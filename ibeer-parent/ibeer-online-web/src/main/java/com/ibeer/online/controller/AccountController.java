@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ibeer.common.constant.ConstantBase;
 import com.ibeer.common.resp.ResponseMessage;
 import com.ibeer.conector.AccountConnector;
 import com.ibeer.dto.MyUsernamePasswordToken;
@@ -35,7 +36,8 @@ public class AccountController {
 	 */
    @RequestMapping("/regPage")
 	public String registerPage(String source,ModelMap model,HttpServletRequest request) {	
-	   String randomUUID = UUID.randomUUID().toString();
+	   //生成UUID(相当于一个令牌)
+	    String randomUUID = UUID.randomUUID().toString();
 	    request.getSession().setAttribute("uuid", randomUUID);
 	   model.addAttribute("uuid", randomUUID);
 	   if("buser".equals(source)) {
@@ -48,22 +50,35 @@ public class AccountController {
   //注册信息提交
    @RequestMapping("/regSub")
    @ResponseBody
-   public ResponseMessage regSub(@RequestBody JSONObject jsonObject,HttpServletRequest request) {	 
-	  String uuid= jsonObject.getString("uuid");
-	  String attr =(String) request.getSession().getAttribute("uuid");
-	  if(!StringUtils.isEmpty(attr)&&uuid.equals(attr)) {
-		  String str = UUID.randomUUID().toString();
-		  request.getSession().setAttribute("uuid", str);
-		  //校验信息
-		  String pwdRepeat = jsonObject.getString("pwdRepeat");
-		  String credential = jsonObject.getString("credential");
-		  if(!credential.equals(pwdRepeat)) {
-			  return ResponseMessage.getFailed("两次密码不一致");
-		  }
-		return accountConnector.regSub(jsonObject, request);  
-	  }else {
-		  return ResponseMessage.getFailed("请不要重复提交！");
-	  }
+   public ResponseMessage regSub(@RequestBody JSONObject jsonObject,HttpServletRequest request) {	
+	   try {
+		 //比较UUID
+			  String uuid= jsonObject.getString("uuid");
+			  String attr =(String) request.getSession().getAttribute("uuid");
+			  if(!StringUtils.isEmpty(attr)&&uuid.equals(attr)) {//UUID相同		 
+				  //校验用户名(昵称)
+				  String nickname = jsonObject.getString("nickname");
+				  if(StringUtils.isEmpty(nickname)) {
+					  return ResponseMessage.getFailed("用户名不能为空！");
+				  }
+				  //校验信息密码
+				  String pwdRepeat = jsonObject.getString("pwdRepeat");
+				  String credential = jsonObject.getString("credential");
+				  if(!credential.equals(pwdRepeat)) {
+					  return ResponseMessage.getFailed("两次密码不一致");
+				  }
+				  String str = UUID.randomUUID().toString();
+				  request.getSession().setAttribute("uuid", str);
+				return accountConnector.regSub(jsonObject, request);  
+			  }else {
+				  return ResponseMessage.getFailed("请不要重复提交！");
+			  }
+	} catch (Exception e) {
+		// TODO: handle exception
+		e.printStackTrace();
+		return ResponseMessage.getFailed(ConstantBase.FAILED_SYSTEM_ERROR);
+	}
+	 
    }
    /**
     * 登录页面
@@ -73,6 +88,12 @@ public class AccountController {
    public String loginPage() {
 	   return "/account/login/login";
    }
+   /**
+    * 登录提交
+    * @param jsonObject
+    * @param request
+    * @return
+    */
    @RequestMapping(value = "/login")
 	public ResponseMessage login(@RequestBody JSONObject jsonObject, HttpServletRequest request) {
 		try {
