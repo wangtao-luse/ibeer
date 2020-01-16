@@ -32,6 +32,7 @@ $(function(){
     	var postData =$("#formlogin").serializeJSON();
     	postAjax(url,JSON.stringify(postData),function(data){
     		console.log(data);
+    		location.href="/index";
     	}, {errorFunction:function(data){
     		
     	},cache: false, async: false});

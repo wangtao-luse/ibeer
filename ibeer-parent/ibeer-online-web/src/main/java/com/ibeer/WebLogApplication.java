@@ -45,7 +45,7 @@ public class WebLogApplication {
     public void webLog() {
     }
  
-    @Before("webLog()") //在切入点的方法运行的时候
+    @Before("webLog()") //在切入点的方法运行之前的时候
     public void logBeforeController(JoinPoint joinPoint) {
         String string = joinPoint.toString();
         Object[] args = joinPoint.getArgs();

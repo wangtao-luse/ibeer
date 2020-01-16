@@ -60,20 +60,23 @@ public class CustomRealm extends AuthorizingRealm {
 			String username = authToken.getUsername();
 			char[] password = authToken.getPassword();			
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("oauthId",username);
+			String encodeToString = Base64.getEncoder().encodeToString(username.getBytes());
+			jsonObject.put("oauthId",encodeToString);
 			 //使用用户名去数据库查找对应的盐(用户名必须唯一(手机号))
 			ResponseMessage responseMessage = accountConnector.login(jsonObject, authToken.getRequest());
 			if("00".equals(responseMessage.getResultCode())&&StringUtils.isEmpty(responseMessage.getReturnResult())) {
 				throw new BaseException(responseMessage.getResultMessage());
 			}
 			Map<String, Object> returnResult = responseMessage.getReturnResult();
-			Oauth oauth =(Oauth)returnResult.get("result");
+			Object object2 = returnResult.get("result");
+			String jsonString = JSONObject.toJSONString(object2);
+			Oauth oauth = JSONObject.toJavaObject(jsonObject.parseObject(jsonString), Oauth.class);
 			//将一个字符串进行盐值加密
 			byte[] salt =  oauth.getPwd().getBytes();
 			Object md5 = new SimpleHash("MD5", password, ByteSource.Util.bytes(salt), 1024);
 		
 			//验证数据库密码
-			if(!md5.equals(oauth.getOauthId())) {
+			if(!md5.equals(oauth.getCredential())) {
 				throw new IncorrectCredentialsException();
 			}		
 			
