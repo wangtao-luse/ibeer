@@ -201,8 +201,8 @@ public static String getAddress(String ip) {
 public static void main(String[] args) throws Exception {
 AddressUtils addressUtils = new AddressUtils();
 String ip = "222.221.10.111";
-ip="58.37.157.3";
-ip="127.0.0.1";
+//ip="58.37.157.3";
+//ip="127.0.0.1";
 String address = "";
 try {
     address = addressUtils.getAddresses("ip=" + ip, "utf-8");

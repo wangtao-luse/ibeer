@@ -137,14 +137,17 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 				   loginList.setUId(selectOne.getUId());
 			   }
 			   String remoteAddr = requestMessage.getRequestHeader().getRemoteAddr();
-				  String address =AddressUtils.getAddress(remoteAddr);
-				  if(!StringUtils.isEmpty(address)) {
-					  if("127.0.0.1".equals(remoteAddr)) {
-						  loginList.setLoginIpLookup(remoteAddr);
-					  }else {
-					      loginList.setLoginIpLookup(address);
-					  }
-				 }
+			   if(!"127.0.0.1".equals(remoteAddr)) {
+				   String address =AddressUtils.getAddress(remoteAddr); 
+				   if(!StringUtils.isEmpty(address)) {
+						      loginList.setLoginIpLookup(address);
+						  
+					 }
+			   }else {
+				   loginList.setLoginIpLookup(remoteAddr);
+			   }
+				  
+				  
 			   loginListMapper.insert(loginList);
 			   responseMessage.setReturnResult(selectOne);
 		   }else {

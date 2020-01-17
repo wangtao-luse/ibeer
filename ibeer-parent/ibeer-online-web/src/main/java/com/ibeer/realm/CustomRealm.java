@@ -73,10 +73,12 @@ public class CustomRealm extends AuthorizingRealm {
 			Oauth oauth = JSONObject.toJavaObject(jsonObject.parseObject(jsonString), Oauth.class);
 			//将一个字符串进行盐值加密
 			byte[] salt =  oauth.getPwd().getBytes();
-			Object md5 = new SimpleHash("MD5", password, ByteSource.Util.bytes(salt), 1024);
+			String md5 = new SimpleHash("MD5", password, ByteSource.Util.bytes(salt), 1024).toHex();
 		
 			//验证数据库密码
 			if(!md5.equals(oauth.getCredential())) {
+				System.out.println(md5);
+				System.out.println(oauth.getCredential());
 				throw new IncorrectCredentialsException();
 			}		
 			

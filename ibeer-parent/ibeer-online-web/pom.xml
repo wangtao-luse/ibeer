@@ -28,6 +28,7 @@
 	    <groupId>com.github.pagehelper</groupId>
 	    <artifactId>pagehelper</artifactId>
 	</dependency>
+	<!-- beetl -->
 	<dependency>
 	    <groupId>com.ibeetl</groupId>
 	    <artifactId>beetl-framework-starter</artifactId>

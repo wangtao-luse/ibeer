@@ -61,3 +61,13 @@ https://blog.csdn.net/LLDD2014425/article/details/79472908
 2020-1-10
 1.加密相关 
 https://blog.csdn.net/sihai12345/article/details/79313574
+
+
+2020-1-17
+IP解决方案
+https://www.cnblogs.com/xing901022/p/5981903.html
+https://blog.csdn.net/CrownP/article/details/101346838
+https://blog.csdn.net/u011142688/article/details/78499375
+shiro整合springboot
+https://blog.csdn.net/lansonan1005/article/details/96318854
+https://www.cnblogs.com/ityouknow/p/7089177.html
