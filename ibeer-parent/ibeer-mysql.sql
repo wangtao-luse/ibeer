@@ -47,7 +47,10 @@ CREATE TABLE T_A_OAUTH (
 	-- 密码凭证	站内的保存密码，站外的不保存或保存token
 	NICKNAME VARCHAR (18),
 	-- 昵称	昵称
-	AVATAR VARCHAR (120) -- 图像	图像
+	AVATAR VARCHAR (120),
+	-- 图像	图像
+	PWD VARCHAR(36)
+	--用盐值
 );
 
 -- 3.	登录记录表(T-A-LOGIN-LIST)

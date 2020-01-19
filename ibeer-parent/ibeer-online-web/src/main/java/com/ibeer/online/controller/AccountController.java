@@ -127,5 +127,8 @@ public class AccountController {
 	   return "/account/login/survey";
    }
   
+   public static void main(String[] args) {
+	System.out.println("7584da82-aeda-4022-b3f1-43b9bd3e521b".length());
+}
    
 }
