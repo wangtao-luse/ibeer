@@ -76,3 +76,15 @@ https://blog.csdn.net/u011142688/article/details/78499375
 shiro整合springboot
 https://blog.csdn.net/lansonan1005/article/details/96318854
 https://www.cnblogs.com/ityouknow/p/7089177.html
+
+2020-1-19
+1.fegin全局异常捕获待解决
+2.前端页面完善头部部分
+3.滑动验证码
+4.手机发送验证码
+5.shiro退出功能;
+6.分布式事务;
+7.多模块service直接的访问;
+
+商品数据库设计
+https://www.cnblogs.com/mmmjiang13/archive/2012/07/05/2575538.html
