@@ -21,7 +21,7 @@ public ResponseMessage regSub(JSONObject content,HttpServletRequest request) {
 	ResponseMessage regSub = accountApi.regSub(requestMessage);
 	return regSub;
 }
-public ResponseMessage login(@RequestBody JSONObject content,HttpServletRequest request) {
+public ResponseMessage login(JSONObject content,HttpServletRequest request) {
 	RequestMessage requestMessage = HttpDateUtil.postData(content, request);
 	ResponseMessage login = accountApi.login(requestMessage);
 	return login;

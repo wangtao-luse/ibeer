@@ -88,6 +88,10 @@ public class AccountController {
    public String loginPage() {
 	   return "/account/login/login";
    }
+   @RequestMapping("/logout")
+   public String logout() {
+	   return "/account/login/login";
+   }
    /**
     * 登录提交
     * @param jsonObject
@@ -95,6 +99,7 @@ public class AccountController {
     * @return
     */
    @RequestMapping(value = "/login")
+   @ResponseBody
 	public ResponseMessage login(@RequestBody JSONObject jsonObject, HttpServletRequest request) {
 		try {
 			String uname = jsonObject.getString("loginname");
@@ -108,11 +113,11 @@ public class AccountController {
 		} catch (UnknownAccountException e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return ResponseMessage.getFailed("账号不存在！");
+			return ResponseMessage.getFailed("账户名与密码不匹配，请重新输入");
 		} catch (IncorrectCredentialsException e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return ResponseMessage.getFailed("密码不正确！");
+			return ResponseMessage.getFailed("账户名与密码不匹配，请重新输入");
 		}
 
 		return ResponseMessage.getSucess();

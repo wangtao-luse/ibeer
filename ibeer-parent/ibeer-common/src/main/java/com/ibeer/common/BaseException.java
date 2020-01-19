@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class BaseException extends RuntimeException {
 private static final long serialVersionUID = 1L;
-private String errorMessage;
+private String message;
 public BaseException() {}
-public BaseException(String errorMessage) {
+public BaseException(String message) {
 	super();
-	this.errorMessage = errorMessage;
+	this.message = message;
 }
 }

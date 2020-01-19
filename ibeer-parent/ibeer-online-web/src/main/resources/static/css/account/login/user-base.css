@@ -4054,7 +4054,7 @@ input:-webkit-autofill {
 	width: 16px;
 	height: 16px;
 	overflow: hidden;
-	background: url(//misc.360buyimg.com/user/passport/1.0.0/widget/login-form-2018-0827/i/pwd-icons-new.png) -104px -49px no-repeat
+	background: url(/../../img/account/login/pwd-icons-new.png) -104px -49px no-repeat
 }
 
 .login-form .msg-warn {

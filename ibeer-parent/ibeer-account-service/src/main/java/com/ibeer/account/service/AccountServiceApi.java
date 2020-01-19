@@ -89,7 +89,7 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 			String salt = UUID.randomUUID().toString();	
 			oauth.setPwd(salt);
 			String credential = oauth.getCredential();
-			String result = new SimpleHash("MD5", credential, ByteSource.Util.bytes(salt), 1024).toHex();
+			String result = new SimpleHash("MD5", credential, ByteSource.Util.bytes(salt), 1024).toString();
 			
 			oauth.setCredential(result);			
 			//加密手机号码	Base64		
@@ -152,9 +152,13 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 			   responseMessage.setReturnResult(selectOne);
 		   }else {
 			   
-			   throw new BaseException("该用户不存在");
+			   throw new BaseException("用户名或密码不正确");
 		   }
 		  
+	}catch (BaseException e) {
+		// TODO: handle exception
+		e.printStackTrace();
+		throw new BaseException(e.getMessage());
 	}catch (Exception e) {
 		// TODO: handle exception
 		e.printStackTrace();

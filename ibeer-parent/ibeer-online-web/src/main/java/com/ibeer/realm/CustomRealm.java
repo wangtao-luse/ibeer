@@ -71,24 +71,18 @@ public class CustomRealm extends AuthorizingRealm {
 			Object object2 = returnResult.get("result");
 			String jsonString = JSONObject.toJSONString(object2);
 			Oauth oauth = JSONObject.toJavaObject(jsonObject.parseObject(jsonString), Oauth.class);
-			//将一个字符串进行盐值加密
+			//得到用户的盐
 			byte[] salt =  oauth.getPwd().getBytes();
-			String md5 = new SimpleHash("MD5", password, ByteSource.Util.bytes(salt), 1024).toHex();
-		
-			//验证数据库密码
-			if(!md5.equals(oauth.getCredential())) {
-				System.out.println(md5);
-				System.out.println(oauth.getCredential());
-				throw new IncorrectCredentialsException();
-			}		
-			
 			Map<String, Object> map = responseMessage.getReturnResult();
 			Object object = map.get("result");
 			UserV userV = JSONObject.parseObject(JSONObject.toJSONString(object), UserV.class);
 			//构建AuthenticationInfo对象
-			String credentials = oauth.getOauthId();
+			String credentials = oauth.getCredential();
 		    simpleAuthenticationInfo = new SimpleAuthenticationInfo(userV, credentials,ByteSource.Util.bytes(salt), getName());
-		} catch (Exception e) {
+		}catch (BaseException e) {
+			e.printStackTrace();
+			throw new BaseException(e.getMessage());
+		}catch (Exception e) {
 			e.printStackTrace();
 			throw new BaseException(ConstantBase.FAILED_SYSTEM_ERROR);
 		}
