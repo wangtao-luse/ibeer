@@ -2,9 +2,12 @@ package com.ibeer;
  
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Constant;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.ibeer.common.BaseException;
 import com.ibeer.common.DuplicateSubmitToken;
+import com.ibeer.common.constant.ConstantBase;
 import com.ibeer.common.req.RequestBody;
 import com.ibeer.common.req.RequestHeader;
 import com.ibeer.common.req.RequestMessage;
@@ -34,7 +37,9 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class WebLogApplication {
     private static Logger logger = (Logger) LoggerFactory.getLogger(WebLogApplication.class);
+       //计算方法调用时间
        ThreadLocal<Long> time=new ThreadLocal<>();
+       //防重复提交
        private static final Cache<String, Object> CACHES = CacheBuilder.newBuilder()
                // 最大缓存 100 个
                .maximumSize(100)
@@ -121,35 +126,57 @@ public class WebLogApplication {
     @AfterThrowing(pointcut = "webLog()")
     public void afterThrow(JoinPoint JoinPoint ){
         System.out.println("#####报错了######" );
+        
     }
     @Around("webLog()")
-  public Object  doAround(ProceedingJoinPoint proceedingJoinPoint ){
+  public Object  doAround(ProceedingJoinPoint proceedingJoinPoint ) throws Exception{
         try {
         	 time.set(System.currentTimeMillis());
              System.out.println("###########方法前#########");
         	//获取被增强的方法相关信息
         	MethodSignature signature =(MethodSignature)proceedingJoinPoint.getSignature();
-        	Method method = signature.getMethod();
-        	DuplicateSubmitToken annotation = method.getAnnotation(DuplicateSubmitToken.class);
+        	Method method = signature.getMethod();        	
         	String name = method.getName();
         	Object[] args = proceedingJoinPoint.getArgs();
-        	String key =name +args;
-        	if(StringUtils.isEmpty(key)) {
-        		if(CACHES.getIfPresent(key)!=null) {
-        			ResponseMessage resp = new ResponseMessage();
-        			resp.setResultCode("00");
-        			resp.setResultMessage("请勿重复请求");
-        			return resp;
-        		}
-        	}
-        	CACHES.put(key, key);           
+        	//防重复提交
+        	duplicateSubmit(method, name, args);           
             Object proceed = proceedingJoinPoint.proceed();
             System.out.println("###########方法后#########");
             return proceed;
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
+        }catch (BaseException e) {
+            e.printStackTrace();
+            return ResponseMessage.getFailed(e.getMessage());
         }
-        return null;
+        catch (Exception e) {
+            e.printStackTrace();
+            return ResponseMessage.getFailed(ConstantBase.FAILED_CODE);
+        } catch (Throwable e) {
+			// TODO Auto-generated catch block
+        	e.printStackTrace();
+            return ResponseMessage.getFailed(ConstantBase.FAILED_CODE);
+		}
     }
+    /**
+     * 防重复提交 基于本地缓存
+     * @param method
+     * @param name
+     * @param args
+     * @return
+     */
+	public ResponseMessage duplicateSubmit(Method method, String name, Object[] args) {
+		DuplicateSubmitToken annotation = method.getAnnotation(DuplicateSubmitToken.class);        	
+		String key =name +args;
+		if(StringUtils.isEmpty(key)) {
+			if(CACHES.getIfPresent(key)!=null) {
+				ResponseMessage resp = new ResponseMessage();
+				resp.setResultCode("00");
+				resp.setResultMessage("请勿重复请求");
+				return resp;
+			}
+		}else {
+			CACHES.put(key, key);
+		}
+		return null;
+	}
  
 }

@@ -29,9 +29,14 @@ https://blog.csdn.net/weixin_43160039/article/details/83544228
  
 5.防重复提交
   1.拦截器
+      https://blog.csdn.net/u013378306/article/details/52944780
   2.Spring AOP
   3.服务端生成uuid(口令);
-  
+  相关博客
+  4.https://blog.csdn.net/u013042707/article/details/80521418
+  5.http://keep.01ue.com/?pi=395677&_a=app&_c=index&_m=p
+  6.http://blog.battcn.com/2018/06/12/springboot/v2-cache-locallock/
+  7.http://blog.battcn.com/2018/06/01/springboot/v2-other-exception/
   
 2020-01-07
 1.什么是幂等性

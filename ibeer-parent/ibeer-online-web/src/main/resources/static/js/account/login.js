@@ -31,13 +31,13 @@ $(function(){
 		var url="/account/login";
     	var postData =$("#formlogin").serializeJSON();
     	postAjax(url,JSON.stringify(postData),function(data){
-    		console.log(data);
     		location.href="/index";
     	}, {errorFunction:function(data){
     		$(".msg-wrap .msg-error").removeClass("hide");
     		$(".msg-wrap .msg-error").html("<b></b>"+data.resultMessage);
     	},cache: false, async: false});
    });
+   
 })
 
 
