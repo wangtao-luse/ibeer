@@ -1243,7 +1243,7 @@ body {
 .slide-authCode-wraper .arrow {
 	display: block;
 	position: absolute;
-	background-image: url(//misc.360buyimg.com/user/reg/1.0.0/widget/foreign-number-layer-170524/i/tips.gif);
+	background-image: url(../../../img/common/tips.gif);
 	background-repeat: no-repeat;
 	width: 16px;
 	height: 8px;
