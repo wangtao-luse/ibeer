@@ -86,5 +86,6 @@ https://www.cnblogs.com/ityouknow/p/7089177.html
 6.分布式事务;
 7.多模块service直接的访问;
 
+
 商品数据库设计
 https://www.cnblogs.com/mmmjiang13/archive/2012/07/05/2575538.html

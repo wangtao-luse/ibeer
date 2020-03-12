@@ -136,37 +136,33 @@ $(function(){
     	
     });
     //验证码验证 跳出滑块验证
-    $(".form-item.form-item-getcode").click(function(){
+    $(".checkCode").click(function(){
     	var phone=$("#form-phone").val(); 
     	//验证手机号码
-    	if(test_phone(phone)){
-    		$(".slide-authCode-wraper").css("display","block");
-    	}else{
-    		if(phone==""){
-    			$(".form-item.form-item-phone .input-tip span").attr("id","form-phone-error").attr("class","error").html("<i class='i-error'></i>请输入手机号");
-    		}
-    		
-    		return;
+    	if(!test_phone(phone)){
+    		$(".form-item.form-item-phone .input-tip span").attr("id","form-phone-error").attr("class","error").html("<i class='i-error'></i>请输入手机号");
+			return;
     	}
+    	   //获取图片验证码
+    		var url="/getImageVerifyCode";
+        	var postData ={};
+        	postAjax(url,JSON.stringify(postData),function(data){
+        		 console.log(data);
+        		 $(".JDJRV-bigimg img").attr("src","data:image/png;base64,"+data.returnResult.bigImage);
+        		 $(".JDJRV-smallimg img").attr("src","data:image/png;base64,"+data.returnResult.smallImage);
+        		 $(".JDJRV-smallimg").css("top",data.returnResult.yHeight+"px")
+        		 $(".slide-authCode-wraper").css("display","block");
+        	}, {errorFunction:function(data){
+        		alert(data.resultMessage);
+        	},cache: false, async: false}); 
+    	
     	
     });
-    //滑块验证码 关闭
-    $(document).on("click",".slide-authCode-wraper .close",function(){
-    	$(".slide-authCode-wraper").css("display","none");
-    });
-    	
-    var downX=0;
-    $(".JDJRV-slide-inner.JDJRV-slide-btn").mousedown(function(e){
-    	var d = e || event;
-    	downX=d.clientX;
-    	var result={"offsetWidth":$(".JDJRV-slide-inner.JDJRV-slide-btn").offsetWidth,"clientX":d.clientX,"clientY":d.clientY,"pageX":d.pageX,"pageY":d.pageY,"screenX":screenX,"screenY":screenY}
-    	console.log(result);
-    	$(this).mousemove();
-      
-    });
-   /* $(".JDJRV-slide-inner.JDJRV-slide-btn").mouseup(function(){
-    	
-    });*/
+   $(".JDJRV-img-refresh").click(function(){
+	   $(".checkCode").click();
+   });
+
+  
     $(".JDJRV-slide-inner.JDJRV-slide-btn").mousemove(function(e){
     	var d = e || event;
     	var moveX = d.clientX;

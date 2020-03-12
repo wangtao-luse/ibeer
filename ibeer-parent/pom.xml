@@ -15,6 +15,7 @@
     <module>ibeer-online-web</module>
     <module>ibeer-account-api</module>
     <module>ibeer-manager-web</module>
+    <module>ibeer-test-web</module>
   </modules>
   <!-- 将当前项目作为一个springboot-starter的子模块 -->
   <parent>
@@ -219,7 +220,8 @@
                 <spring.datasource.driverClassName>oracle.jdbc.driver.OracleDriver</spring.datasource.driverClassName>
                 <spring.datasource.username>onlinetest</spring.datasource.username>
                 <spring.datasource.password>onlinetest438</spring.datasource.password>
-                
+                <!-- 图片滑动验证码 -->
+                <prefix.verificationImagePathPrefix>D:\\temp\\imgs\\</prefix.verificationImagePathPrefix>
             </properties>
         </profile>
         <!--测试环境-->
@@ -239,6 +241,8 @@
                 <spring.datasource.driverClassName>com.mysql.cj.jdbc.Driver</spring.datasource.driverClassName>
                 <spring.datasource.username>root</spring.datasource.username>
                 <spring.datasource.password>root</spring.datasource.password>
+                <!-- 图片滑动验证码 -->
+               <prefix.verificationImagePathPrefix>D:\\temp\\imgs\\</prefix.verificationImagePathPrefix>
             </properties>
         </profile>
         <!--生产环境-->
@@ -258,6 +262,8 @@
                 <spring.datasource.driverClassName>com.mysql.cj.jdbc.Driver</spring.datasource.driverClassName>
                 <spring.datasource.username>root</spring.datasource.username>
                 <spring.datasource.password>root</spring.datasource.password>
+                <!-- 图片滑动验证码 -->
+               <prefix.verificationImagePathPrefix>D:\\temp\\imgs\\</prefix.verificationImagePathPrefix>
             </properties>
         </profile>
     </profiles>

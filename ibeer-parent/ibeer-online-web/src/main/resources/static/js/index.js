@@ -1,4 +1,5 @@
 $(function(){
+	//适配屏幕
 	//https://blog.csdn.net/LEE18254290736/article/details/81326490
 	//https://blog.csdn.net/ChibiMarukoChan/article/details/77934248
 	//https://www.cnblogs.com/raphael1982/p/7994157.html
