@@ -57,7 +57,14 @@ $(function(){
    		    	$(".item-getcode-wrap").css("display","none");
    		    	//隐藏验证验证码按钮
    		    	$(".slide-authCode-wraper").css("display","none");
-   		    	timer120();
+   		    	
+   		    	//发送验证码
+	   		 	postAjax("/sendCode",postData,function(data){
+	   		 	  timer120();
+	   		   	}, {errorFunction:function(data){
+	   		   		alert(data.resultMessage);
+	   		   	},cache: false, async: false}); 
+	   		    	
    		    	//显示手机验证码文本框
    		    	$(".item-phonecode-wrap").css("display","block");
    		        $(".item-phonecode-wrap .input-tip").html("<span><i class='i-def'></i>验证码已发送，120秒内输入有效</span>");

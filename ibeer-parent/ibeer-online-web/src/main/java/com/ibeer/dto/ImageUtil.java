@@ -23,8 +23,8 @@ public class ImageUtil {
   private static final Logger logger = LoggerFactory.getLogger(ImageUtil.class);
   private  static int targetWidth = 55;//小图长
   private  static int targetHeight = 45;//小图宽
-  private  static int circleR = 8;//半径
-  private  static int r1 = 4;//距离点
+  private  static int circleR = 10;//半径
+  private  static int r1 = 6;//距离点
  
     /**
      * @Createdate: 2019年1月24日上午10:52:42
@@ -48,20 +48,24 @@ public class ImageUtil {
         //圆的标准方程 (x-a)²+(y-b)²=r²,标识圆心（a,b）,半径为r的圆
         //计算需要的小图轮廓，用二维数组来表示，二维数组有两张值，0和1，其中0表示没有颜色，1有颜色
         for (int i = 0; i < targetWidth; i++) {
+        	
             for (int j = 0; j < targetHeight; j++) {
                 double d2 = Math.pow(j - 2,2) + Math.pow(i - h1,2);
                 double d3 = Math.pow(i - x2,2) + Math.pow(j - h1,2);
                 if ((j <= ybegin && d2 < po)||(i >= xbegin && d3 > po)) {
-                        data[i][j] = 0;
+                       // data[i][j] = 0;
                 }  else {
                         data[i][j] = 1;
                 }
+                System.out.print(data[i][j]+"  ");
             }
+            System.out.println();
         }
         return data;
     }
     /**
-    *
+            *  帮助：https://www.cnblogs.com/chenhonggao/p/8999447.html
+    *https://blog.csdn.net/baidu_28665563/article/details/82887485
     * @Createdate: 2019年1月24日上午10:51:30
     * @Title: cutByTemplate
     * @Description: 有这个轮廓后就可以依据这个二维数组的值来判定抠图并在原图上抠图位置处加阴影,
@@ -161,7 +165,7 @@ public class ImageUtil {
        try {
            BufferedImage oriImage = ImageIO.read(file);
            Random random = new Random();
-           //X轴距离右端targetWidth  Y轴距离底部targetHeight以上
+           //随机出带抠图阴影图片的阴影的左上坐标(位置)
            int widthRandom = random.nextInt(oriImage.getWidth()-  2*targetWidth) + targetWidth;
            int heightRandom = random.nextInt(oriImage.getHeight()- targetHeight);
            logger.info("原图大小{} x {},随机生成的坐标 X,Y 为（{}，{}）",oriImage.getWidth(),oriImage.getHeight(),widthRandom,heightRandom);
@@ -225,7 +229,7 @@ public class ImageUtil {
        imagedata=bao.toByteArray();
        Encoder encoder = Base64.getEncoder();
        String base64Image = encoder.encodeToString(imagedata).trim();
-       base64Image = base64Image.replaceAll("\r|\n", "");  //删除 \r\n
+       base64Image = base64Image.replaceAll("\r|\n", "");  //删除 \r\n  回车|新行
        return base64Image;
    }
   

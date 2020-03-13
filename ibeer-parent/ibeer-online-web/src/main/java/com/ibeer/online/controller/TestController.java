@@ -8,6 +8,7 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -122,5 +123,27 @@ public ResponseMessage verifyImageCode(@RequestParam(value = "moveLength") Strin
     }
     return new ResponseMessage(resultMap);
 }
-
+@RequestMapping(value = "/sendCode", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+@ResponseBody
+public ResponseMessage sendCode(@RequestParam(value = "phone") String phone,HttpServletRequest request) {
+    Map<String, Object> resultMap = new HashMap<>();
+    try {
+          Random r = new Random();
+          int nextInt = r.nextInt(999999)+100000;
+          String sendCode = String.valueOf(nextInt);
+          
+          request.getSession().setAttribute("sendCode", sendCode+phone);
+        if (StringUtils.isEmpty(phone)) {
+            resultMap.put("errcode", 1);
+            resultMap.put("errmsg", "手机号码不能为空！");
+            return new ResponseMessage(resultMap);
+        }
+       System.out.println("验证码为：-------------------》"+sendCode);
+    } catch (Exception e) {
+        return ResponseMessage.getFailed(ConstantBase.FAILED_SYSTEM_ERROR);
+    } finally {
+    	request.getSession().removeAttribute("sendCode");
+    }
+    return new ResponseMessage(resultMap);
+}
 }
