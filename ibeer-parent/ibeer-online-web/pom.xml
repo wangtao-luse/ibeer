@@ -33,7 +33,11 @@
 	    <groupId>com.ibeetl</groupId>
 	    <artifactId>beetl-framework-starter</artifactId>
 	</dependency>
-	
+	<!-- DOM4J -->
+	<dependency>
+	    <groupId>dom4j</groupId>
+	    <artifactId>dom4j</artifactId>
+	</dependency>
   </dependencies>
   <build>
     <finalName>ibeer-online-web</finalName>

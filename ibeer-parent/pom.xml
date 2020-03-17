@@ -37,6 +37,8 @@
   	<shiro-spring.version>1.4.2</shiro-spring.version>
   	<guava.version>28.1-jre</guava.version>
   	<shiro-spring-boot-web-starter.version>1.4.2</shiro-spring-boot-web-starter.version>
+  	<dom4j.version>1.6.1</dom4j.version>
+  	<xstream.version>1.4.11.1</xstream.version>
   </properties> 
   <dependencies>
   <!-- springboot web -->
@@ -129,11 +131,10 @@
 			</dependency>
 			<!-- oracle 驱动包 -->
 		  	<dependency>
-				<groupId>oracle</groupId>
-		  		<artifactId>ojdbc8</artifactId>	  
-				<version>${oracle.version}</version>
-				<scope>compile</scope>
-			</dependency>
+		     <groupId>com.oracle</groupId>
+		      <artifactId>ojdbc14</artifactId>
+		      <version>${oracle.version}</version>
+		    </dependency>
 			<!-- mysql驱动包 -->
 			<dependency>
 			    <groupId>mysql</groupId>
@@ -176,6 +177,17 @@
 			    <groupId>org.apache.shiro</groupId>
 			    <artifactId>shiro-spring-boot-web-starter</artifactId>
 			    <version>${shiro-spring-boot-web-starter.version}</version>
+			</dependency>
+			<!-- 微信公众号开发 -->
+			<dependency>
+			    <groupId>dom4j</groupId>
+			    <artifactId>dom4j</artifactId>
+			    <version>${dom4j.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.thoughtworks.xstream</groupId>
+			    <artifactId>xstream</artifactId>
+			    <version>${xstream.version}</version>
 			</dependency>
 		</dependencies>
 		
