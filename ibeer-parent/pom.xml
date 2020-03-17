@@ -16,6 +16,7 @@
     <module>ibeer-account-api</module>
     <module>ibeer-manager-web</module>
     <module>ibeer-test-web</module>
+    <module>ibeer-wechat-web</module>
   </modules>
   <!-- 将当前项目作为一个springboot-starter的子模块 -->
   <parent>
@@ -214,13 +215,14 @@
                 <server.online.port>9093</server.online.port>
                 <server.eureka.port>9090</server.eureka.port>
                 <server.zuul.port>9091</server.zuul.port>
+                <server.wechat.port>9094</server.wechat.port>
                 <eureka.host>127.0.0.1</eureka.host>
                 <!-- 数据库相关 -->
                 <spring.datasource.url>jdbc:oracle:thin:@10.103.32.24:1521:onlinetest</spring.datasource.url>
                 <spring.datasource.driverClassName>oracle.jdbc.driver.OracleDriver</spring.datasource.driverClassName>
                 <spring.datasource.username>onlinetest</spring.datasource.username>
                 <spring.datasource.password>onlinetest438</spring.datasource.password>
-                <!-- 图片滑动验证码 -->
+                <!-- 图片滑动验证码 图片路径 -->
                 <prefix.verificationImagePathPrefix>D:\\temp\\imgs\\</prefix.verificationImagePathPrefix>
             </properties>
         </profile>
@@ -236,12 +238,13 @@
                 <server.online.port>9093</server.online.port>
                 <server.eureka.port>9090</server.eureka.port>
                 <server.zuul.port>9091</server.zuul.port>
+                <server.wechat.port>9094</server.wechat.port>
                 <eureka.host>127.0.0.1</eureka.host>
                 <spring.datasource.url>jdbc:mysql://localhost:3306/ibeer?serverTimezone=UTC</spring.datasource.url>
                 <spring.datasource.driverClassName>com.mysql.cj.jdbc.Driver</spring.datasource.driverClassName>
                 <spring.datasource.username>root</spring.datasource.username>
                 <spring.datasource.password>root</spring.datasource.password>
-                <!-- 图片滑动验证码 -->
+                <!-- 图片滑动验证码 图片路径-->
                <prefix.verificationImagePathPrefix>D:\\temp\\imgs\\</prefix.verificationImagePathPrefix>
             </properties>
         </profile>
@@ -257,12 +260,13 @@
                 <server.online.port>9093</server.online.port>
                 <server.eureka.port>9090</server.eureka.port>
                 <server.zuul.port>9091</server.zuul.port>
+                <server.wechat.port>9094</server.wechat.port>
                 <eureka.host>127.0.0.1</eureka.host>
                 <spring.datasource.url>jdbc:mysql://localhost:3306/ibeer?serverTimezone=UTC</spring.datasource.url>
                 <spring.datasource.driverClassName>com.mysql.cj.jdbc.Driver</spring.datasource.driverClassName>
                 <spring.datasource.username>root</spring.datasource.username>
                 <spring.datasource.password>root</spring.datasource.password>
-                <!-- 图片滑动验证码 -->
+                <!-- 图片滑动验证码 图片路径-->
                <prefix.verificationImagePathPrefix>D:\\temp\\imgs\\</prefix.verificationImagePathPrefix>
             </properties>
         </profile>
