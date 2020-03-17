@@ -2,10 +2,12 @@ package com.ibeer.dto;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-@XStreamAlias("xml")
 public class BaseMessage {
+@XStreamAlias("ToUserName")
 private String toUserName;
+@XStreamAlias("FromUserName")
 private String fromUserName;
+@XStreamAlias("MsgType")
 private String msgType;
 public String getToUserName() {
 	return toUserName;

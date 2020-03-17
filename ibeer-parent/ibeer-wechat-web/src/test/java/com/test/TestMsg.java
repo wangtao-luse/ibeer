@@ -15,8 +15,9 @@ public class TestMsg {
     	map.put("ToUserName", "to");
     	map.put("FromUserName", "from");
     	map.put("MsgType", "type");
-    	TextMessage textMessage = new TextMessage(map, "你好");
+    	TextMessage textMessage = new TextMessage(map, "你好");    	
     	XStream xstream = new XStream();
+    	xstream.processAnnotations(TextMessage.class);
     	String xml = xstream.toXML(map);
     	System.out.println(xml);
     	return true;
