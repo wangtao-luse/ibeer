@@ -3,10 +3,7 @@ package com.ibeer.common.req;
 import java.io.Serializable;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.annotation.TableField;
 
-import lombok.Data;
-@Data
 public class RequestBody implements Serializable {
 private static final long serialVersionUID = 1L;
 private JSONObject content;
@@ -31,6 +28,42 @@ private String nickname;
 * 头像
 */
 private String avatar;
+public JSONObject getContent() {
+	return content;
+}
+public void setContent(JSONObject content) {
+	this.content = content;
+}
+public Integer getuId() {
+	return uId;
+}
+public void setuId(Integer uId) {
+	this.uId = uId;
+}
+public String getOauthId() {
+	return oauthId;
+}
+public void setOauthId(String oauthId) {
+	this.oauthId = oauthId;
+}
+public String getOauthType() {
+	return oauthType;
+}
+public void setOauthType(String oauthType) {
+	this.oauthType = oauthType;
+}
+public String getNickname() {
+	return nickname;
+}
+public void setNickname(String nickname) {
+	this.nickname = nickname;
+}
+public String getAvatar() {
+	return avatar;
+}
+public void setAvatar(String avatar) {
+	this.avatar = avatar;
+}
 
 
 }

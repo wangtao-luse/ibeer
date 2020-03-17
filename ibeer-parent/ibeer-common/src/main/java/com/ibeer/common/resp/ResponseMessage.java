@@ -8,7 +8,6 @@ import com.ibeer.common.constant.ConstantBase;
 
 import lombok.Data;
 
-@Data
 public final class ResponseMessage implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -37,6 +36,21 @@ public final class ResponseMessage implements Serializable {
 		this.resultCode = ConstantBase.SUCCESS_CODE;
 		this.resultMessage = ConstantBase.SUCESS_MESSAGE;
 		this.returnResult.put("result", object);
+	}
+	public String getResultCode() {
+		return resultCode;
+	}
+	public void setResultCode(String resultCode) {
+		this.resultCode = resultCode;
+	}
+	public String getResultMessage() {
+		return resultMessage;
+	}
+	public void setResultMessage(String resultMessage) {
+		this.resultMessage = resultMessage;
+	}
+	public Map<String, Object> getReturnResult() {
+		return returnResult;
 	}
 	public void setReturnResult(Map<String, Object> returnResult) {
 		this.returnResult = returnResult;
