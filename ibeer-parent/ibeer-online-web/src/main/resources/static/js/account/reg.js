@@ -144,13 +144,17 @@ $(function(){
 			return;
     	}
     	   //获取图片验证码
-    		var url="/getImageVerifyCode";
+    	//1.	var url="/getImageVerifyCode";
+    	var url="/selectSlideVerificationCode";
         	var postData ={};
         	postAjax(url,JSON.stringify(postData),function(data){
         		 console.log(data);
-        		 $(".JDJRV-bigimg img").attr("src","data:image/png;base64,"+data.returnResult.bigImage);
-        		 $(".JDJRV-smallimg img").attr("src","data:image/png;base64,"+data.returnResult.smallImage);
-        		 $(".JDJRV-smallimg").css("top",data.returnResult.yHeight+"px")
+	        		$(".JDJRV-bigimg img").attr("src","data:image/png;base64,"+data.returnResult.result.shadeImage);
+	        		$(".JDJRV-smallimg img").attr("src","data:image/png;base64,"+data.returnResult.result.cutoutImage);
+	        		$(".JDJRV-smallimg").css("top",(data.returnResult.result.y+2)+"px")
+        		// $(".JDJRV-bigimg img").attr("src","data:image/png;base64,"+data.returnResult.bigImage);
+        		 //$(".JDJRV-smallimg img").attr("src","data:image/png;base64,"+data.returnResult.smallImage);
+        		 //$(".JDJRV-smallimg").css("top",data.returnResult.yHeight+"px")
         		 $(".slide-authCode-wraper").css("display","block");
         	}, {errorFunction:function(data){
         		alert(data.resultMessage);

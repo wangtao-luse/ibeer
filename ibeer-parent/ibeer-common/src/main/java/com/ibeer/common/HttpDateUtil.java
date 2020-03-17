@@ -20,7 +20,7 @@ public static RequestMessage postData(JSONObject content,HttpServletRequest requ
 	RequestBody body = new RequestBody();
 	UserV sessionUser = SessionUtil.getSessionUser();
 	if(null != sessionUser) {
-		body.setUId(sessionUser.getUId());
+		body.setuId(sessionUser.getUId());
 		body.setNickname(sessionUser.getNickname());
 		body.setAvatar(sessionUser.getAvatar());
 		body.setOauthType(sessionUser.getOauthType());	

@@ -63,8 +63,7 @@ public class Account extends Model<Account> {
     private String utype;
     @Override
     protected Serializable pkVal() {
-        return null;
+        return this.id;
     }
-
-  
+	
 }

@@ -9,7 +9,9 @@ import java.net.URLDecoder;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -35,24 +37,24 @@ public class ImageVerificationController {
      */
 	@RequestMapping("/selectSlideVerificationCode")
 	@ResponseBody
-    public ResponseMessage selectSlideVerificationCode(ImageVerificationDto imageVerificationDto,HttpServletRequest request) {
+    public ResponseMessage selectSlideVerificationCode(ImageVerificationDto imageVerificationDto,HttpServletRequest request,HttpServletResponse response) {
 
        ResponseMessage responseMessage = ResponseMessage.getSucess();
         ImageVerificationVo imageVerificationVo = null;
         try {            
-            File verifyImageImport = new File(verificationImagePathPrefix);
+            File verifyImageImport = new File(verificationImagePathPrefix+"/code/");
             File[] verifyImages = verifyImageImport.listFiles();
-
+           
             Random random = new Random(System.currentTimeMillis());
             //  随机取得原图文件夹中一张图片
             File originImageFile = verifyImages[random.nextInt(verifyImages.length)];
 
             String templateImagePathPrefix = verificationImagePathPrefix;
 			//  获取模板图片文件
-            File templateImageFile = new File(templateImagePathPrefix + "/template.png");
+            File templateImageFile = new File(templateImagePathPrefix + "/template/template.png");
 
             //  获取描边图片文件
-            File borderImageFile = new File(templateImagePathPrefix + "/border.png");
+            File borderImageFile = new File(templateImagePathPrefix + "/template/border.png");
             //  获取描边图片类型
             String borderImageFileType = borderImageFile.getName().substring(borderImageFile.getName().lastIndexOf(".") + 1);
 
@@ -78,13 +80,13 @@ public class ImageVerificationController {
 			  request.getSession().setAttribute("imageVerificationVo",
 			  imageVerificationVo);
 			  
-			  // 根据原图生成遮罩图和切块图 imageVerificationVo =
-			  ImageVerificationUtil.pictureTemplateCutout(originImageFile,
+			  // 根据原图生成遮罩图和切块图 
+			  imageVerificationVo =ImageVerificationUtil.pictureTemplateCutout(originImageFile,
 			  originImageFileType, templateImageFile, templateImageFileType,
 			  imageVerificationVo.getX(), imageVerificationVo.getY());
 			  
-			  // 剪切图描边 imageVerificationVo =
-			  ImageVerificationUtil.cutoutImageEdge(imageVerificationVo, borderImage,
+			  // 剪切图描边 
+			  imageVerificationVo =ImageVerificationUtil.cutoutImageEdge(imageVerificationVo, borderImage,
 			  borderImageFileType); imageVerificationVo.setY(Y);
 			  imageVerificationVo.setType(imageVerificationDto.getType());
 			 
@@ -93,14 +95,16 @@ public class ImageVerificationController {
 
             //  =============================================
             //  输出图片
-//            HttpServletResponse response = getResponse();
-//            response.setContentType("image/jpeg");
-//            ServletOutputStream outputStream = response.getOutputStream();
-//            outputStream.write(oriCopyImages);
-//            BufferedImage bufferedImage = ImageIO.read(originImageFile);
-//            ImageIO.write(bufferedImage, originImageType, outputStream);
-//            outputStream.flush();
-            //  =================================================
+			
+			  // HttpServletResponse response = getResponse(); //
+			 // response.setContentType("image/jpeg"); 
+			 // ServletOutputStream outputStream = response.getOutputStream(); 
+			  
+			//  outputStream.write(imageVerificationVo.getCutoutImage().getBytes());//
+			//  BufferedImage bufferedImage = ImageIO.read(originImageFile); //
+			 // ImageIO.write(bufferedImage, originImageFileType, outputStream); //
+			 // outputStream.flush();
+			             //  =================================================
 
         } catch (Exception e) {
 			// TODO: handle exception

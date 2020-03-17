@@ -41,7 +41,7 @@ public class CompanyInfo extends Model<CompanyInfo> {
 
     @Override
     protected Serializable pkVal() {
-        return null;
+        return this.id;
     }
 
 }

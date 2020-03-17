@@ -40,7 +40,7 @@ public class LoginList extends Model<LoginList> {
     
     @Override
     protected Serializable pkVal() {
-        return null;
+        return this.id;
     }
 
    
