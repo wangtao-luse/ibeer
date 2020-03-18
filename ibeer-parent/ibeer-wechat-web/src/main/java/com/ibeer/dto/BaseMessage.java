@@ -14,7 +14,7 @@ private String toUserName;
 @XStreamAlias("FromUserName")
 private String fromUserName;
 /**
- * 消息类型，文本为text,图片为image,语音为voice
+ * 消息类型，文本为text,图片为image,语音为voice,视频为video,小视频消息为shortvideo,地理位置消息为location,链接消息为link;
  */
 @XStreamAlias("MsgType")
 private String msgType;

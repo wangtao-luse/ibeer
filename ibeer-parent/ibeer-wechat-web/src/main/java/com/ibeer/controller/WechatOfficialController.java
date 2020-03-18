@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ibeer.common.resp.ResponseMessage;
 import com.ibeer.connector.WechatConnector;
+import com.ibeer.dto.Image;
+import com.ibeer.dto.ImageMessage;
 import com.ibeer.dto.TextMessage;
 import com.thoughtworks.xstream.XStream;
 @Controller
@@ -84,6 +86,23 @@ public class WechatOfficialController {
 		System.out.println(sb.toString());*/
 		//接受处理用户发的信息
 		Map<String,String>  map = wechatConnector.parseRequest(request.getInputStream());
+		//文本为text,图片为image,语音为voice,视频为video,小视频消息为shortvideo,地理位置消息为location,链接消息为link;
+		String msgType = map.get("MsgType");		
+		if("text".equals(msgType)) {//文本消息
+			
+		}else if("image".equals(msgType)) {//图片
+			
+		}else if("voice".equals(msgType)) {//语音
+			
+		}else if("video".equals(msgType)) {//视频
+			
+		}else if("shortvideo".equals(msgType)) {//小视频
+			
+		}else if("location".equals(msgType)) {//地理位置消息
+			
+		}else if("link".equals(msgType)) {//链接
+			
+		}
 		
 		return null;
 	}
@@ -93,10 +112,20 @@ public class WechatOfficialController {
     	map.put("ToUserName", "to");
     	map.put("FromUserName", "from");
     	map.put("MsgType", "type");
+    	map.put("CreateTime",String.valueOf(System.currentTimeMillis()));
+    	//文本消息
     	TextMessage textMessage = new TextMessage(map, "你好");
+    	//图片消息
+    	Image img = new Image();
+    	      img.setMediaId("007");
+    	ImageMessage imageMessage = new ImageMessage(map,img);
     	XStream xstream = new XStream();
-    	 xstream.processAnnotations(TextMessage.class);
-    	String xml = xstream.toXML(textMessage);
-    	System.out.println(xml);
+    	xstream.processAnnotations(TextMessage.class);
+    	xstream.processAnnotations(ImageMessage.class);
+    	String textXml = xstream.toXML(textMessage);
+    	String imageXml = xstream.toXML(imageMessage);
+    	
+    	System.out.println(textXml);
+    	System.out.println(imageXml);
     }
 }

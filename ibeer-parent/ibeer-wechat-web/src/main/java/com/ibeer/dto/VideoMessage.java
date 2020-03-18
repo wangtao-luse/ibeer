@@ -7,6 +7,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  * @author wwang
  *
  */
+@XStreamAlias("xml")
 public class VideoMessage extends BaseMessage {
 @XStreamAlias("Video")
 private Video video;
