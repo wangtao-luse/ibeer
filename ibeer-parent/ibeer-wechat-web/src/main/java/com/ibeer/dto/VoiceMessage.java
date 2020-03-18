@@ -7,6 +7,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  * @author wwang
  *
  */
+@XStreamAlias("xml")
 public class VoiceMessage extends BaseMessage{
 @XStreamAlias("Voice")
 private Voice voice;

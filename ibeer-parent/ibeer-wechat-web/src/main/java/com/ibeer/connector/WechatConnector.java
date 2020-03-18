@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.ibeer.common.BaseException;
 import com.ibeer.dto.BaseMessage;
+import com.ibeer.dto.Image;
 import com.ibeer.dto.ImageMessage;
 import com.ibeer.dto.MusicMessage;
 import com.ibeer.dto.NewsMessage;
@@ -117,7 +118,7 @@ public class WechatConnector {
 		msg=dealTextMessage(requestMap);
 		break;
 	case "image":
-		
+		msg=dealImageMessage(requestMap);
 		break;
 	case "voice":
 		
@@ -155,6 +156,7 @@ public class WechatConnector {
 	 
  }
 
+
 /**
   * 将消息对象处理为数据包
   * @param msg
@@ -173,13 +175,32 @@ public String BeeanToXml(BaseMessage msg) {
 
 	return xml;
 }
+/**
+ * 处理文本消息
+ * @param requestMap
+ * @return
+ */
 public BaseMessage dealTextMessage(Map<String, String> requestMap) {
 	// TODO Auto-generated method stub	
+	dealMessage(requestMap);		
+	return new TextMessage(requestMap,"hello!");
+}
+private void dealMessage(Map<String, String> requestMap) {
 	String temp="";
 	temp=requestMap.get("ToUserName");
 	String from = requestMap.get("FromUserName");
 	requestMap.put("ToUserName", from);
-	requestMap.put("FromUserName", temp);		
-	return new TextMessage(requestMap,"hello!");
+	requestMap.put("FromUserName", temp);
+}
+/**
+ * 处理图片消息
+ * @param requestMap
+ * @return
+ */
+private BaseMessage dealImageMessage(Map<String, String> requestMap) {
+	// TODO Auto-generated method stub
+	dealMessage(requestMap);	
+	String mediaId = null;
+	return new ImageMessage(requestMap,new Image(mediaId));
 }
 }

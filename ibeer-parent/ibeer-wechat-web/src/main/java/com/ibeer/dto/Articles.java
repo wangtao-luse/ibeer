@@ -1,6 +1,9 @@
 package com.ibeer.dto;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 public class Articles {
+@XStreamAlias("Item")
 private Item item;
 
 public Item getItem() {
