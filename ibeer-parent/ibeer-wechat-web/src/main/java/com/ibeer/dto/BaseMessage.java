@@ -1,5 +1,7 @@
 package com.ibeer.dto;
 
+import java.util.Map;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 public class BaseMessage {
@@ -14,12 +16,21 @@ private String toUserName;
 @XStreamAlias("FromUserName")
 private String fromUserName;
 /**
- * 消息类型，文本为text,图片为image,语音为voice
+ * 消息类型，文本为ccc,图片为image,语音为voice
  */
 @XStreamAlias("MsgType")
 private String msgType;
 @XStreamAlias("CreateTime")
-private Long createTime;
+private String createTime;
+public BaseMessage() {
+	super();
+}
+public BaseMessage(Map<String,String> requestMap) {
+	super();
+	this.toUserName=requestMap.get("ToUserName");
+	this.fromUserName=requestMap.get("FromUserName");
+	this.createTime=System.currentTimeMillis()/1000+"";
+}
 public String getToUserName() {
 	return toUserName;
 }
@@ -38,15 +49,12 @@ public String getMsgType() {
 public void setMsgType(String msgType) {
 	this.msgType = msgType;
 }
-
-public Long getCreateTime() {
+public String getCreateTime() {
 	return createTime;
 }
-public void setCreateTime(Long createTime) {
+public void setCreateTime(String createTime) {
 	this.createTime = createTime;
 }
-@Override
-public String toString() {
-	return "BaseMessage [toUserName=" + toUserName + ", fromUserName=" + fromUserName + ", msgType=" + msgType + "]";
-}
+
+
 }

@@ -21,11 +21,10 @@ public TextMessage() {
 }
 
 public TextMessage(Map map,String cotent) {
-	super();
+	super(map);	
+	this.setMsgType("text");
 	this.cotent = cotent;
-	this.setFromUserName((String)map.get("FromUserName"));
-	this.setToUserName((String)map.get("ToUserName"));
-	this.setMsgType((String)map.get("MsgType"));
+	
 	
 }
 public String getCotent() {

@@ -16,6 +16,14 @@ import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Service;
 
 import com.ibeer.common.BaseException;
+import com.ibeer.dto.BaseMessage;
+import com.ibeer.dto.ImageMessage;
+import com.ibeer.dto.MusicMessage;
+import com.ibeer.dto.NewsMessage;
+import com.ibeer.dto.TextMessage;
+import com.ibeer.dto.VideoMessage;
+import com.ibeer.dto.VoiceMessage;
+import com.thoughtworks.xstream.XStream;
 
 @Service
 public class WechatConnector {
@@ -93,8 +101,85 @@ public class WechatConnector {
 			e.printStackTrace();
 		}
 		
-		
 		return map;
 	}
+/**
+ * 处理事件和消息回复
+ * @param requestMap
+ * @return
+ */
+ public String getResponse(Map<String,String> requestMap) {
+	 String msgType = requestMap.get("MsgType");
+	 BaseMessage msg=null;
+	 switch (msgType) {
+	case "text":
+		//处理文本消息
+		msg=dealTextMessage(requestMap);
+		break;
+	case "image":
+		
+		break;
+	case "voice":
+		
+		break;
+	case "video":
+		
+		break;
+	case "shortvideo":
+		
+		break;
+	case "music":
+		
+		break;
+	case "news":
+		
+		break;
 	
+	case "location":
+		
+		break;
+		
+	case "link":
+		
+		break;
+		
+
+	default:
+		break;
+		
+	}
+	//将消息对象处理为数据包
+	 
+	 String xml = BeeanToXml(msg);
+	 return xml;
+	 
+ }
+
+/**
+  * 将消息对象处理为数据包
+  * @param msg
+  * @return
+  */
+public String BeeanToXml(BaseMessage msg) {
+	 XStream xstream = new XStream();
+	 xstream.processAnnotations(TextMessage.class);
+	 xstream.processAnnotations(ImageMessage.class);
+	 xstream.processAnnotations(VoiceMessage.class);
+	 xstream.processAnnotations(VideoMessage.class);
+	 xstream.processAnnotations(MusicMessage.class);
+	 xstream.processAnnotations(NewsMessage.class);
+	 String xml = xstream.toXML(msg);
+	 System.out.println(xml);
+
+	return xml;
+}
+public BaseMessage dealTextMessage(Map<String, String> requestMap) {
+	// TODO Auto-generated method stub	
+	String temp="";
+	temp=requestMap.get("ToUserName");
+	String from = requestMap.get("FromUserName");
+	requestMap.put("ToUserName", from);
+	requestMap.put("FromUserName", temp);		
+	return new TextMessage(requestMap,"hello!");
+}
 }

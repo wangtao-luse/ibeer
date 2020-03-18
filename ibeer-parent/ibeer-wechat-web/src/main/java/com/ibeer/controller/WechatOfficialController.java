@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.dom4j.DocumentException;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ibeer.common.resp.ResponseMessage;
 import com.ibeer.connector.WechatConnector;
+import com.ibeer.dto.ImageMessage;
+import com.ibeer.dto.MusicMessage;
+import com.ibeer.dto.NewsMessage;
 import com.ibeer.dto.TextMessage;
+import com.ibeer.dto.VideoMessage;
+import com.ibeer.dto.VoiceMessage;
+import com.netflix.client.http.HttpResponse;
 import com.thoughtworks.xstream.XStream;
 @Controller
 public class WechatOfficialController {
@@ -72,7 +77,7 @@ public class WechatOfficialController {
 	 * @throws DocumentException 
 	 */
 	@RequestMapping(value="/start",method = RequestMethod.POST)
-	public ResponseMessage receiveMessage(HttpServletRequest request) throws IOException, DocumentException {
+	public void receiveMessage(HttpServletRequest request,HttpServletResponse response) throws IOException, DocumentException {
 		//打印信息
 		/*ServletInputStream inputStream = request.getInputStream();
 		byte [] by = new byte[1024];
@@ -82,10 +87,16 @@ public class WechatOfficialController {
 			sb.append(new String(by,0,len));
 		}
 		System.out.println(sb.toString());*/
-		//接受处理用户发的信息
+		//接受用户发的信息
 		Map<String,String>  map = wechatConnector.parseRequest(request.getInputStream());
+		//处理用户发的信息
+		String xml = wechatConnector.getResponse(map);
+		//将处理的消息返回用户的消息
+		PrintWriter pw = response.getWriter();
+		pw.write(xml);
+		pw.flush();
+		pw.close();
 		
-		return null;
 	}
 	@RequestMapping(value = "testMsg",method=RequestMethod.GET)
     public void testMsg() {
@@ -94,9 +105,6 @@ public class WechatOfficialController {
     	map.put("FromUserName", "from");
     	map.put("MsgType", "type");
     	TextMessage textMessage = new TextMessage(map, "你好");
-    	XStream xstream = new XStream();
-    	 xstream.processAnnotations(TextMessage.class);
-    	String xml = xstream.toXML(textMessage);
-    	System.out.println(xml);
-    }
+	}
+    	
 }
