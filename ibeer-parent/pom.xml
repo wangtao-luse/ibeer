@@ -131,10 +131,11 @@
 			</dependency>
 			<!-- oracle 驱动包 -->
 		  	<dependency>
-		     <groupId>com.oracle</groupId>
-		      <artifactId>ojdbc14</artifactId>
-		      <version>${oracle.version}</version>
-		    </dependency>
+				<groupId>oracle</groupId>
+		  		<artifactId>ojdbc8</artifactId>	  
+				<version>${oracle.version}</version>
+				<scope>compile</scope>
+			</dependency>
 			<!-- mysql驱动包 -->
 			<dependency>
 			    <groupId>mysql</groupId>

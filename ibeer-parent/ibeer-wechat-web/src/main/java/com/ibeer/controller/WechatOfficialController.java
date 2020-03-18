@@ -87,16 +87,16 @@ public class WechatOfficialController {
 		
 		return null;
 	}
-	@Test
-    public boolean estMsg() {
+	@RequestMapping(value = "testMsg",method=RequestMethod.GET)
+    public void testMsg() {
     	Map<String,String> map = new HashMap<String, String>();
     	map.put("ToUserName", "to");
     	map.put("FromUserName", "from");
     	map.put("MsgType", "type");
     	TextMessage textMessage = new TextMessage(map, "你好");
     	XStream xstream = new XStream();
-    	String xml = xstream.toXML(map);
+    	 xstream.processAnnotations(TextMessage.class);
+    	String xml = xstream.toXML(textMessage);
     	System.out.println(xml);
-    	return true;
     }
 }
