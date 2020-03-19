@@ -8,18 +8,25 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Base64;
+
 
 
 
 public class HttpURLConnectionUtil {
 	public static void main(String[] args) {
+		//http://api.qingyunke.com/
+		String serverurl="http://api.qingyunke.com/";
+		String msg="上海天气";
+		String requesturl="api.php?key=free&appid=0&msg="+msg;
+		
 		//1.获取访问的地址
 		//2.得到网络访问对象
 		//3.设置请求参数
 		//4.得到响应状态码的返回值 
 		//5.如果返回值正常，数据在网络中是以流的形式得到服务端返回的数
 		//6.断开连接，释放资源
-		
+		visitGet(serverurl, requesturl, null);
 	}
     /**
      * HttpURLConnection接口调用
@@ -107,7 +114,7 @@ public static String  visitGet(String serverurl,String requesturl,String json) {
 		//3.1设置请求方式
 		http.setRequestMethod("GET");
 		//3.2设定传送的内容类型
-		http.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+		//http.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 		//3.3设置是否从httpUrlConnection读入，默认情况下是true;
 		http.setDoInput(true);
 		//3.4设置是否向HttpURLConnection输出, 默认情况下是false;(输出参数)			
@@ -122,7 +129,7 @@ public static String  visitGet(String serverurl,String requesturl,String json) {
 		int responseCode = http.getResponseCode();
 		//5.如果返回值正常，数据在网络中是以流的形式得到服务端返回的数
 		StringBuffer sb = new StringBuffer();
-		 if("200".equals(responseCode)) {
+		 if(200==responseCode) {
 				InputStream inputStream = http.getInputStream();
 				BufferedReader br = new BufferedReader(new InputStreamReader(inputStream,"UTF-8"));
 				String readLine = "";
@@ -139,7 +146,7 @@ public static String  visitGet(String serverurl,String requesturl,String json) {
 		 }
 		
 		
-		
+		System.out.println(result);
 	} catch (MalformedURLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
