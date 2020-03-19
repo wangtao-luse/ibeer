@@ -6,6 +6,15 @@ public class Image {
 @XStreamAlias("MediaId")
 private String	mediaId;
 
+public Image(String mediaId) {
+	super();
+	this.mediaId = mediaId;
+}
+
+public Image() {
+	super();
+}
+
 public String getMediaId() {
 	return mediaId;
 }

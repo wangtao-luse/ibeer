@@ -28,6 +28,15 @@ private String hQMusicUrl;
  */
 @XStreamAlias("ThumbMediaId")
 private String thumbMediaId;
+public Music() {}
+public Music(String title, String description, String musicUrl, String hQMusicUrl, String thumbMediaId) {
+	super();
+	this.title = title;
+	this.description = description;
+	this.musicUrl = musicUrl;
+	this.hQMusicUrl = hQMusicUrl;
+	this.thumbMediaId = thumbMediaId;
+}
 public String getTitle() {
 	return title;
 }

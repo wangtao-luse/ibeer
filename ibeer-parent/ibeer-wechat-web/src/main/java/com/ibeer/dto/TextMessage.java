@@ -20,13 +20,12 @@ public TextMessage() {
 	super();
 }
 
-public TextMessage(Map<String,String> map,String cotent) {
-	super();
+
+public TextMessage(Map map,String cotent) {
+	super(map);	
+	this.setMsgType("text");
 	this.cotent = cotent;
-	this.setFromUserName(map.get("FromUserName"));
-	this.setToUserName(map.get("ToUserName"));
-	this.setMsgType(map.get("MsgType"));
-	this.setCreateTime(Long.valueOf(map.get("CreateTime")));
+	
 	
 }
 public String getCotent() {

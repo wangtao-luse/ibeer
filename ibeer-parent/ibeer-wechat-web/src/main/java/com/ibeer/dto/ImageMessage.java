@@ -17,14 +17,10 @@ public ImageMessage() {
 	super();
 }
 
-public ImageMessage(Map<String,String> map,Image image) {
-	super();
+
+public ImageMessage(Map<String,String> requestMap,Image image) {
+	super(requestMap);
 	this.image = image;
-	this.setCreateTime(Long.valueOf(map.get("CreateTime")));
-	this.setFromUserName(map.get("FromUserName"));
-	this.setToUserName(map.get("ToUserName"));
-	this.setMsgType(map.get("MsgType"));
-	this.setCreateTime(Long.valueOf(map.get("CreateTime")));
 }
 
 public Image getImage() {
