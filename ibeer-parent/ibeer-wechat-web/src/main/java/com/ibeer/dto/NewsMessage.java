@@ -1,5 +1,8 @@
 package com.ibeer.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -15,18 +18,31 @@ public class NewsMessage extends BaseMessage {
 @XStreamAlias("ArticleCount")	
 private String articleCount;
 @XStreamAlias("Articles")
-private Articles articles;
+private List<Articles> articles = new ArrayList<Articles>();
+
+public NewsMessage() {
+	super();
+}
+
+public NewsMessage(String articleCount, List<Articles> articles) {
+	super();
+	this.articleCount = articleCount;
+	this.articles = articles;
+	this.setMsgType("news");
+}
+
+public List<Articles> getArticles() {
+	return articles;
+}
+public void setArticles(List<Articles> articles) {
+	this.articles = articles;
+}
 public String getArticleCount() {
 	return articleCount;
 }
 public void setArticleCount(String articleCount) {
 	this.articleCount = articleCount;
 }
-public Articles getArticles() {
-	return articles;
-}
-public void setArticles(Articles articles) {
-	this.articles = articles;
-}
+
 
 }

@@ -121,27 +121,27 @@ public class WechatConnector {
 		msg=dealImageMessage(requestMap);
 		break;
 	case "voice":
-		
+		msg=dealVoiceMessage(requestMap);
 		break;
 	case "video":
-		
+		msg=dealVideoMessage(requestMap);
 		break;
 	case "shortvideo":
-		
+		msg=dealShortvideoMessage(requestMap);
 		break;
 	case "music":
-		
+		msg=dealMusicMessage(requestMap);
 		break;
 	case "news":
-		
+		msg=dealNewsMessage(requestMap);
 		break;
 	
 	case "location":
-		
+		msg=dealLocationMessage(requestMap);
 		break;
 		
 	case "link":
-		
+		msg=dealLinkMessage(requestMap);
 		break;
 		
 
@@ -185,7 +185,11 @@ public BaseMessage dealTextMessage(Map<String, String> requestMap) {
 	dealMessage(requestMap);		
 	return new TextMessage(requestMap,"hello!");
 }
-private void dealMessage(Map<String, String> requestMap) {
+/**
+ * 处理发送人和收接收者
+ * @param requestMap
+ */
+public void dealMessage(Map<String, String> requestMap) {
 	String temp="";
 	temp=requestMap.get("ToUserName");
 	String from = requestMap.get("FromUserName");
@@ -197,10 +201,74 @@ private void dealMessage(Map<String, String> requestMap) {
  * @param requestMap
  * @return
  */
-private BaseMessage dealImageMessage(Map<String, String> requestMap) {
+public BaseMessage dealImageMessage(Map<String, String> requestMap) {
 	// TODO Auto-generated method stub
 	dealMessage(requestMap);	
 	String mediaId = null;
 	return new ImageMessage(requestMap,new Image(mediaId));
+}
+/**
+ * 处理语音消息
+ * @param requestMap
+ * @return
+ */
+public BaseMessage dealVoiceMessage(Map<String, String> requestMap) {
+	// TODO Auto-generated method stub
+	return null;
+}
+/**
+ * 处理视频消息
+ * @param requestMap
+ * @return
+ */
+public BaseMessage dealVideoMessage(Map<String, String> requestMap) {
+	// TODO Auto-generated method stub
+	return null;
+}
+/**
+ * 处理小视频消息
+ * @param requestMap
+ * @return
+ */
+public BaseMessage dealShortvideoMessage(Map<String, String> requestMap) {
+	// TODO Auto-generated method stub
+	return null;
+}
+/**
+ * 处理音乐消息
+ * @param requestMap
+ * @return
+ */
+public BaseMessage dealMusicMessage(Map<String, String> requestMap) {
+	// TODO Auto-generated method stub
+	return null;
+}
+/**
+ *   处理图文消息
+ * @param requestMap
+ * @return
+ */
+public BaseMessage dealNewsMessage(Map<String, String> requestMap) {
+	// TODO Auto-generated method stub
+	return null;
+}
+/**
+ * 处理图文消息
+ * @param requestMap
+ * @return
+ */
+public BaseMessage dealLocationMessage(Map<String, String> requestMap) {
+	// TODO Auto-generated method stub
+	return null;
+}
+/**
+ * 处理链接消息
+ * @param requestMap
+ * @return
+ */
+
+public BaseMessage dealLinkMessage(Map<String, String> requestMap) {
+	// TODO Auto-generated method stub
+	return null;
 }
 }

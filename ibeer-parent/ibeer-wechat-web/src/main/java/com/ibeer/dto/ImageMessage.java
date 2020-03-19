@@ -20,6 +20,7 @@ public ImageMessage() {
 
 public ImageMessage(Map<String,String> requestMap,Image image) {
 	super(requestMap);
+	this.setMsgType("image");
 	this.image = image;
 }
 

@@ -14,21 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ibeer.common.resp.ResponseMessage;
 import com.ibeer.connector.WechatConnector;
 
-import com.ibeer.dto.Image;
-import com.ibeer.dto.ImageMessage;
 
-import com.ibeer.dto.ImageMessage;
-import com.ibeer.dto.MusicMessage;
-import com.ibeer.dto.NewsMessage;
 
 import com.ibeer.dto.TextMessage;
-import com.ibeer.dto.VideoMessage;
-import com.ibeer.dto.VoiceMessage;
-import com.netflix.client.http.HttpResponse;
-import com.thoughtworks.xstream.XStream;
 @Controller
 public class WechatOfficialController {
 	//需要和测试的token一致
@@ -105,17 +95,7 @@ public class WechatOfficialController {
 
 		
 	}
-	@RequestMapping(value = "testMsg",method=RequestMethod.GET)
-    public void testMsg() {
-    	Map<String,String> map = new HashMap<String, String>();
-    	map.put("ToUserName", "to");
-    	map.put("FromUserName", "from");
-    	map.put("MsgType", "type");
-    	map.put("CreateTime",String.valueOf(System.currentTimeMillis()));
-    	//文本消息
-    	TextMessage textMessage = new TextMessage(map, "你好");
-
-	}
+	
     	
 
 }
