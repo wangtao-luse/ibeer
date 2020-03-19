@@ -26,7 +26,6 @@ public BaseMessage() {
 	super();
 }
 public BaseMessage(Map<String,String> requestMap) {
-	super();
 	this.toUserName=requestMap.get("ToUserName");
 	this.fromUserName=requestMap.get("FromUserName");
 	this.createTime=System.currentTimeMillis()/1000+"";

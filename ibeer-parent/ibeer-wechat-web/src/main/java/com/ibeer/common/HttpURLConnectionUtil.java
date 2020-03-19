@@ -10,9 +10,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Base64;
 
+import org.springframework.stereotype.Service;
 
 
 
+@Service
 public class HttpURLConnectionUtil {
 	public static void main(String[] args) {
 		//http://api.qingyunke.com/
@@ -26,7 +28,7 @@ public class HttpURLConnectionUtil {
 		//4.得到响应状态码的返回值 
 		//5.如果返回值正常，数据在网络中是以流的形式得到服务端返回的数
 		//6.断开连接，释放资源
-		visitGet(serverurl, null, null);
+		visitGet(serverurl, null);
 	}
     /**
      * HttpURLConnection接口调用
@@ -101,7 +103,7 @@ public class HttpURLConnectionUtil {
 		
       return result;
 	}
-public static String  visitGet(String serverurl,String requesturl,String json) {
+public static String  visitGet(String serverurl,String requesturl) {
 	String result = null;
 	HttpURLConnection http=null;
 	try {

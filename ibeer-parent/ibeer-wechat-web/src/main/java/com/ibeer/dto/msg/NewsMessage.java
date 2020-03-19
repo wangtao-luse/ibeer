@@ -2,6 +2,7 @@ package com.ibeer.dto.msg;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
@@ -24,9 +25,9 @@ public NewsMessage() {
 	super();
 }
 
-public NewsMessage(String articleCount, List<Articles> articles) {
-	super();
-	this.articleCount = articleCount;
+public NewsMessage(Map<String,String> map , List<Articles> articles) {
+	super(map);
+	this.articleCount = articles.size()+"";
 	this.articles = articles;
 	this.setMsgType("news");
 }

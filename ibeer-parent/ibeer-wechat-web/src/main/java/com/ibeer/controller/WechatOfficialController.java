@@ -94,8 +94,6 @@ public class WechatOfficialController {
 		
 	}
 	
-    	public void testMsg() {
-    		ChatRequest chat = new ChatRequest();
-    	}
+    	
 
 }
