@@ -1,4 +1,4 @@
-package com.ibeer.dto;
+package com.ibeer.dto.msg;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 

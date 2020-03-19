@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.ibeer.dto.TextMessage;
+import com.ibeer.dto.msg.TextMessage;
 import com.thoughtworks.xstream.XStream;
 
 public class TestMsg {

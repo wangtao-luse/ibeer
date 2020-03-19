@@ -1,4 +1,4 @@
-package com.ibeer.dto;
+package com.ibeer.dto.msg;
 
 import java.util.Map;
 

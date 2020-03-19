@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ibeer.connector.WechatConnector;
-
-
-
-import com.ibeer.dto.TextMessage;
+import com.ibeer.dto.msg.TextMessage;
 @Controller
 public class WechatOfficialController {
 	//需要和测试的token一致

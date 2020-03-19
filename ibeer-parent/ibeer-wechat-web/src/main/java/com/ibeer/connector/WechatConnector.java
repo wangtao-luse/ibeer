@@ -16,14 +16,14 @@ import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Service;
 
 import com.ibeer.common.BaseException;
-import com.ibeer.dto.BaseMessage;
-import com.ibeer.dto.Image;
-import com.ibeer.dto.ImageMessage;
-import com.ibeer.dto.MusicMessage;
-import com.ibeer.dto.NewsMessage;
-import com.ibeer.dto.TextMessage;
-import com.ibeer.dto.VideoMessage;
-import com.ibeer.dto.VoiceMessage;
+import com.ibeer.dto.msg.BaseMessage;
+import com.ibeer.dto.msg.Image;
+import com.ibeer.dto.msg.ImageMessage;
+import com.ibeer.dto.msg.MusicMessage;
+import com.ibeer.dto.msg.NewsMessage;
+import com.ibeer.dto.msg.TextMessage;
+import com.ibeer.dto.msg.VideoMessage;
+import com.ibeer.dto.msg.VoiceMessage;
 import com.thoughtworks.xstream.XStream;
 
 @Service
