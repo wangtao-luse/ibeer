@@ -19,14 +19,14 @@ public class HttpURLConnectionUtil {
 		String serverurl="http://api.qingyunke.com/";
 		String msg="上海天气";
 		String requesturl="api.php?key=free&appid=0&msg="+msg;
-		
+		serverurl="https://api.ai.qq.com/fcgi-bin/nlp/nlp_textchat";
 		//1.获取访问的地址
 		//2.得到网络访问对象
 		//3.设置请求参数
 		//4.得到响应状态码的返回值 
 		//5.如果返回值正常，数据在网络中是以流的形式得到服务端返回的数
 		//6.断开连接，释放资源
-		visitGet(serverurl, requesturl, null);
+		visitGet(serverurl, null, null);
 	}
     /**
      * HttpURLConnection接口调用
