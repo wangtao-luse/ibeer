@@ -25,6 +25,7 @@
 	    <groupId>dom4j</groupId>
 	    <artifactId>dom4j</artifactId>
 	</dependency>
+	<!-- xstream 帮助我们更容易生成xml -->
 	<dependency>
 	    <groupId>com.thoughtworks.xstream</groupId>
 	    <artifactId>xstream</artifactId>

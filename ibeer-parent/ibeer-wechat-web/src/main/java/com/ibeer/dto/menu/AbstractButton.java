@@ -1,7 +1,11 @@
 package com.ibeer.dto.menu;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AbstractButton {
 private String name;
+
 
 public AbstractButton() {
 	super();
@@ -19,5 +23,8 @@ public String getName() {
 public void setName(String name) {
 	this.name = name;
 }
+
+
+
 
 }
