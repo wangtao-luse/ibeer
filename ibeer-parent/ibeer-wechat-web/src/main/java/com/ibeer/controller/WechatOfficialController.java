@@ -2,7 +2,6 @@ package com.ibeer.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,47 +12,57 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
+import com.ibeer.common.HttpURLConnectionUtil;
+import com.ibeer.common.resp.ResponseMessage;
+import com.ibeer.common.wechat.AccesstokenUtil;
+import com.ibeer.common.wechat.MessageUtil;
+import com.ibeer.common.wechat.WechatUtil;
 import com.ibeer.connector.WechatConnector;
-import com.ibeer.dto.chat.ChatRequest;
-import com.ibeer.dto.msg.TextMessage;
+import com.ibeer.dto.menu.Button;
+import com.ibeer.dto.menu.ClickButton;
+import com.ibeer.dto.menu.PhotoOrAlbum;
+import com.ibeer.dto.menu.SubButton;
+import com.ibeer.dto.menu.ViewButton;
 @Controller
 public class WechatOfficialController {
-	//需要和测试的token一致
-	private static final String TOKEN="test";	
 	@Autowired
 	private WechatConnector wechatConnector;
+	@Autowired
+	private WechatUtil wechatUtil;
+	@Autowired
+	private MessageUtil messageUtil;
+	@Autowired
+	private HttpURLConnectionUtil httpURLConnectionUtil;
+	@Autowired
+	private AccesstokenUtil accesstokenUtil;
 	/**
-	 * 1.开发接口接入
-	 * 接入微信公众平台开发，开发者需要按照如下步骤完成：
-		1、填写服务器配置
-		2、验证服务器地址的有效性
-		3、依据接口文档实现业务逻辑
-		下面详细介绍这3个步骤。
-			第一步：填写服务器配置
-			第二步：验证消息的确来自微信服务器
-			第三步：依据接口文档实现业务逻辑
-	 * 
+	 * 接入微信公众平台开发
+	 * 1.填写服务器配置;
+	 *   a.开发者提交信息后，微信服务器将发送GET请求到填写的服务器地址URL上;
+	 * 2.验证消息的确来自微信服务器
+	 *   a.开发者通过检验signature对请求进行校验,确认此次GET请求来自微信服务器，
+	   *              请原样返回echostr参数内容，则接入生效，成为开发者成功，否则接入失败;
+	 * 3.第三步：依据接口文档实现业务逻辑;  
+	 * @param request
+	 * @param response
+	 * @throws IOException
 	 */
 	@RequestMapping(value="/start",method = RequestMethod.GET)
-	public String start(HttpServletRequest request,HttpServletResponse response) throws IOException {	
-	    String signature = request.getParameter("signature");
-	    String timestamp = request.getParameter("timestamp");
-	    String nonce = request.getParameter("nonce");
-	    String echostr = request.getParameter("echostr");
-	    System.out.println(signature+"\n"+timestamp+"\n"+nonce+"\n"+echostr);   
-	    if(wechatConnector.check(timestamp,nonce,signature,TOKEN)) {
+	public void start(HttpServletRequest request,HttpServletResponse response) throws IOException {	
+		//验证消息的确来自微信服务器
+		if(wechatUtil.check(request)) {	    	
 	    	PrintWriter writer = response.getWriter();
-	    	writer.write(echostr);
+	    	writer.write( request.getParameter("echostr"));
 	    	writer.flush();
 	    	writer.close();
 	    	System.out.println("接入成功");
 	    	
-	    	
 	    }else {
 	    	 System.out.println("接入失败");
 	    }
-	    return "";
 		
 	}
 	
@@ -80,12 +89,12 @@ public class WechatOfficialController {
 			sb.append(new String(by,0,len));
 		}
 		System.out.println(sb.toString());*/
-		//接受用户发的信息
-		Map<String,String>  map = wechatConnector.parseRequest(request.getInputStream());
-
-		//处理用户发的信息
-		String xml = wechatConnector.getResponse(map);
-		//将处理的消息返回用户的消息
+		//接受用户发的信息 (微信服务器推送的xml转为map)
+		Map<String,String>  map = wechatUtil.parseRequest(request.getInputStream());
+		//处理用户发的信息(根据不同的消息回复消息且生成对应的xml发给微信服务器)
+		String xml = messageUtil.getResponse(map);
+		//将处理的消息返回用户的消息(返回微信服务器)
+		response.setCharacterEncoding("UTF-8");
 		PrintWriter pw = response.getWriter();
 		pw.write(xml);
 		pw.flush();
@@ -94,6 +103,90 @@ public class WechatOfficialController {
 		
 	}
 	
-    	
+	
+	/**
+	 * 自定义菜单
+	 * @return
+	 */
+	@RequestMapping("/createMenu")
+	public ResponseMessage createMenu() {
+		ResponseMessage responseMessage = ResponseMessage.getSucess();
+		try {
+			String url = " https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
+			String accesstoken = accesstokenUtil.getAccesstoken();
+			url = url.replace("ACCESS_TOKEN", accesstoken);
+			// 菜单对象
+			Button btn = new Button();
+			// 第一个一级菜单
+			btn.getButton().add(new ClickButton("一级点击菜单", "1-1"));
+			// 第二个一级菜单
+			btn.getButton().add(new ViewButton("一级跳转菜单", "http://www.baidu.com"));
+			// 第三个一级菜单
+			SubButton sub = new SubButton("菜单");
+			sub.getSub_button().add(new ClickButton("二级点击菜单", "3-1"));
+			sub.getSub_button().add(new ViewButton("二级跳转菜单", "http://www.csesteel.com"));
+			sub.getSub_button().add(new PhotoOrAlbum("传图片", "3-3"));
+			// 加入第三个一级菜单
+			btn.getButton().add(sub);
+
+			String jsonString = JSONObject.toJSONString(btn);
+			System.out.println(jsonString);
+			String visitPost = httpURLConnectionUtil.visitPost(url, "", jsonString);
+			responseMessage.setReturnResult(visitPost);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return responseMessage.getFailed();
+		}
+
+		return responseMessage;
+	}  	
+	
+	/**
+	 * 删除菜单
+	 * @return
+	 */
+	@RequestMapping(value ="/deleteMenu")
+	public ResponseMessage deleteMenu() {
+		ResponseMessage responseMessage = ResponseMessage.getSucess();
+		try {
+			String url = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN";
+			String accesstoken = accesstokenUtil.getAccesstoken();
+			url = url.replace("ACCESS_TOKEN", accesstoken);
+			String visitGet = httpURLConnectionUtil.visitGet(url, "");
+			responseMessage.setReturnResult(visitGet);
+			System.out.println("delete返回信息：" + visitGet);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return responseMessage.getSucess();
+		}
+
+		return responseMessage;
+	}
+	/**
+	 * 查看自定义菜单
+	 * @return
+	 */
+	@RequestMapping(value="/queryMenu",produces = {"application/json;charset=UTF-8"})
+	@ResponseBody
+	public ResponseMessage queryMenu() {
+		ResponseMessage responseMessage = ResponseMessage.getSucess();
+		try {
+			String url ="https://api.weixin.qq.com/cgi-bin/get_current_selfmenu_info?access_token=ACCESS_TOKEN";
+			 String accesstoken = accesstokenUtil.getAccesstoken();
+			 url=url.replace("ACCESS_TOKEN", accesstoken);
+			 String visitGet = httpURLConnectionUtil.visitGet(url, "");
+			 responseMessage.setReturnResult(visitGet);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return responseMessage.getFailed();
+		}
+		
+		return responseMessage;
+	}
+	
 
 }

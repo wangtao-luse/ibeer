@@ -22,10 +22,10 @@
       <scope>test</scope>
     </dependency>
    <!-- oracle 驱动包 -->
-  <dependency>
-	<groupId>oracle</groupId>
- 		<artifactId>ojdbc8</artifactId>	  
-	</dependency>
+  	<dependency>
+	     <groupId>com.oracle</groupId>
+	      <artifactId>ojdbc14</artifactId>
+	    </dependency>
 
     <dependency>
     	<groupId>com.ibeer</groupId>

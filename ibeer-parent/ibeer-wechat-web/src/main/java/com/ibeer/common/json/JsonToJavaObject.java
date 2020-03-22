@@ -7,13 +7,15 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
-
-import org.apache.commons.lang.StringUtils;
-
 import java.util.Set;
+
+import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.lang.StringUtils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -30,8 +32,37 @@ public static void main(String[] args) {
 	String jsonString = JSONObject.toJSONString(p);
 	System.out.println(jsonString);
 	String path="D:\\temp\\test\\";
-	String className="Person";
+	String className="Button";
 	String packageName="com.ibeer.model";
+	jsonString ="{\r\n" + 
+			"     \"button\":[\r\n" + 
+			"     {	\r\n" + 
+			"          \"type\":\"click\",\r\n" + 
+			"          \"name\":\"今日歌曲\",\r\n" + 
+			"          \"key\":\"V1001_TODAY_MUSIC\"\r\n" + 
+			"      },\r\n" + 
+			"      {\r\n" + 
+			"           \"name\":\"菜单\",\r\n" + 
+			"           \"sub_button\":[\r\n" + 
+			"           {	\r\n" + 
+			"               \"type\":\"view\",\r\n" + 
+			"               \"name\":\"搜索\",\r\n" + 
+			"               \"url\":\"http://www.soso.com/\"\r\n" + 
+			"            },\r\n" + 
+			"            {\r\n" + 
+			"                 \"type\":\"miniprogram\",\r\n" + 
+			"                 \"name\":\"wxa\",\r\n" + 
+			"                 \"url\":\"http://mp.weixin.qq.com\",\r\n" + 
+			"                 \"appid\":\"wx286b93c14bbf93aa\",\r\n" + 
+			"                 \"pagepath\":\"pages/lunar/index\"\r\n" + 
+			"             },\r\n" + 
+			"            {\r\n" + 
+			"               \"type\":\"click\",\r\n" + 
+			"               \"name\":\"赞一下我们\",\r\n" + 
+			"               \"key\":\"V1001_GOOD\"\r\n" + 
+			"            }]\r\n" + 
+			"       }]\r\n" + 
+			" }";
 	getJavaBean(path,className,packageName,jsonString);
 }
 
@@ -86,6 +117,7 @@ private static String getImports() {
  * @return 字符串
  */
 private static void getJavaBean(String path,String className,String packageName,String json) {
+	String captureName = captureName(className);
 	JSONObject jsonObject = JSONObject.parseObject(json);
 	Set<Entry<String, Object>> entrySet = jsonObject.entrySet();
 	Iterator<Entry<String, Object>> iterator = entrySet.iterator();
@@ -96,7 +128,7 @@ private static void getJavaBean(String path,String className,String packageName,
 	//get set方法
 	StringBuffer data = new StringBuffer();
 	boolean isList=false;
-	JSONArray arr = new JSONArray();
+	Map<String,String> map = new HashMap<String, String>();
 	
 	while(iterator.hasNext()){
 		Entry<String, Object> next = iterator.next();
@@ -115,13 +147,20 @@ private static void getJavaBean(String path,String className,String packageName,
 			//拼接get,set方法
 			setData(data, next.getKey(),"List");
 			getData(data,next.getKey(),"List");
+			//是否需要导入List导包
 			isList=true;
-			
-			JSONArray vl =(JSONArray) next.getValue();
-			if(null!=vl&&vl.size()>0) {
-				arr.add(vl.get(0));
+			if(null!=next.getValue()) {
+				JSONArray  arr1 = (JSONArray)next.getValue();
+			     for (Object object2 : arr1) {
+			    	 String jsonString = JSONObject.toJSONString(object2);
+						map.put(next.getKey(), jsonString);
+				}
 				
 			}
+			
+			
+			
+			
 			
 		}
 	}
@@ -133,17 +172,19 @@ private static void getJavaBean(String path,String className,String packageName,
 		//导入包
 		result.append(imports);
 		//类定义
-		result.append("public class "+className+" {\r\n");
+		result.append("public class "+captureName+" {\r\n");
 		//属性和get,set方法
 	    result.append(attr);
 	    result.append(data);
 	   //结尾的括号
 	   result.append("}");
 	   printJavaBean(path, className, result.toString());
-	   for (Object object : arr) {
-			String jsonString = JSONObject.toJSONString(object);
-			getJavaBean( path,jsonString, packageName, className);
-		}
+	   Iterator<Entry<String, String>> iterator2 = map.entrySet().iterator();
+	   while(iterator2.hasNext()) {
+		 Entry<String, String> next = iterator2.next();
+		   getJavaBean( path,next.getKey(),packageName,next.getValue());
+	   }
+	  
 }
 private static String getImports(boolean isList) {
 	// TODO Auto-generated method stub

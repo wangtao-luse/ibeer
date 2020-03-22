@@ -145,16 +145,16 @@ $(function(){
     	}
     	   //获取图片验证码
     	//1.	var url="/getImageVerifyCode";
-    	var url="/selectSlideVerificationCode";
+    	var url="/getImageVerifyCode";
         	var postData ={};
         	postAjax(url,JSON.stringify(postData),function(data){
         		 console.log(data);
-	        		$(".JDJRV-bigimg img").attr("src","data:image/png;base64,"+data.returnResult.result.shadeImage);
+	        		/*$(".JDJRV-bigimg img").attr("src","data:image/png;base64,"+data.returnResult.result.shadeImage);
 	        		$(".JDJRV-smallimg img").attr("src","data:image/png;base64,"+data.returnResult.result.cutoutImage);
-	        		$(".JDJRV-smallimg").css("top",(data.returnResult.result.y+2)+"px")
-        		// $(".JDJRV-bigimg img").attr("src","data:image/png;base64,"+data.returnResult.bigImage);
-        		 //$(".JDJRV-smallimg img").attr("src","data:image/png;base64,"+data.returnResult.smallImage);
-        		 //$(".JDJRV-smallimg").css("top",data.returnResult.yHeight+"px")
+	        		$(".JDJRV-smallimg").css("top",(data.returnResult.result.y+2)+"px")*/
+        		 $(".JDJRV-bigimg img").attr("src","data:image/png;base64,"+data.returnResult.bigImage);
+        		 $(".JDJRV-smallimg img").attr("src","data:image/png;base64,"+data.returnResult.smallImage);
+        		 $(".JDJRV-smallimg").css("top",data.returnResult.yHeight+"px")
         		 $(".slide-authCode-wraper").css("display","block");
         	}, {errorFunction:function(data){
         		alert(data.resultMessage);
