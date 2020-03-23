@@ -83,7 +83,7 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 			account.setSex("1");		
 			accountMapper.insert(account);
 			//插入用户认证表数据
-			oauth.setUId(uid);
+			oauth.setuId(uid);
 			oauth.setOauthType("phone");
 			//加密密码
 			String salt = UUID.randomUUID().toString();	
@@ -99,7 +99,7 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 			//插入公司信息表
 			if("2".equals(utype)) {
 				CompanyInfo companyInfo = jsonObject.toJavaObject(CompanyInfo.class);
-				            companyInfo.setUId(uid);
+				            companyInfo.setuId(uid);
 				companyInfoMapper.insert(companyInfo);
 			}
 		} catch (Exception e) {
@@ -133,8 +133,8 @@ public class AccountServiceApi extends ServiceImpl<AccountMapper, Account> imple
 			   LoginList loginList = new LoginList();
 			   loginList.setLoginTime(DateUtil.setDate(new Date()));
 			   loginList.setLoginIp(requestMessage.getRequestHeader().getRemoteAddr());	
-			   if(!StringUtils.isEmpty(selectOne.getUId())) {
-				   loginList.setUId(selectOne.getUId());
+			   if(!StringUtils.isEmpty(selectOne.getuId())) {
+				   loginList.setuId(selectOne.getuId());
 			   }
 			   String remoteAddr = requestMessage.getRequestHeader().getRemoteAddr();
 			   if(!"127.0.0.1".equals(remoteAddr)) {

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ibeer.common.http.HttpURLConnectionUtil;
 import com.ibeer.constant.Constant;
 import com.ibeer.dto.Accesstoken;
+
 public class AccesstokenUtil {
 	private  static  Accesstoken accesstoken=null;
 	private  static void  getToken() {

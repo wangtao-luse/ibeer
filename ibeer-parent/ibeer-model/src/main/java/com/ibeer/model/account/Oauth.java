@@ -3,7 +3,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
-import lombok.Data;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -16,7 +15,6 @@ import java.io.Serializable;
  * @author wangtao
  * @since 2020-01-02
  */
-@Data
 @TableName("t_a_oauth")
 public class Oauth extends Model<Oauth> {
 
@@ -61,7 +59,71 @@ public class Oauth extends Model<Oauth> {
     */
     private String pwd;
 
-    @Override
+    public Integer getId() {
+	return id;
+}
+
+public void setId(Integer id) {
+	this.id = id;
+}
+
+public String getuId() {
+	return uId;
+}
+
+public void setuId(String uId) {
+	this.uId = uId;
+}
+
+public String getOauthId() {
+	return oauthId;
+}
+
+public void setOauthId(String oauthId) {
+	this.oauthId = oauthId;
+}
+
+public String getOauthType() {
+	return oauthType;
+}
+
+public void setOauthType(String oauthType) {
+	this.oauthType = oauthType;
+}
+
+public String getCredential() {
+	return credential;
+}
+
+public void setCredential(String credential) {
+	this.credential = credential;
+}
+
+public String getNickname() {
+	return nickname;
+}
+
+public void setNickname(String nickname) {
+	this.nickname = nickname;
+}
+
+public String getAvatar() {
+	return avatar;
+}
+
+public void setAvatar(String avatar) {
+	this.avatar = avatar;
+}
+
+public String getPwd() {
+	return pwd;
+}
+
+public void setPwd(String pwd) {
+	this.pwd = pwd;
+}
+
+	@Override
     protected Serializable pkVal() {
         return null;
     }

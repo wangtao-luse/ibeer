@@ -3,7 +3,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
-import lombok.Data;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -16,7 +15,6 @@ import java.io.Serializable;
  * @author wangtao
  * @since 2020-01-07
  */
-@Data
 @TableName("t_a_login_list")
 public class LoginList extends Model<LoginList> {
 
@@ -38,7 +36,57 @@ public class LoginList extends Model<LoginList> {
     private String loginIpLookup;
 
     
-    @Override
+    public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+	public String getuId() {
+		return uId;
+	}
+
+
+	public void setuId(String uId) {
+		this.uId = uId;
+	}
+
+
+	public Long getLoginTime() {
+		return loginTime;
+	}
+
+
+	public void setLoginTime(Long loginTime) {
+		this.loginTime = loginTime;
+	}
+
+
+	public String getLoginIp() {
+		return loginIp;
+	}
+
+
+	public void setLoginIp(String loginIp) {
+		this.loginIp = loginIp;
+	}
+
+
+	public String getLoginIpLookup() {
+		return loginIpLookup;
+	}
+
+
+	public void setLoginIpLookup(String loginIpLookup) {
+		this.loginIpLookup = loginIpLookup;
+	}
+
+
+	@Override
     protected Serializable pkVal() {
         return this.id;
     }

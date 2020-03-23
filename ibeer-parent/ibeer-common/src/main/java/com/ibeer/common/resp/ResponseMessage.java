@@ -6,7 +6,6 @@ import java.util.Map;
 
 import com.ibeer.common.constant.ConstantBase;
 
-import lombok.Data;
 
 public final class ResponseMessage implements Serializable {
 
