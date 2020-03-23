@@ -273,10 +273,12 @@
                 <spring.datasource.password>onlinetest438</spring.datasource.password>
                 <!-- 图片滑动验证码 图片路径 -->
                 <prefix.verificationImagePathPrefix>D:\\temp\\imgs\\</prefix.verificationImagePathPrefix>
-                <!-- wechat第三方接口相关参数配置 -->
+                 <!-- wechat第三方接口相关参数配置 -->
+                 <wechat.api.requestUrl>https://api.weixin.qq.com</wechat.api.requestUrl>
                  <wechat.api.appid>wxf4c100beea39b4db</wechat.api.appid>
                  <wechat.api.appsecret>acf77040a595c51646f87b1a2308e775</wechat.api.appsecret>
                 <!-- 百度AI第三方接口相关参数配置 -->
+                <baidu.api.requestUrl>https://aip.baidubce.com</baidu.api.requestUrl>
                 <baidu.api.client_id>S3EKgVjpcmwBBQInE6VMTrHo</baidu.api.client_id>
                 <baidu.api.client_secret>qKtWQ4x1YEPlxtMf97BbSQV3uGb8d085</baidu.api.client_secret>
             </properties>
@@ -302,9 +304,11 @@
                 <!-- 图片滑动验证码 图片路径-->
                <prefix.verificationImagePathPrefix>D:\\temp\\imgs\\</prefix.verificationImagePathPrefix>
                 <!-- wechat第三方接口相关参数配置 -->
+                 <wechat.api.requestUrl>https://api.weixin.qq.com</wechat.api.requestUrl>
                  <wechat.api.appid>wxf4c100beea39b4db</wechat.api.appid>
                  <wechat.api.appsecret>acf77040a595c51646f87b1a2308e775</wechat.api.appsecret>
                 <!-- 百度AI第三方接口相关参数配置 -->
+                <baidu.api.requestUrl>https://aip.baidubce.com</baidu.api.requestUrl>
                 <baidu.api.client_id>S3EKgVjpcmwBBQInE6VMTrHo</baidu.api.client_id>
                 <baidu.api.client_secret>qKtWQ4x1YEPlxtMf97BbSQV3uGb8d085</baidu.api.client_secret>
             </properties>
@@ -329,10 +333,12 @@
                 <spring.datasource.password>root</spring.datasource.password>
                 <!-- 图片滑动验证码 图片路径-->
                <prefix.verificationImagePathPrefix>D:\\temp\\imgs\\</prefix.verificationImagePathPrefix>
-               <!-- wechat第三方接口相关参数配置 -->
+                <!-- wechat第三方接口相关参数配置 -->
+                 <wechat.api.requestUrl>https://api.weixin.qq.com</wechat.api.requestUrl>
                  <wechat.api.appid>wxf4c100beea39b4db</wechat.api.appid>
                  <wechat.api.appsecret>acf77040a595c51646f87b1a2308e775</wechat.api.appsecret>
                 <!-- 百度AI第三方接口相关参数配置 -->
+                <baidu.api.requestUrl>https://aip.baidubce.com</baidu.api.requestUrl>
                 <baidu.api.client_id>S3EKgVjpcmwBBQInE6VMTrHo</baidu.api.client_id>
                 <baidu.api.client_secret>qKtWQ4x1YEPlxtMf97BbSQV3uGb8d085</baidu.api.client_secret>
             </properties>
@@ -358,9 +364,11 @@
                 <!-- 图片滑动验证码 图片路径-->
                <prefix.verificationImagePathPrefix>D:\\temp\\imgs\\</prefix.verificationImagePathPrefix>
                 <!-- wechat第三方接口相关参数配置 -->
+                 <wechat.api.requestUrl>https://api.weixin.qq.com</wechat.api.requestUrl>
                  <wechat.api.appid>wxf4c100beea39b4db</wechat.api.appid>
                  <wechat.api.appsecret>acf77040a595c51646f87b1a2308e775</wechat.api.appsecret>
                 <!-- 百度AI第三方接口相关参数配置 -->
+                <baidu.api.requestUrl>https://aip.baidubce.com</baidu.api.requestUrl>
                 <baidu.api.client_id>S3EKgVjpcmwBBQInE6VMTrHo</baidu.api.client_id>
                 <baidu.api.client_secret>qKtWQ4x1YEPlxtMf97BbSQV3uGb8d085</baidu.api.client_secret>
             </properties>

@@ -106,7 +106,7 @@ public class WechatOfficialController {
 	public ResponseMessage createMenu() {
 		ResponseMessage responseMessage = ResponseMessage.getSucess();
 		try {
-			String url = " https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
+			String url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
 			String accesstoken = AccesstokenUtil.getAccesstoken();
 			url = url.replace("ACCESS_TOKEN", accesstoken);
 			// 菜单对象
