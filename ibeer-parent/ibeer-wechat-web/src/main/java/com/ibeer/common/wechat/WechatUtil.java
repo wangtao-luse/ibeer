@@ -32,7 +32,7 @@ private static final String TOKEN="test";
 	 * @param token
 	 * @return
 	 */
-	public boolean check(HttpServletRequest request) {
+	public static boolean check(HttpServletRequest request) {
 		 //微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数。
 		String signature = request.getParameter("signature");
 		//时间戳
@@ -58,7 +58,7 @@ private static final String TOKEN="test";
     * @param strs
     * @return
     */
-	public String sha1(String strs) {
+	public  static String sha1(String strs) {
 		// TODO Auto-generated method stub
 		try {
 			//获取加密对象
@@ -85,7 +85,7 @@ private static final String TOKEN="test";
 	 * @return
 	 * @throws DocumentException 
 	 */
-	public Map<String, String> parseRequest(InputStream input)  {
+	public static Map<String, String> parseRequest(InputStream input)  {
 		Map map = new HashMap<String, String>();
 		try {
 			SAXReader saxReader = new SAXReader();

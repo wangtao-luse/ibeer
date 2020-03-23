@@ -1,4 +1,4 @@
-package com.ibeer.common;
+package com.ibeer.common.http;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public static void main(String[] args) {
 	
 	
 }	
-public String httpPost(String uri,String jsonParam) {
+public static String httpPost(String uri,String jsonParam) {
 	HttpClient httpClient = null;
 	HttpPost httpPost=null;
 	String str="";
@@ -82,7 +82,7 @@ public String httpPost(String uri,String jsonParam) {
 	return str;
 }
 
-public String httpGet(String url) {
+public static String httpGet(String url) {
 	String result="";
 	HttpGet httpGet =null;
 	try {

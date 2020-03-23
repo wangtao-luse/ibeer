@@ -1,7 +1,7 @@
 package com.test;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ibeer.common.HttpURLConnectionUtil;
+import com.ibeer.common.http.HttpURLConnectionUtil;
 import com.ibeer.common.wechat.AccesstokenUtil;
 import com.ibeer.dto.menu.Button;
 import com.ibeer.dto.menu.ClickButton;
@@ -34,10 +34,7 @@ public class TestMenu {
 	btn.getButton().add(sub);
 	String jsonString = JSONObject.toJSONString(btn);
 	System.out.println(jsonString);
-	HttpURLConnectionUtil http = new HttpURLConnectionUtil();
-	
-	
-	String visitPost = http.visitPost(url, "", jsonString);
+	String visitPost = HttpURLConnectionUtil.visitPost(url, "", jsonString);
 	System.out.println("返回信息："+visitPost);
 }
 

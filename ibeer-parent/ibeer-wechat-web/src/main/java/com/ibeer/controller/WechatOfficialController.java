@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ibeer.common.HttpURLConnectionUtil;
+import com.ibeer.common.http.HttpURLConnectionUtil;
 import com.ibeer.common.resp.ResponseMessage;
 import com.ibeer.common.wechat.AccesstokenUtil;
-import com.ibeer.common.wechat.MessageUtil;
 import com.ibeer.common.wechat.WechatUtil;
+import com.ibeer.connector.MessageConnector;
 import com.ibeer.connector.WechatConnector;
 import com.ibeer.dto.menu.Button;
 import com.ibeer.dto.menu.ClickButton;
@@ -31,13 +31,7 @@ public class WechatOfficialController {
 	@Autowired
 	private WechatConnector wechatConnector;
 	@Autowired
-	private WechatUtil wechatUtil;
-	@Autowired
-	private MessageUtil messageUtil;
-	@Autowired
-	private HttpURLConnectionUtil httpURLConnectionUtil;
-	@Autowired
-	private AccesstokenUtil accesstokenUtil;
+	private MessageConnector messageConnector;
 	/**
 	 * 接入微信公众平台开发
 	 * 1.填写服务器配置;
@@ -53,7 +47,7 @@ public class WechatOfficialController {
 	@RequestMapping(value="/start",method = RequestMethod.GET)
 	public void start(HttpServletRequest request,HttpServletResponse response) throws IOException {	
 		//验证消息的确来自微信服务器
-		if(wechatUtil.check(request)) {	    	
+		if(WechatUtil.check(request)) {	    	
 	    	PrintWriter writer = response.getWriter();
 	    	writer.write( request.getParameter("echostr"));
 	    	writer.flush();
@@ -90,9 +84,9 @@ public class WechatOfficialController {
 		}
 		System.out.println(sb.toString());*/
 		//接受用户发的信息 (微信服务器推送的xml转为map)
-		Map<String,String>  map = wechatUtil.parseRequest(request.getInputStream());
+		Map<String,String>  map = WechatUtil.parseRequest(request.getInputStream());
 		//处理用户发的信息(根据不同的消息回复消息且生成对应的xml发给微信服务器)
-		String xml = messageUtil.getResponse(map);
+		String xml = messageConnector.getResponse(map);
 		//将处理的消息返回用户的消息(返回微信服务器)
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter pw = response.getWriter();
@@ -113,7 +107,7 @@ public class WechatOfficialController {
 		ResponseMessage responseMessage = ResponseMessage.getSucess();
 		try {
 			String url = " https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
-			String accesstoken = accesstokenUtil.getAccesstoken();
+			String accesstoken = AccesstokenUtil.getAccesstoken();
 			url = url.replace("ACCESS_TOKEN", accesstoken);
 			// 菜单对象
 			Button btn = new Button();
@@ -131,7 +125,7 @@ public class WechatOfficialController {
 
 			String jsonString = JSONObject.toJSONString(btn);
 			System.out.println(jsonString);
-			String visitPost = httpURLConnectionUtil.visitPost(url, "", jsonString);
+			String visitPost = HttpURLConnectionUtil.visitPost(url, "", jsonString);
 			responseMessage.setReturnResult(visitPost);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -151,9 +145,9 @@ public class WechatOfficialController {
 		ResponseMessage responseMessage = ResponseMessage.getSucess();
 		try {
 			String url = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN";
-			String accesstoken = accesstokenUtil.getAccesstoken();
+			String accesstoken = AccesstokenUtil.getAccesstoken();
 			url = url.replace("ACCESS_TOKEN", accesstoken);
-			String visitGet = httpURLConnectionUtil.visitGet(url, "");
+			String visitGet = HttpURLConnectionUtil.visitGet(url, "");
 			responseMessage.setReturnResult(visitGet);
 			System.out.println("delete返回信息：" + visitGet);
 			
@@ -175,9 +169,9 @@ public class WechatOfficialController {
 		ResponseMessage responseMessage = ResponseMessage.getSucess();
 		try {
 			String url ="https://api.weixin.qq.com/cgi-bin/get_current_selfmenu_info?access_token=ACCESS_TOKEN";
-			 String accesstoken = accesstokenUtil.getAccesstoken();
+			 String accesstoken = AccesstokenUtil.getAccesstoken();
 			 url=url.replace("ACCESS_TOKEN", accesstoken);
-			 String visitGet = httpURLConnectionUtil.visitGet(url, "");
+			 String visitGet = HttpURLConnectionUtil.visitGet(url, "");
 			 responseMessage.setReturnResult(visitGet);
 		} catch (Exception e) {
 			// TODO: handle exception

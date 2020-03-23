@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ibeer.common.HttpURLConnectionUtil;
 import com.ibeer.constant.Constant;
 import com.ibeer.dto.Accesstoken;
 import com.ibeer.dto.menu.Button;
@@ -37,9 +36,7 @@ import com.thoughtworks.xstream.XStream;
 
 @Service
 public class WechatConnector {
-	@Autowired
-	private static HttpURLConnectionUtil httpURLConnectionUtil;
-	
+
 
 
 

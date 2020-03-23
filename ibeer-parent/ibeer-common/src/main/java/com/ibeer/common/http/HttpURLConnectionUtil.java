@@ -1,4 +1,4 @@
-package com.ibeer.common;
+package com.ibeer.common.http;
 
 import java.io.BufferedReader;
 import java.io.File;

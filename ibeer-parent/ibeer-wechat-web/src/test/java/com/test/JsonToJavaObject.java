@@ -1,4 +1,4 @@
-package com.ibeer.common.json;
+package com.test;
 
 import java.io.File;
 import java.io.FileNotFoundException;

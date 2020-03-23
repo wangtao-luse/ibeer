@@ -1,4 +1,4 @@
-package com.ibeer.common.wechat;
+package com.ibeer.connector;
 
 
 import java.util.Map;
@@ -16,7 +16,7 @@ import com.ibeer.dto.msg.VoiceMessage;
 import com.thoughtworks.xstream.XStream;
 
 @Service
-public class MessageUtil {
+public class MessageConnector {
 	/**
 	 * 处理事件和消息回复
 	 * @param requestMap
