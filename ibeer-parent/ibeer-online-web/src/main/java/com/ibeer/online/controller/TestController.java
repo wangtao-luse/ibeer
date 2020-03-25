@@ -1,7 +1,6 @@
 package com.ibeer.online.controller;
 
 import java.io.File;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -10,23 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSONObject;
-import com.github.pagehelper.Constant;
-import com.ibeer.api.TestApi;
 import com.ibeer.common.constant.ConstantBase;
 import com.ibeer.common.resp.ResponseMessage;
 import com.ibeer.dto.ImageUtil;
-import com.ibeer.model.Contract;
+import com.ibeer.model.account.Account;
 
 @Controller
 public class TestController {
@@ -146,4 +141,16 @@ public ResponseMessage sendCode(@RequestParam(value = "phone") String phone,Http
     }
     return new ResponseMessage(resultMap);
 }
+@RequestMapping(value = "/result", produces = {"application/json;charset=UTF-8"})
+@ResponseBody
+public ResponseMessage sendCode(HttpServletRequest request) {
+	ResponseMessage response = ResponseMessage.getSucess();
+	Account account = new Account();
+	account.setUid("uid");
+	account.setUtype("1");
+	account.setCreatedate(Long.valueOf("123456"));
+	response.setReturnResult(account);
+    return response;
+}
+
 }

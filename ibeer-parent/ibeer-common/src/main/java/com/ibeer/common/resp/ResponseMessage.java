@@ -57,7 +57,7 @@ public final class ResponseMessage implements Serializable {
 
 	 //添加可变参数注意是为了解决Could not extract response: no suitable HttpMessageConverter found for respose type
 	//具体原因不清楚。。。。。待解决
-	  public void setReturnResult(Object object,Object...obj) { 
+	  public void setReturnResult(Object object) { 
 		  Map<String,Object> map = new  HashMap<String, Object>();
 		  map.put("result", object);
 		  this.returnResult = map;
