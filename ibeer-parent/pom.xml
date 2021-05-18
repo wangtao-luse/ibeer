@@ -42,7 +42,7 @@
   	<guava.version>28.1-jre</guava.version>
   	<shiro-spring-boot-web-starter.version>1.4.2</shiro-spring-boot-web-starter.version>
   	<dom4j.version>1.6.1</dom4j.version>
-  	<xstream.version>1.4.11.1</xstream.version>
+  	<xstream.version>1.4.17</xstream.version>
   	<mail.version>1.4.7</mail.version>
   </properties> 
   <dependencies>
